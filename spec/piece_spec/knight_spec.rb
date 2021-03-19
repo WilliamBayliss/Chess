@@ -1,4 +1,4 @@
-require "../lib/piece/knight.rb"
+require "../lib/pieces/knight.rb"
 
 describe Knight do
     describe "#initialize" do
