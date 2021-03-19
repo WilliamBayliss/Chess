@@ -31,5 +31,23 @@ class Board
         end
     end
 
-    
+    def diagonal? square, other_square
+        if square.nil? || other_square.nil?
+            return false
+        elsif square.coordinate[0] == other_square.coordinate[0]
+            return false
+        elsif square.coordinate[1] == other_square.coordinate[1]
+            return false
+        else
+            x_difference = square.coordinate[0] - other_square.coordinate[0]
+            y_difference = square.coordinate[1] - other_square.coordinate[1]
+            
+            if x_difference / y_difference == 1 || x_difference / y_difference == -1
+                return true
+            else
+                return false
+            end
+        end
+
+    end
 end

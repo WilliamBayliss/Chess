@@ -64,4 +64,75 @@ describe Board do
         end
     end
 
+    describe "#diagonal?" do
+        it "returns false if either square is nil" do
+            board = Board.new
+            square_one = nil
+            square_two = Square.new([[0,0], "A1"])
+            expect(board.diagonal?(square_one, square_two)).to eql(false)
+        end
+
+        it "returns false if the two squares are on the same row" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["A1"],
+                board["B1"]
+            )).to eql(false)
+        end
+
+        it "returns false if the two squares are vertically aligned" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["A1"],
+                board["A1"]
+            )).to eql(false)
+        end
+
+        it "returns false if the squares are not diagonal" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["A1"],
+                board["D3"]
+            )).to eql(false)
+        end
+
+        it "returns true if square is above right" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["D5"],
+                board["F3"]
+            )).to eql(true)
+        end
+
+        it "returns true if square is below right" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["D5"],
+                board["F7"]
+            )).to eql(true)
+        end
+
+        it "returns true if square is below left" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["D5"],
+                board["B7"]
+            )).to eql(true)
+        end
+
+        it "returns true if square is above left" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["D5"],
+                board["A2"]
+            )).to eql(true)
+        end
+    end
 end
