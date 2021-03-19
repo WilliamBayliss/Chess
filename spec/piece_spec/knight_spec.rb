@@ -13,27 +13,4 @@ describe Knight do
             expect(knight.square).to eql(square)
         end
     end
-
-    describe "#legal_move" do
-        it "returns false if square is nil" do
-
-            square = Square.new([[0,0], "A1"])
-            knight = Knight.new(square)
-            square_two = nil
-            expect(knight.legal_move?(square_two)).to eql(false)
-        end
-        it "returns false if move illegal" do
-            square = Square.new([[0,0], "A1"])
-            knight = Knight.new(square)
-            square_two = Square.new([[0,1], "B1"])
-            expect(knight.legal_move?(square_two)).to eql(false)
-        end
-
-        it "returns true if move legal" do
-            square = Square.new([[0,0], "A1"])
-            knight = Knight.new(square)
-            square_two = Square.new([[1,2], "C1"])
-            expect(knight.legal_move?(square_two)).to eql(true)
-        end
-    end
 end
