@@ -67,8 +67,9 @@ describe Board do
     describe "#diagonal?" do
         it "returns false if either square is nil" do
             board = Board.new
+            board.create_board(board.board_array)
             square_one = nil
-            square_two = Square.new([[0,0], "A1"])
+            square_two = board["A1"]
             expect(board.diagonal?(square_one, square_two)).to eql(false)
         end
 
@@ -132,6 +133,52 @@ describe Board do
             expect(board.diagonal?(
                 board["D5"],
                 board["A2"]
+            )).to eql(true)
+        end
+    end
+
+    describe "#vertical" do
+        it "returns false if either square is nil" do
+            board = Board.new
+            square_one = nil
+            square_two = Square.new([[0,0], "A1"])
+            expect(board.vertical?(square_one, square_two)).to eql(false)
+        end
+
+        it "returns false if squares are on same row" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["D5"],
+                board["D3"]
+            )).to eql(false)
+        end
+
+        it "returns false if squares are diagonal" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.vertical?(
+                board["B3"],
+                board["A2"]
+            )).to eql(false)
+        end
+
+        it "returns false if squares are not vertical" do
+
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.vertical?(
+                board["D5"],
+                board["F8"]
+            )).to eql(false)
+        end
+
+        it "returns true if squares are vertical" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.vertical?(
+                board["D5"],
+                board["D3"]
             )).to eql(true)
         end
     end

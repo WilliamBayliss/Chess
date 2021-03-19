@@ -48,6 +48,15 @@ class Board
                 return false
             end
         end
+    end
 
+    def vertical? square, other_square
+        if square.nil? || other_square.nil?
+            return false
+        elsif square.coordinate[1] == other_square.coordinate[1]
+            return true
+        else
+            return false
+        end
     end
 end
