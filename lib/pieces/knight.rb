@@ -4,6 +4,9 @@ class Knight < Piece
 
 
     def legal_move? square_two
+      if square_two.nil?
+        return false
+      else
         if    @square.coordinate[0] == (square_two.coordinate[0] + 2) && @square.coordinate[1] == (square_two.coordinate[1] + 1)  
           return true
         elsif @square.coordinate[0] == (square_two.coordinate[0] + 1) && @square.coordinate[1] == (square_two.coordinate[1] + 2)
@@ -21,5 +24,6 @@ class Knight < Piece
         else
           return false
         end
+      end
     end
 end
