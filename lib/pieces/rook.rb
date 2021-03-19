@@ -1,3 +1,4 @@
+require './piece.rb'
 class Rook < Piece
 
     def legal_move? second_square
