@@ -13,6 +13,21 @@ describe Piece do
             piece = Piece.new(square)
             expect(piece.square).to eql(square)
         end
+
+        it "initializes with a nil symbol value" do
+            square = Square.new([[0,0], "A1"])
+            piece = Piece.new(square)
+            expect(piece.symbol).to eql(nil)
+        end
+    end
+
+    describe "#set_symbol" do
+        it "sets a piece's symbol" do
+            square = Square.new([[0,0], "A1"])
+            queen = Piece.new(square)
+            queen.set_symbol("♔")
+            expect(queen.symbol).to eql("♔")
+        end
     end
     
     describe "#move" do
