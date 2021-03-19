@@ -59,4 +59,39 @@ class Board
             return false
         end
     end
+
+    def horizontal? square, other_square
+        if square.nil? || other_square.nil?
+            return false
+        elsif square.coordinate[0] == other_square.coordinate[0]
+            return true
+        else 
+            return false
+        end
+    end
+
+    def knight_move? square, other_square
+        if square.nil? || other_square.nil?
+            return false
+          else
+            if    square.coordinate[0] == (other_square.coordinate[0] + 2) && square.coordinate[1] == (other_square.coordinate[1] + 1)  
+              return true
+            elsif square.coordinate[0] == (other_square.coordinate[0] + 1) && square.coordinate[1] == (other_square.coordinate[1] + 2)
+              return true
+            elsif square.coordinate[0] == (other_square.coordinate[0] - 1) && square.coordinate[1] == (other_square.coordinate[1] + 2)
+              return true
+            elsif square.coordinate[0] == (other_square.coordinate[0] - 2) && square.coordinate[1] == (other_square.coordinate[1] - 1)
+              return true
+            elsif square.coordinate[0] == (other_square.coordinate[0] - 1) && square.coordinate[1] == (other_square.coordinate[1] - 2)
+              return true
+            elsif square.coordinate[0] == (other_square.coordinate[0] + 1) && square.coordinate[1] == (other_square.coordinate[1] - 2)
+              return true
+            elsif square.coordinate[0] == (other_square.coordinate[0] + 2) && square.coordinate[1] == (other_square.coordinate[1] -1)
+              return true
+            else
+              return false
+            end
+          end
+    end
+
 end
