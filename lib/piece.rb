@@ -2,7 +2,7 @@ class Piece
     attr_accessor :square, :symbol
     def initialize square
         @square = square
-        @symbol = nil
+        @symbol = " "
     end
 
     def set_symbol symbol

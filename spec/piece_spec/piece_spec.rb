@@ -14,10 +14,10 @@ describe Piece do
             expect(piece.square).to eql(square)
         end
 
-        it "initializes with a nil symbol value" do
+        it "initializes with a empty space symbol value" do
             square = Square.new([[0,0], "A1"])
             piece = Piece.new(square)
-            expect(piece.symbol).to eql(nil)
+            expect(piece.symbol).to eql(" ")
         end
     end
 
