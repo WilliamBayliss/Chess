@@ -31,6 +31,29 @@ class Board
         end
     end
 
+    def print_board
+        puts "
+           A |  B | C | D | E | F | G | H |
+        _____|____|___|___|___|___|___|___|
+        1 #{@board["A1"].piece.symbol}   | #{@board["B1"].piece.symbol}   | #{@board["C1"].piece.symbol}  | #{@board["D1"].piece.symbol}  | #{@board["E1"].piece.symbol}  | #{@board["F1"].piece.symbol}  | #{@board["G1"].piece.symbol}  | #{@board["H1"].piece.symbol}  |            
+        -----|----|---|---|---|---|---|---|
+        2 #{@board["A2"].piece.symbol}   | #{@board["B2"].piece.symbol}   | #{@board["C2"].piece.symbol}  | #{@board["D2"].piece.symbol}  | #{@board["E2"].piece.symbol}  | #{@board["F2"].piece.symbol}  | #{@board["G2"].piece.symbol}  | #{@board["H2"].piece.symbol}  |                
+        -----|----|---|---|---|---|---|---|
+        3 #{@board["A3"].piece.symbol}   | #{@board["B3"].piece.symbol}   | #{@board["C3"].piece.symbol}  | #{@board["D3"].piece.symbol}  | #{@board["E3"].piece.symbol}  | #{@board["F3"].piece.symbol}  | #{@board["G3"].piece.symbol}  | #{@board["H3"].piece.symbol}  |                       
+        -----|----|---|---|---|---|---|---|
+        4 #{@board["A4"].piece.symbol}   | #{@board["B4"].piece.symbol}   | #{@board["C4"].piece.symbol}  | #{@board["D4"].piece.symbol}  | #{@board["E4"].piece.symbol}  | #{@board["F4"].piece.symbol}  | #{@board["G4"].piece.symbol}  | #{@board["H4"].piece.symbol}  |                    
+        -----|----|---|---|---|---|---|---|
+        5 #{@board["A5"].piece.symbol}   | #{@board["B5"].piece.symbol}   | #{@board["C5"].piece.symbol}  | #{@board["D5"].piece.symbol}  | #{@board["E5"].piece.symbol}  | #{@board["F5"].piece.symbol}  | #{@board["G5"].piece.symbol}  | #{@board["H5"].piece.symbol}  |                   
+        -----|----|---|---|---|---|---|---|
+        6 #{@board["A6"].piece.symbol}   | #{@board["B6"].piece.symbol}   | #{@board["C6"].piece.symbol}  | #{@board["D6"].piece.symbol}  | #{@board["E6"].piece.symbol}  | #{@board["F6"].piece.symbol}  | #{@board["G6"].piece.symbol}  | #{@board["H6"].piece.symbol}  |                 
+        -----|----|---|---|---|---|---|---|
+        7 #{@board["A7"].piece.symbol}   | #{@board["B7"].piece.symbol}   | #{@board["C7"].piece.symbol}  | #{@board["D7"].piece.symbol}  | #{@board["E7"].piece.symbol}  | #{@board["F7"].piece.symbol}  | #{@board["G7"].piece.symbol}  | #{@board["H7"].piece.symbol}  |                      
+        -----|----|---|---|---|---|---|---|
+        8 #{@board["A8"].piece.symbol}   | #{@board["B8"].piece.symbol}   | #{@board["C8"].piece.symbol}  | #{@board["D8"].piece.symbol}  | #{@board["E8"].piece.symbol}  | #{@board["F8"].piece.symbol}  | #{@board["G8"].piece.symbol}  | #{@board["H8"].piece.symbol}  |                     
+        ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+        "
+    end
+
     def diagonal? square, other_square
         if square.nil? || other_square.nil?
             return false
