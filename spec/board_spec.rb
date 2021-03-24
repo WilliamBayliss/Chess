@@ -261,4 +261,26 @@ describe Board do
             expect(board.knight_move?(square, other_square)).to eql(true)
         end
     end
+
+    describe "#rook_move?" do
+        it "returns false if a square is neither vertically or horizontally accessible from start square" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.rook_move?(board["A1"], board["B2"])).to eql(false)
+
+        end
+
+        it "returns true if a square is vertically accessible" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.rook_move?(board["A1"], board["A5"])).to eql(true)
+        end
+
+        it "returns true if a square is horizontally accessible" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.rook_move?(board["A3"], board["D3"])).to eql(true)
+        end
+
+    end
 end

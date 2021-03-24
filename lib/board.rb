@@ -127,4 +127,12 @@ class Board
           end
     end
 
+    def rook_move? square, other_square
+        if vertical?(square, other_square) || horizontal?(square, other_square)
+            return true
+        else
+            return false
+        end
+    
+    end
 end
