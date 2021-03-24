@@ -5,4 +5,12 @@ class Move
         @piece = nil
         @square = nil
     end
+
+    def get_piece square
+        @piece = square.piece
+    end
+
+    def get_square square
+        @square = square
+    end
 end
