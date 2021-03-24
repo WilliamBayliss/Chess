@@ -1,5 +1,7 @@
 require_relative "square.rb"
 
+Dir["./lib/pieces/*.rb"].each {|file| require file }
+
 class Board
     def initialize
         @board = {}
