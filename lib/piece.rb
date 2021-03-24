@@ -1,7 +1,8 @@
 class Piece
-    attr_accessor :square, :symbol
-    def initialize square
-        @square = square
+    attr_accessor :square, :color, :symbol
+    def initialize color
+        @square = nil
+        @color = color
         @symbol = " "
     end
 
