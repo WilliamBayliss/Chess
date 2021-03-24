@@ -1,3 +1,5 @@
+require_relative "square.rb"
+
 class Board
     def initialize
         @board = {}
@@ -31,26 +33,36 @@ class Board
         end
     end
 
+
+
     def print_board
         puts "
-           A |  B | C | D | E | F | G | H |
-        _____|____|___|___|___|___|___|___|
-        1 #{@board["A1"].piece.symbol}   | #{@board["B1"].piece.symbol}   | #{@board["C1"].piece.symbol}  | #{@board["D1"].piece.symbol}  | #{@board["E1"].piece.symbol}  | #{@board["F1"].piece.symbol}  | #{@board["G1"].piece.symbol}  | #{@board["H1"].piece.symbol}  |            
-        -----|----|---|---|---|---|---|---|
-        2 #{@board["A2"].piece.symbol}   | #{@board["B2"].piece.symbol}   | #{@board["C2"].piece.symbol}  | #{@board["D2"].piece.symbol}  | #{@board["E2"].piece.symbol}  | #{@board["F2"].piece.symbol}  | #{@board["G2"].piece.symbol}  | #{@board["H2"].piece.symbol}  |                
-        -----|----|---|---|---|---|---|---|
-        3 #{@board["A3"].piece.symbol}   | #{@board["B3"].piece.symbol}   | #{@board["C3"].piece.symbol}  | #{@board["D3"].piece.symbol}  | #{@board["E3"].piece.symbol}  | #{@board["F3"].piece.symbol}  | #{@board["G3"].piece.symbol}  | #{@board["H3"].piece.symbol}  |                       
-        -----|----|---|---|---|---|---|---|
-        4 #{@board["A4"].piece.symbol}   | #{@board["B4"].piece.symbol}   | #{@board["C4"].piece.symbol}  | #{@board["D4"].piece.symbol}  | #{@board["E4"].piece.symbol}  | #{@board["F4"].piece.symbol}  | #{@board["G4"].piece.symbol}  | #{@board["H4"].piece.symbol}  |                    
-        -----|----|---|---|---|---|---|---|
-        5 #{@board["A5"].piece.symbol}   | #{@board["B5"].piece.symbol}   | #{@board["C5"].piece.symbol}  | #{@board["D5"].piece.symbol}  | #{@board["E5"].piece.symbol}  | #{@board["F5"].piece.symbol}  | #{@board["G5"].piece.symbol}  | #{@board["H5"].piece.symbol}  |                   
-        -----|----|---|---|---|---|---|---|
-        6 #{@board["A6"].piece.symbol}   | #{@board["B6"].piece.symbol}   | #{@board["C6"].piece.symbol}  | #{@board["D6"].piece.symbol}  | #{@board["E6"].piece.symbol}  | #{@board["F6"].piece.symbol}  | #{@board["G6"].piece.symbol}  | #{@board["H6"].piece.symbol}  |                 
-        -----|----|---|---|---|---|---|---|
-        7 #{@board["A7"].piece.symbol}   | #{@board["B7"].piece.symbol}   | #{@board["C7"].piece.symbol}  | #{@board["D7"].piece.symbol}  | #{@board["E7"].piece.symbol}  | #{@board["F7"].piece.symbol}  | #{@board["G7"].piece.symbol}  | #{@board["H7"].piece.symbol}  |                      
-        -----|----|---|---|---|---|---|---|
-        8 #{@board["A8"].piece.symbol}   | #{@board["B8"].piece.symbol}   | #{@board["C8"].piece.symbol}  | #{@board["D8"].piece.symbol}  | #{@board["E8"].piece.symbol}  | #{@board["F8"].piece.symbol}  | #{@board["G8"].piece.symbol}  | #{@board["H8"].piece.symbol}  |                     
-        ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+         |  A |  B |  C |  D |  E |  F |  G |  H |
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        1| #{@board["A1"].piece}  | #{@board["B1"].piece}  | #{@board["C1"].piece}  | #{@board["D1"].piece}  | #{@board["E1"].piece}  | #{@board["F1"].piece}  | #{@board["G1"].piece}  | #{@board["H1"].piece}  |            
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        2| #{@board["A2"].piece}  | #{@board["B2"].piece}  | #{@board["C2"].piece}  | #{@board["D2"].piece}  | #{@board["E2"].piece}  | #{@board["F2"].piece}  | #{@board["G2"].piece}  | #{@board["H2"].piece}  |                
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        3| #{@board["A3"].piece}  | #{@board["B3"].piece}  | #{@board["C3"].piece}  | #{@board["D3"].piece}  | #{@board["E3"].piece}  | #{@board["F3"].piece}  | #{@board["G3"].piece}  | #{@board["H3"].piece}  |                       
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        4| #{@board["A4"].piece}  | #{@board["B4"].piece}  | #{@board["C4"].piece}  | #{@board["D4"].piece}  | #{@board["E4"].piece}  | #{@board["F4"].piece}  | #{@board["G4"].piece}  | #{@board["H4"].piece}  |                    
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        5| #{@board["A5"].piece}  | #{@board["B5"].piece}  | #{@board["C5"].piece}  | #{@board["D5"].piece}  | #{@board["E5"].piece}  | #{@board["F5"].piece}  | #{@board["G5"].piece}  | #{@board["H5"].piece}  |                   
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        6| #{@board["A6"].piece}  | #{@board["B6"].piece}  | #{@board["C6"].piece}  | #{@board["D6"].piece}  | #{@board["E6"].piece}  | #{@board["F6"].piece}  | #{@board["G6"].piece}  | #{@board["H6"].piece}  |                 
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        7| #{@board["A7"].piece}  | #{@board["B7"].piece}  | #{@board["C7"].piece}  | #{@board["D7"].piece}  | #{@board["E7"].piece}  | #{@board["F7"].piece}  | #{@board["G7"].piece}  | #{@board["H7"].piece}  |                      
+         |____|____|____|____|____|____|____|____|
+         |    |    |    |    |    |    |    |    |
+        8| #{@board["A8"].piece}  | #{@board["B8"].piece}  | #{@board["C8"].piece}  | #{@board["D8"].piece}  | #{@board["E8"].piece}  | #{@board["F8"].piece}  | #{@board["G8"].piece}  | #{@board["H8"].piece}  |                     
+         |____|____|____|____|____|____|____|____|
         "
     end
 
@@ -118,3 +130,9 @@ class Board
     end
 
 end
+
+board = Board.new
+board.create_board(board.board_array)
+board["A1"].set_piece("♖")
+board["A8"].set_piece("♖")
+board.print_board
