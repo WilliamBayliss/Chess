@@ -109,7 +109,7 @@ class Board
         else
             x_difference = square.coordinate[0] - other_square.coordinate[0]
             y_difference = square.coordinate[1] - other_square.coordinate[1]
-            if (x_difference <= 1 && x_difference >= -1) && (y_difference <= 1 || y_difference >= -1)
+            if (x_difference <= 1 && x_difference >= -1) && (y_difference <= 1 && y_difference >= -1)
                 return true
             else
                 return false
@@ -160,6 +160,14 @@ class Board
 
     def bishop_move? square, other_square
         if diagonal?(square, other_square)
+            return true
+        else
+            return false
+        end
+    end
+
+    def king_move? square, other_square
+        if adjacent?(square, other_square)
             return true
         else
             return false

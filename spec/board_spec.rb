@@ -251,8 +251,8 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             expect(board.adjacent?(
-                board["A1"],
-                board["B3"]
+                board["B3"],
+                board["D2"]
             )).to eql(false)
         end
 
@@ -450,6 +450,100 @@ describe Board do
             expect(board.bishop_move?(
                 board["A4"], 
                 board["B3"]
+                )).to eql(true)
+        end
+    end
+
+    describe "#king_move?" do
+        it "returns false if square is not adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["A4"], 
+                board["D3"]
+                )).to eql(false)
+        end
+
+        it "returns false if square is not adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["A4"], 
+                board["A6"]
+                )).to eql(false)
+        end
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["B3"]
+                )).to eql(true)
+        end
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["C3"]
+                )).to eql(true)
+        end
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["C4"]
+                )).to eql(true)
+        end
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["C5"]
+                )).to eql(true)
+        end
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["B5"]
+                )).to eql(true)
+        end
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["A5"]
+                )).to eql(true)
+        end
+
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["A4"]
+                )).to eql(true)
+        end
+
+
+        it "returns true if square is adjacent in any direction" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.king_move?(
+                board["B4"], 
+                board["A3"]
                 )).to eql(true)
         end
     end
