@@ -3,6 +3,10 @@ class Square
     def initialize coordinate
         @coordinate = coordinate[0]
         @name = coordinate[1]
-        @piece = nil
+        @piece = " "
+    end
+
+    def set_piece piece_symbol
+        @piece = piece_symbol
     end
 end
