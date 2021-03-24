@@ -31,7 +31,7 @@ describe Piece do
     end
     
     describe "#move" do
-        it "updates the square value" do
+        it "updates the piece's square value" do
             square = Square.new([[0,0], "A1"])
             piece = Piece.new(square)
             
