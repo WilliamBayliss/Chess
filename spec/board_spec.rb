@@ -409,7 +409,7 @@ describe Board do
         it "returns true if a square is horizontal" do
             board = Board.new
             board.create_board(board.board_array)
-            expect(board.rook_move?(
+            expect(board.queen_move?(
                 board["D5"], 
                 board["A5"]
                 )).to eql(true)
@@ -418,7 +418,7 @@ describe Board do
         it "returns true if a square is vertical" do
             board = Board.new
             board.create_board(board.board_array)
-            expect(board.rook_move?(
+            expect(board.queen_move?(
                 board["A1"], 
                 board["A5"]
                 )).to eql(true)
@@ -428,6 +428,26 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             expect(board.queen_move?(
+                board["A4"], 
+                board["B3"]
+                )).to eql(true)
+        end
+    end
+
+    describe "#bishop_move?" do
+        it "returns false if a square is not diagonally accessible from start square" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.bishop_move?(
+                board["A1"], 
+                board["A2"]
+                )).to eql(false)
+        end
+
+        it "returns true if a square is diagonally accessible from start square" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.bishop_move?(
                 board["A4"], 
                 board["B3"]
                 )).to eql(true)

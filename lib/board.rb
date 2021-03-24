@@ -157,4 +157,12 @@ class Board
             return false     
         end
     end
+
+    def bishop_move? square, other_square
+        if diagonal?(square, other_square)
+            return true
+        else
+            return false
+        end
+    end
 end
