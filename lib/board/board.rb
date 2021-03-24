@@ -38,28 +38,28 @@ class Board
          |  A |  B |  C |  D |  E |  F |  G |  H |
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        1| #{@board["A1"].piece}  | #{@board["B1"].piece}  | #{@board["C1"].piece}  | #{@board["D1"].piece}  | #{@board["E1"].piece}  | #{@board["F1"].piece}  | #{@board["G1"].piece}  | #{@board["H1"].piece}  |            
+        1| #{@board["A1"].symbol}  | #{@board["B1"].symbol}  | #{@board["C1"].symbol}  | #{@board["D1"].symbol}  | #{@board["E1"].symbol}  | #{@board["F1"].symbol}  | #{@board["G1"].symbol}  | #{@board["H1"].symbol}  |            
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        2| #{@board["A2"].piece}  | #{@board["B2"].piece}  | #{@board["C2"].piece}  | #{@board["D2"].piece}  | #{@board["E2"].piece}  | #{@board["F2"].piece}  | #{@board["G2"].piece}  | #{@board["H2"].piece}  |                
+        2| #{@board["A2"].symbol}  | #{@board["B2"].symbol}  | #{@board["C2"].symbol}  | #{@board["D2"].symbol}  | #{@board["E2"].symbol}  | #{@board["F2"].symbol}  | #{@board["G2"].symbol}  | #{@board["H2"].symbol}  |                
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        3| #{@board["A3"].piece}  | #{@board["B3"].piece}  | #{@board["C3"].piece}  | #{@board["D3"].piece}  | #{@board["E3"].piece}  | #{@board["F3"].piece}  | #{@board["G3"].piece}  | #{@board["H3"].piece}  |                       
+        3| #{@board["A3"].symbol}  | #{@board["B3"].symbol}  | #{@board["C3"].symbol}  | #{@board["D3"].symbol}  | #{@board["E3"].symbol}  | #{@board["F3"].symbol}  | #{@board["G3"].symbol}  | #{@board["H3"].symbol}  |                       
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        4| #{@board["A4"].piece}  | #{@board["B4"].piece}  | #{@board["C4"].piece}  | #{@board["D4"].piece}  | #{@board["E4"].piece}  | #{@board["F4"].piece}  | #{@board["G4"].piece}  | #{@board["H4"].piece}  |                    
+        4| #{@board["A4"].symbol}  | #{@board["B4"].symbol}  | #{@board["C4"].symbol}  | #{@board["D4"].symbol}  | #{@board["E4"].symbol}  | #{@board["F4"].symbol}  | #{@board["G4"].symbol}  | #{@board["H4"].symbol}  |                    
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        5| #{@board["A5"].piece}  | #{@board["B5"].piece}  | #{@board["C5"].piece}  | #{@board["D5"].piece}  | #{@board["E5"].piece}  | #{@board["F5"].piece}  | #{@board["G5"].piece}  | #{@board["H5"].piece}  |                   
+        5| #{@board["A5"].symbol}  | #{@board["B5"].symbol}  | #{@board["C5"].symbol}  | #{@board["D5"].symbol}  | #{@board["E5"].symbol}  | #{@board["F5"].symbol}  | #{@board["G5"].symbol}  | #{@board["H5"].symbol}  |                   
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        6| #{@board["A6"].piece}  | #{@board["B6"].piece}  | #{@board["C6"].piece}  | #{@board["D6"].piece}  | #{@board["E6"].piece}  | #{@board["F6"].piece}  | #{@board["G6"].piece}  | #{@board["H6"].piece}  |                 
+        6| #{@board["A6"].symbol}  | #{@board["B6"].symbol}  | #{@board["C6"].symbol}  | #{@board["D6"].symbol}  | #{@board["E6"].symbol}  | #{@board["F6"].symbol}  | #{@board["G6"].symbol}  | #{@board["H6"].symbol}  |                 
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        7| #{@board["A7"].piece}  | #{@board["B7"].piece}  | #{@board["C7"].piece}  | #{@board["D7"].piece}  | #{@board["E7"].piece}  | #{@board["F7"].piece}  | #{@board["G7"].piece}  | #{@board["H7"].piece}  |                      
+        7| #{@board["A7"].symbol}  | #{@board["B7"].symbol}  | #{@board["C7"].symbol}  | #{@board["D7"].symbol}  | #{@board["E7"].symbol}  | #{@board["F7"].symbol}  | #{@board["G7"].symbol}  | #{@board["H7"].symbol}  |                      
          |____|____|____|____|____|____|____|____|
          |    |    |    |    |    |    |    |    |
-        8| #{@board["A8"].piece}  | #{@board["B8"].piece}  | #{@board["C8"].piece}  | #{@board["D8"].piece}  | #{@board["E8"].piece}  | #{@board["F8"].piece}  | #{@board["G8"].piece}  | #{@board["H8"].piece}  |                     
+        8| #{@board["A8"].symbol}  | #{@board["B8"].symbol}  | #{@board["C8"].symbol}  | #{@board["D8"].symbol}  | #{@board["E8"].symbol}  | #{@board["F8"].symbol}  | #{@board["G8"].symbol}  | #{@board["H8"].symbol}  |                     
          |____|____|____|____|____|____|____|____|
         "
     end
