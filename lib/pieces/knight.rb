@@ -1,4 +1,4 @@
-require './piece.rb'
+require_relative 'piece.rb'
 
 class Knight < Piece
     def initialize color

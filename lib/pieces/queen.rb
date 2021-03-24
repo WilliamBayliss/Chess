@@ -1,4 +1,4 @@
-require './piece.rb'
+require_relative 'piece.rb'
 class Queen < Piece
     def initialize color
         super(color)

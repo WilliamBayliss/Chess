@@ -1,4 +1,4 @@
-require './piece.rb'
+require_relative 'piece.rb'
 class Bishop < Piece
     def initialize color
         super(color)

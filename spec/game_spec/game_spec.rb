@@ -1,4 +1,4 @@
-require './lib/game.rb'
+require './lib/game/game.rb'
 describe Game do
     describe "#initialize" do
         it "initializes" do

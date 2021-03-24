@@ -1,4 +1,4 @@
-require './lib/square.rb'
+require './lib/board/square.rb'
 
 describe Square do
     describe "#initialize" do

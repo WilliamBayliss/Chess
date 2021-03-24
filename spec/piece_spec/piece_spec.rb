@@ -1,4 +1,4 @@
-require '../lib/piece.rb'
+require '../lib/pieces/piece.rb'
 
 describe Piece do
     describe "#initialize" do

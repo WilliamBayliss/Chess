@@ -1,4 +1,4 @@
-require '../lib/pieces/rook.rb'
+require './lib/pieces/rook.rb'
 
 describe Rook do
     describe "#initialize" do

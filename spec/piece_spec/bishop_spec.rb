@@ -1,4 +1,4 @@
-require '../lib/pieces/bishop.rb'
+require './lib/pieces/bishop.rb'
 
 describe Bishop do
     describe "#initialize" do

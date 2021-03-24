@@ -1,4 +1,4 @@
-require './lib/board.rb'
+require './lib/board/board.rb'
 
 describe Board do
     describe "#initialize" do
