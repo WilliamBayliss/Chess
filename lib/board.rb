@@ -130,9 +130,3 @@ class Board
     end
 
 end
-
-board = Board.new
-board.create_board(board.board_array)
-board["A1"].set_piece("♖")
-board["A8"].set_piece("♖")
-board.print_board
