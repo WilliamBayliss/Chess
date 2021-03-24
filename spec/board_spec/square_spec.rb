@@ -17,18 +17,30 @@ describe Square do
             expect(square.name).to eql("A1")
         end
 
-        it "initializes piece value to empty space" do
+        it "initializes symbol value to empty space" do
             square = Square.new([[0,0], "A1"])
-            expect(square.piece).to eql(" ")
+            expect(square.symbol).to eql(" ")
+        end
+
+        it "initializes piece value to nil" do
+            square = Square.new([[0,0], "A1"])
+            expect(square.piece).to eql(nil)
         end
     end
 
     describe "#set_piece" do
         it "updates the square's piece value" do
             square = Square.new([[0,0], "A1"])
-            square.set_piece("♟︎")
-            expect(square.piece).to eql("♟︎")
+            pawn = Pawn.new("blk")
+            square.set_piece(pawn)
+            expect(square.piece).to eql(pawn)
+        end
 
+        it "updates the square's symbol value" do
+            square = Square.new([[0,0], "A1"])
+            pawn = Pawn.new("blk")
+            square.set_piece(pawn)
+            expect(square.symbol).to eql("♟︎")
         end
     end
 

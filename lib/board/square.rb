@@ -1,12 +1,14 @@
 class Square
-    attr_reader :coordinate, :name, :piece
+    attr_reader :coordinate, :name, :piece, :symbol
     def initialize coordinate
         @coordinate = coordinate[0]
         @name = coordinate[1]
-        @piece = " "
+        @piece = nil
+        @symbol = " "
     end
 
-    def set_piece piece_symbol
-        @piece = piece_symbol
+    def set_piece piece
+        @piece = piece
+        @symbol = piece.symbol
     end
 end
