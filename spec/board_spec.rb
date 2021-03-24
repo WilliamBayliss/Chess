@@ -237,20 +237,121 @@ describe Board do
         end
     end
 
+    describe "#adjacent?" do
+        it "returns false if squares are nil" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                nil,
+                nil
+            )).to eql(false)
+        end
+
+        it "returns false if squares are not adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["A1"],
+                board["B3"]
+            )).to eql(false)
+        end
+
+        it "returns true if squares are horizontally adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["B2"],
+                board["C2"]
+            )).to eql(true)
+        end
+
+
+        it "returns true if squares are horizontally adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["B2"],
+                board["B1"]
+            )).to eql(true)
+        end
+
+        it "returns true if squares are vertically adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["D5"],
+                board["D6"]
+            )).to eql(true)
+        end
+
+        it "returns true if squares are vertically adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["D5"],
+                board["D4"]
+            )).to eql(true)
+        end
+
+        it "returns true if squares are diagonally adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["D5"],
+                board["E6"]
+            )).to eql(true)
+        end
+
+
+        it "returns true if squares are diagonally adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["D5"],
+                board["C6"]
+            )).to eql(true)
+        end
+
+
+        it "returns true if squares are diagonally adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["D5"],
+                board["C4"]
+            )).to eql(true)
+        end
+
+        it "returns true if squares are diagonally adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.adjacent?(
+                board["D5"],
+                board["E4"]
+            )).to eql(true)
+        end
+    end
+
     describe "#knight_move?" do
         it "returns false if square is nil" do
             board = Board.new
             board.create_board(board.board_array)
             square = board["A1"]
             other_square = nil
-            expect(board.knight_move?(square, other_square)).to eql(false)
+            expect(board.knight_move?(
+                square,
+                other_square
+                )).to eql(false)
         end
         it "returns false if move illegal" do
             board = Board.new
             board.create_board(board.board_array)
             square = board["A1"]
             other_square = board["B2"]
-            expect(board.knight_move?(square, other_square)).to eql(false)
+            expect(board.knight_move?(
+                square, 
+                other_square
+                )).to eql(false)
         end
 
         it "returns true if move legal" do
@@ -258,7 +359,10 @@ describe Board do
             board.create_board(board.board_array)
             square = board["A1"]
             other_square = board["C2"]
-            expect(board.knight_move?(square, other_square)).to eql(true)
+            expect(board.knight_move?(
+                square, 
+                other_square
+                )).to eql(true)
         end
     end
 
@@ -266,21 +370,67 @@ describe Board do
         it "returns false if a square is neither vertically or horizontally accessible from start square" do
             board = Board.new
             board.create_board(board.board_array)
-            expect(board.rook_move?(board["A1"], board["B2"])).to eql(false)
+            expect(board.rook_move?(
+                board["A1"], 
+                board["B2"]
+                )).to eql(false)
 
         end
 
         it "returns true if a square is vertically accessible" do
             board = Board.new
             board.create_board(board.board_array)
-            expect(board.rook_move?(board["A1"], board["A5"])).to eql(true)
+            expect(board.rook_move?(
+                board["A1"], 
+                board["A5"]
+                )).to eql(true)
         end
 
         it "returns true if a square is horizontally accessible" do
             board = Board.new
             board.create_board(board.board_array)
-            expect(board.rook_move?(board["A3"], board["D3"])).to eql(true)
+            expect(board.rook_move?(
+                board["A3"], 
+                board["D3"]
+                )).to eql(true)
+        end
+    end
+
+    describe "#queen_move?" do
+        it "returns false if a square is not in a straight line from start square" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.queen_move?(
+                board["A1"], 
+                board["B7"]
+                )).to eql(false)
         end
 
+        it "returns true if a square is horizontal" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.rook_move?(
+                board["D5"], 
+                board["A5"]
+                )).to eql(true)
+        end
+
+        it "returns true if a square is vertical" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.rook_move?(
+                board["A1"], 
+                board["A5"]
+                )).to eql(true)
+        end
+
+        it "returns true if a square is diagonal" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.queen_move?(
+                board["A4"], 
+                board["B3"]
+                )).to eql(true)
+        end
     end
 end

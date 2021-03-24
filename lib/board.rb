@@ -103,6 +103,20 @@ class Board
         end
     end
 
+    def adjacent? square, other_square
+        if square.nil? || other_square.nil?
+            return false
+        else
+            x_difference = square.coordinate[0] - other_square.coordinate[0]
+            y_difference = square.coordinate[1] - other_square.coordinate[1]
+            if (x_difference <= 1 && x_difference >= -1) && (y_difference <= 1 || y_difference >= -1)
+                return true
+            else
+                return false
+            end
+        end
+    end
+
     def knight_move? square, other_square
         if square.nil? || other_square.nil?
             return false
@@ -134,5 +148,13 @@ class Board
             return false
         end
     
+    end
+
+    def queen_move? square, other_square
+        if vertical?(square, other_square) || horizontal?(square, other_square) || diagonal?(square, other_square)
+            return true
+        else
+            return false     
+        end
     end
 end
