@@ -547,4 +547,66 @@ describe Board do
                 )).to eql(true)
         end
     end
+
+    describe "#pawn_move" do
+        it "returns false if a square is neither vertical nor adjacent" do
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("wht")
+            expect(board.pawn_move?(
+                pawn,
+                board["B4"], 
+                board["A3"]
+                )).to eql(false)
+        end 
+
+        it "returns true if a square is vertical and adjacent, and a correct move for a white pawn" do
+
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("wht")
+            expect(board.pawn_move?(
+                pawn,
+                board["A5"], 
+                board["A4"]
+                )).to eql(true)
+        end
+
+        it "returns false if a square is vertical and adjacent, but an illegal move for a white pawn" do
+
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("wht")
+            expect(board.pawn_move?(
+                pawn,
+                board["A5"], 
+                board["A6"]
+                )).to eql(false)
+        end
+
+
+        it "returns true if a square is vertical and adjacent, and a correct move for a black pawn" do
+
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("blk")
+            expect(board.pawn_move?(
+                pawn,
+                board["A2"], 
+                board["A3"]
+                )).to eql(true)
+        end
+
+        it "returns false if a square is vertical and adjacent, but an illegal move for a black pawn" do
+
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("blk")
+            expect(board.pawn_move?(
+                pawn,
+                board["A2"], 
+                board["A1"]
+                )).to eql(false)
+        end
+    end
 end

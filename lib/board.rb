@@ -117,6 +117,7 @@ class Board
         end
     end
 
+
     def knight_move? square, other_square
         if square.nil? || other_square.nil?
             return false
@@ -172,5 +173,27 @@ class Board
         else
             return false
         end
+    end
+
+    def pawn_move? pawn, square, other_square
+        if vertical?(square, other_square) && adjacent?(square, other_square)
+            if pawn.color == "wht"
+                if other_square.coordinate[0] < square.coordinate[0]
+                    return true
+                else
+                    return false
+                end
+            elsif pawn.color == "blk"
+
+                if other_square.coordinate[0] > square.coordinate[0]
+                    return true
+                else
+                    return false
+                end
+            end
+        else
+            return false
+        end
+
     end
 end
