@@ -13,13 +13,13 @@ describe Queen do
         end
 
         it "initializes with the correct wht symbol" do
-            rook = Queen.new("wht")
-            expect(rook.symbol).to eql("♕")
+            queen = Queen.new("wht")
+            expect(queen.symbol).to eql("♕")
         end
 
         it "initializes with the correct blk symbol" do
-            rook = Queen.new("blk")
-            expect(rook.symbol).to eql("♛")
+            queen = Queen.new("blk")
+            expect(queen.symbol).to eql("♛")
         end
     end
 end

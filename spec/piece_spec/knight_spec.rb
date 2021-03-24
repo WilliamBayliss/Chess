@@ -13,13 +13,13 @@ describe Knight do
         end
 
         it "initializes with the correct wht symbol" do
-            rook = Knight.new("wht")
-            expect(rook.symbol).to eql("♘")
+            knight = Knight.new("wht")
+            expect(knight.symbol).to eql("♘")
         end
 
         it "initializes with the correct blk symbol" do
-            rook = Knight.new("blk")
-            expect(rook.symbol).to eql("♞")
+            knight = Knight.new("blk")
+            expect(knight.symbol).to eql("♞")
         end
     end
 end

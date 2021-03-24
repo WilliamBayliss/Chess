@@ -14,13 +14,13 @@ describe King do
 
 
         it "initializes with the correct wht symbol" do
-            rook = King.new("wht")
-            expect(rook.symbol).to eql("♔")
+            king = King.new("wht")
+            expect(king.symbol).to eql("♔")
         end
 
         it "initializes with the correct blk symbol" do
-            rook = King.new("blk")
-            expect(rook.symbol).to eql("♚")
+            king = King.new("blk")
+            expect(king.symbol).to eql("♚")
         end
     end
 end

@@ -13,13 +13,13 @@ describe Bishop do
         end
 
         it "initializes with the correct wht symbol" do
-            rook = Bishop.new("wht")
-            expect(rook.symbol).to eql("♗")
+            bishop = Bishop.new("wht")
+            expect(bishop.symbol).to eql("♗")
         end
 
         it "initializes with the correct blk symbol" do
-            rook = Bishop.new("blk")
-            expect(rook.symbol).to eql("♝")
+            bishop = Bishop.new("blk")
+            expect(bishop.symbol).to eql("♝")
         end
     end
 end
