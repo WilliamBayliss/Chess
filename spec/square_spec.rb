@@ -30,8 +30,6 @@ describe Square do
             expect(square.piece).to eql("♟︎")
 
         end
-
-
     end
 
 end

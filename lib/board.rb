@@ -33,8 +33,6 @@ class Board
         end
     end
 
-
-
     def print_board
         puts "
          |  A |  B |  C |  D |  E |  F |  G |  H |
