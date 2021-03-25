@@ -35,6 +35,15 @@ class Board
         end
     end
 
+    def place_pieces
+        place_white_pieces
+        place_black_pieces
+    end
+
+    def place_white_pieces
+        
+    end
+
     def print_board
         puts "
          |  A |  B |  C |  D |  E |  F |  G |  H |
@@ -64,6 +73,11 @@ class Board
         8| #{@board["A8"].symbol}  | #{@board["B8"].symbol}  | #{@board["C8"].symbol}  | #{@board["D8"].symbol}  | #{@board["E8"].symbol}  | #{@board["F8"].symbol}  | #{@board["G8"].symbol}  | #{@board["H8"].symbol}  |                     
          |____|____|____|____|____|____|____|____|
         "
+    end
+
+    def move_piece piece, square
+        piece.set_square(square)
+        square.set_piece(piece)
     end
 
     def diagonal? square, other_square

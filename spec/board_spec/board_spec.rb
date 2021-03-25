@@ -64,6 +64,30 @@ describe Board do
         end
     end
 
+    describe "#move_piece" do
+        it "sets the piece's square value" do
+            board = Board.new
+            board.create_board(board.board_array)
+
+            rook = Rook.new("wht")
+            rook.set_square(board["A1"])
+
+            board.move_piece(rook, board["A5"])
+            expect(rook.square).to eql(board["A5"])
+        end
+
+        it "sets the square's piece value" do
+            board = Board.new
+            board.create_board(board.board_array)
+
+            rook = Rook.new("wht")
+            rook.set_square(board["A1"])
+
+            board.move_piece(rook, board["A5"])
+            expect(board["A5"].piece).to eql(rook)
+        end
+    end
+
     describe "#diagonal?" do
         it "returns false if either square is nil" do
             board = Board.new
