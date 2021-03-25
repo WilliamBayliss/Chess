@@ -12,6 +12,11 @@ describe Move do
             expect(move.player).to eql("player_one")
         end
 
+        it "initializes @opponent to nil" do
+            move = Move.new('player_one')
+            expect(move.opponent).to eql(nil)
+        end
+
         it "initializes @piece to nil" do
             move = Move.new("player_one")
             expect(move.piece).to eql(nil)
