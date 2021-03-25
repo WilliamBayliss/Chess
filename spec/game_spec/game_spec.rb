@@ -54,7 +54,7 @@ describe Game do
             player_two = Player.new("Fernando", "blk")
             square = board["A5"]
             rook = Rook.new("wht")
-            rook.move(square)
+            rook.set_square(square)
             square.set_piece(rook)
             move = Move.new(player_one)
             move.get_opponent(player_two)
@@ -73,7 +73,7 @@ describe Game do
             player_two = Player.new("Fernando", "blk")
             square = board["A5"]
             rook = Rook.new("wht")
-            rook.move(square)
+            rook.set_square(square)
             square.set_piece(rook)
             move = Move.new(player_one)
             move.get_opponent(player_two)
@@ -92,7 +92,7 @@ describe Game do
             player_two = Player.new("Fernando", "blk")
             square = board["A5"]
             rook = Rook.new("wht")
-            rook.move(square)
+            rook.set_square(square)
             square.set_piece(rook)
             move = Move.new(player_one)
             move.get_opponent(player_two)
@@ -111,7 +111,7 @@ describe Game do
             player_two = Player.new("Fernando", "blk")
             square = board["A5"]
             rook = Rook.new("wht")
-            rook.move(square)
+            rook.set_square(square)
             square.set_piece(rook)
             move = Move.new(player_one)
             move.get_opponent(player_two)
@@ -130,7 +130,7 @@ describe Game do
             player_two = Player.new("Fernando", "blk")
             square = board["A5"]
             rook = Rook.new("wht")
-            rook.move(square)
+            rook.set_square(square)
             square.set_piece(rook)
             move = Move.new(player_one)
             move.get_opponent(player_two)
