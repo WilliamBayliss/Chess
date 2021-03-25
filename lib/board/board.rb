@@ -77,13 +77,13 @@ class Board
 
     def move_piece piece, square
         if legal_move?(piece, square)
+            piece.square.clear_square
             piece.set_square(square)
             square.set_piece(piece)
             return true
         else
             return false
         end
-    
     end
 
     def diagonal? square, other_square

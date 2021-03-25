@@ -112,6 +112,28 @@ describe Board do
             board.move_piece(rook, board["A5"])
             expect(board["A5"].piece).to eql(rook)
         end
+
+        it "resets the piece value of the square the piece moved from to nil" do
+            board = Board.new
+            board.create_board(board.board_array)
+
+            rook = Rook.new("wht")
+            rook.set_square(board["A1"])
+
+            board.move_piece(rook, board["A5"])
+            expect(board["A1"].piece).to eql(nil)
+        end
+
+        it "resets the symbol value of the square the piece moved from to empty space" do    
+            board = Board.new
+            board.create_board(board.board_array)
+
+            rook = Rook.new("wht")
+            rook.set_square(board["A1"])
+
+            board.move_piece(rook, board["A5"])
+            expect(board["A1"].symbol).to eql(" ")
+        end
     end
 
     describe "#diagonal?" do
