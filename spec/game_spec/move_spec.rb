@@ -26,6 +26,12 @@ describe Move do
             move = Move.new("player_one")
             expect(move.square).to eql(nil)
         end
+        
+        it "initializes @board to nil" do
+            move = Move.new("player_one")
+            expect(move.board).to eql(nil)
+        end
+    
     end
     
     describe "#get_opponent" do
