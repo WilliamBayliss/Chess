@@ -11,4 +11,9 @@ class Square
         @piece = piece
         @symbol = piece.symbol
     end
+
+    def clear_square
+        @piece = nil
+        @symbol = " "
+    end
 end

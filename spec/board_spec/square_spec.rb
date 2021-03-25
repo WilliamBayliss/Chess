@@ -44,4 +44,25 @@ describe Square do
         end
     end
 
+    describe "#clear_square" do
+        it "resets the square's piece value to nil" do
+            square = Square.new([[0,0], "A1"])
+            pawn = Pawn.new("wht")
+            square.set_piece(pawn)
+            square.clear_square
+
+            expect(square.piece).to eql(nil)
+        end
+
+        it "resets the square's symbol value to empty space" do
+            square = Square.new([[0,0], "A1"])
+            pawn = Pawn.new("wht")
+            square.set_piece(pawn)
+            square.clear_square
+
+            expect(square.symbol).to eql(" ")
+        end
+
+    end
+
 end
