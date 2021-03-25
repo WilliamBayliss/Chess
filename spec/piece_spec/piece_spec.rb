@@ -26,11 +26,11 @@ describe Piece do
         end
     end
     
-    describe "#move" do
+    describe "#set_square" do
         it "updates the piece's square value" do
             piece = Piece.new("wht")
             new_square = Square.new([[0,5], "F1"])
-            piece.move(new_square)
+            piece.set_square(new_square)
             expect(piece.square).to eql(new_square)
         end
     end
