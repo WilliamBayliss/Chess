@@ -193,14 +193,13 @@ class Board
 
     def pawn_move? pawn, square, other_square
         if vertical?(square, other_square) && adjacent?(square, other_square)
-            if pawn.color == "wht"
+            if pawn.symbol == "♙"
                 if other_square.coordinate[0] < square.coordinate[0]
                     return true
                 else
                     return false
                 end
-            elsif pawn.color == "blk"
-
+            elsif pawn.symbol == "♟︎"
                 if other_square.coordinate[0] > square.coordinate[0]
                     return true
                 else
@@ -212,4 +211,24 @@ class Board
         end
 
     end
+
+    def legal_move? piece, square
+        case piece.symbol
+        when "♟︎", "♙"
+            pawn_move?(piece, piece.square, square)
+        when "♞", "♘"
+            knight_move?(piece.square, square)
+        when "♝", "♗"
+            bishop_move?(piece.square, square)
+        when "♜", "♖"
+            rook_move?(piece.square, square)
+        when "♛", "♕"
+            queen_move?(piece.square, square)
+        when "♚", "♔"
+            king_move?(piece.square, square)
+        else
+            false
+        end
+    end
+
 end
