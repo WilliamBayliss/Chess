@@ -37,11 +37,85 @@ class Board
 
     def place_pieces
         place_white_pieces
+        place_white_pawns
+        place_black_pawns
         place_black_pieces
     end
 
     def place_white_pieces
-        
+        rook_one = Rook.new("wht")
+        @board["A1"].set_piece(rook_one)
+        knight_one = Knight.new("wht")
+        @board["B1"].set_piece(knight_one)
+        bishop_one = Bishop.new("wht")
+        @board["C1"].set_piece(bishop_one)
+        king = King.new("wht")
+        @board["D1"].set_piece(king)
+        queen = Queen.new("wht")
+        @board["E1"].set_piece(queen)
+        bishop_two = Bishop.new("wht")
+        @board["F1"].set_piece(bishop_two)
+        knight_two = Knight.new("wht")
+        @board["G1"].set_piece(knight_two)
+        rook_two = Rook.new("wht")
+        @board["H1"].set_piece(rook_two)
+    end
+
+    def place_white_pawns
+        pawn_one = Pawn.new("wht")
+        @board["A2"].set_piece(pawn_one)
+        pawn_two = Pawn.new("wht")
+        @board["B2"].set_piece(pawn_two)
+        pawn_three = Pawn.new("wht")
+        @board["C2"].set_piece(pawn_three)
+        pawn_four = Pawn.new("wht")
+        @board["D2"].set_piece(pawn_four)
+        pawn_five = Pawn.new("wht")
+        @board["E2"].set_piece(pawn_five)
+        pawn_six = Pawn.new("wht")
+        @board["F2"].set_piece(pawn_six)
+        pawn_seven = Pawn.new("wht")
+        @board["G2"].set_piece(pawn_seven)
+        pawn_eight = Pawn.new("wht")
+        @board["H2"].set_piece(pawn_eight)
+    end
+
+    def place_black_pieces
+        rook_one = Rook.new("blk")
+        @board["A8"].set_piece(rook_one)
+        knight_one = Knight.new("blk")
+        @board["B8"].set_piece(knight_one)
+        bishop_one = Bishop.new("blk")
+        @board["C8"].set_piece(bishop_one)
+        king = King.new("blk")
+        @board["D8"].set_piece(king)
+        queen = Queen.new("blk")
+        @board["E8"].set_piece(queen)
+        bishop_two = Bishop.new("blk")
+        @board["F8"].set_piece(bishop_two)
+        knight_two = Knight.new("blk")
+        @board["G8"].set_piece(knight_two)
+        rook_two = Rook.new("blk")
+        @board["H8"].set_piece(rook_two)
+    end
+
+    def place_black_pawns
+        pawn_one = Pawn.new("blk")
+        @board["A7"].set_piece(pawn_one)
+        pawn_two = Pawn.new("blk")
+        @board["B7"].set_piece(pawn_two)
+        pawn_three = Pawn.new("blk")
+        @board["C7"].set_piece(pawn_three)
+        pawn_four = Pawn.new("blk")
+        @board["D7"].set_piece(pawn_four)
+        pawn_five = Pawn.new("blk")
+        @board["E7"].set_piece(pawn_five)
+        pawn_six = Pawn.new("blk")
+        @board["F7"].set_piece(pawn_six)
+        pawn_seven = Pawn.new("blk")
+        @board["G7"].set_piece(pawn_seven)
+        pawn_eight = Pawn.new("blk")
+        @board["H7"].set_piece(pawn_eight)
     end
 
     def print_board
@@ -200,13 +274,13 @@ class Board
     def pawn_move? pawn, square, other_square
         if vertical?(square, other_square) && adjacent?(square, other_square)
             if pawn.symbol == "♙"
-                if other_square.coordinate[0] < square.coordinate[0]
+                if other_square.coordinate[0] > square.coordinate[0]
                     return true
                 else
                     return false
                 end
             elsif pawn.symbol == "♟︎"
-                if other_square.coordinate[0] > square.coordinate[0]
+                if other_square.coordinate[0] < square.coordinate[0]
                     return true
                 else
                     return false
