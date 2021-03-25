@@ -1,10 +1,7 @@
 class Game
-    attr_accessor :moves_history, :player_one, :player_two
+    attr_accessor :moves_history
     def initialize
         @moves_history = []
-
-        @player_one = nil
-        @player_two = nil
     end
 
     def create_player name, color
