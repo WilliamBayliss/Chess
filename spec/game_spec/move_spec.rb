@@ -58,6 +58,17 @@ describe Move do
         end
     end
 
+    describe "#get board" do
+        it "saves the board state" do
+            board = Board.new
+            board.create_board(board.board_array)
+            move = Move.new("player_one")
+            move.get_board(board)
+            expect(move.board).to eql(board)
+        end
+    end
+
+
     describe "#valid_coordinate?" do
         it "returns false if more than two characters are entered" do
             input = "A55"

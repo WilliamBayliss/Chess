@@ -1,10 +1,11 @@
 class Move
-    attr_reader :player, :opponent, :piece, :square
+    attr_reader :player, :opponent, :piece, :square, :board
     def initialize player
         @player = player
         @opponent = nil
         @piece = nil
         @square = nil
+        @board = nil
     end
 
     def get_opponent player
@@ -17,6 +18,10 @@ class Move
 
     def get_square square
         @square = square
+    end
+
+    def get_board board
+        @board = board
     end
 
     def valid_coordinate? input
