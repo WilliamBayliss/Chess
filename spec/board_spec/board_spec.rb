@@ -65,6 +65,32 @@ describe Board do
     end
 
     describe "#move_piece" do
+        it "returns false if a move is illegal" do
+            board = Board.new
+            board.create_board(board.board_array)
+
+            rook = Rook.new("wht")
+            rook.set_square(board["A1"])
+
+            
+            expect(board.move_piece(
+                rook, 
+                board["B5"]
+                )).to eql(false)
+        end
+        it "returns true if a move is legal" do
+            board = Board.new
+            board.create_board(board.board_array)
+
+            rook = Rook.new("wht")
+            rook.set_square(board["A1"])
+
+            
+            expect(board.move_piece(
+                rook, 
+                board["G1"]
+                )).to eql(true)
+        end
         it "sets the piece's square value" do
             board = Board.new
             board.create_board(board.board_array)
