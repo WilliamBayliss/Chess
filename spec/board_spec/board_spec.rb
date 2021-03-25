@@ -640,7 +640,7 @@ describe Board do
             expect(board.pawn_move?(
                 pawn,
                 board["A5"], 
-                board["A4"]
+                board["A6"]
                 )).to eql(true)
         end
 
@@ -652,7 +652,7 @@ describe Board do
             expect(board.pawn_move?(
                 pawn,
                 board["A5"], 
-                board["A6"]
+                board["A4"]
                 )).to eql(false)
         end
 
@@ -664,8 +664,8 @@ describe Board do
             pawn = Pawn.new("blk")
             expect(board.pawn_move?(
                 pawn,
-                board["A2"], 
-                board["A3"]
+                board["A3"], 
+                board["A2"]
                 )).to eql(true)
         end
 
@@ -677,7 +677,7 @@ describe Board do
             expect(board.pawn_move?(
                 pawn,
                 board["A2"], 
-                board["A1"]
+                board["A3"]
                 )).to eql(false)
         end
     end
@@ -703,11 +703,11 @@ describe Board do
             pawn.set_square(board["A5"])
             expect(board.legal_move?(
                 pawn,
-                board["A4"]
+                board["A6"]
             )).to eql(true)
         end
 
-        it "returns true for a legal white pawn move" do
+        it "returns true for a legal black pawn move" do
             board = Board.new
             board.create_board(board.board_array)
 
@@ -715,7 +715,7 @@ describe Board do
             pawn.set_square(board["A5"])
             expect(board.legal_move?(
                 pawn,
-                board["A6"]
+                board["A4"]
             )).to eql(true)
         end
 
