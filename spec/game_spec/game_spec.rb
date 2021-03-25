@@ -10,7 +10,34 @@ describe Game do
             game = Game.new
             expect(game.moves_history).to eql([])
         end
+
+        it "initializes @player_one to nil" do
+            game = Game.new
+            expect(game.player_one).to eql(nil)
+        end 
+
+        it "initializes @player_two to nil" do
+            game = Game.new
+            expect(game.player_two).to eql(nil)
+        end
     end
+
+    describe "#create_computer_player" do
+        it "returns the computer player" do
+            game = Game.new
+            cpu = game.create_computer_player("wht")
+
+            expect(cpu).to_not eql(nil)
+        end
+
+        it "gives the player a name of 'CPU' " do
+            game = Game.new
+            cpu = game.create_computer_player("wht")
+            expect(cpu.name).to eql("CPU")
+        end
+
+    end
+
 
     describe "#record_move" do
         it "adds a move to the @move_history" do
