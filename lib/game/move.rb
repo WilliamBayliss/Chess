@@ -1,17 +1,22 @@
 class Move
-    attr_reader :player, :piece, :square
+    attr_reader :player, :opponent, :piece, :square
     def initialize player
         @player = player
+        @opponent = nil
         @piece = nil
         @square = nil
     end
 
-    def get_piece_puts
-        puts "Please enter the coordinate of the piece you'd like to select."
-        input = gets.chomp
-        until valid_coordinate?
-            input = gets.chomp
-        end
+    def get_opponent player
+        @opponent = player
+    end
+
+    def get_piece square
+        @piece = square.piece
+    end
+
+    def get_square square
+        @square = square
     end
 
     def valid_coordinate? input
@@ -25,11 +30,12 @@ class Move
         end
     end
 
-    def get_piece square
-        @piece = square.piece
+    def get_piece_puts
+        puts "Please enter the coordinate of the piece you'd like to select."
+        input = gets.chomp
+        until valid_coordinate?(input)
+            input = gets.chomp
+        end
     end
 
-    def get_square square
-        @square = square
-    end
 end

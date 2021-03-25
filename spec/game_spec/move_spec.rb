@@ -22,6 +22,16 @@ describe Move do
             expect(move.square).to eql(nil)
         end
     end
+    
+    describe "#get_opponent" do
+        it "sets @opponent" do
+            player_one = Player.new("Mike", "wht")
+            player_two = Player.new("Will", "blk")
+            move = Move.new(player_one)
+            move.get_opponent(player_two)
+            expect(move.opponent).to eql(player_two)
+        end
+    end
 
     describe "#get_piece" do
         it "gets a piece from a square" do
