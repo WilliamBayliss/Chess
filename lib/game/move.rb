@@ -16,6 +16,15 @@ class Move
         @piece = square.piece
     end
 
+    def get_coordinate
+        puts "Please enter a coordinate to select a square"
+        input = gets.chomp
+        until valid_coordinate?(input)
+            input = gets.chomp
+        end
+        input
+    end
+
     def get_square square
         @square = square
     end
