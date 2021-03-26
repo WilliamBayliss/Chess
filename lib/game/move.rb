@@ -8,6 +8,13 @@ class Move
         @board = nil
     end
 
+    def log_move_data board, opponent, piece, square
+        get_board(board)
+        get_opponent(opponent)
+        get_piece(piece)
+        get_square(square)
+    end
+
     def get_opponent player
         @opponent = player
     end
