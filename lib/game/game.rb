@@ -15,7 +15,7 @@ class Game
     def create_board
         board = Board.new
         board.create_board(board.board_array)
-
+        board.place_pieces
         board
     end
 
