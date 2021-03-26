@@ -26,4 +26,8 @@ class Game
     def record_move move
         @moves_history.append(move)
     end
+
+    def preamble
+        puts "Welcome to Chess! This is a game of chess that you can play against a friend or the computer on the command line. Take your opponent's pieces and try to put their King into checkmate to win!"
+    end
 end
