@@ -19,8 +19,34 @@ class Move
         @opponent = player
     end
 
+    def select_piece
+        puts "Which piece would you like to move?"
+        coordinate = get_coordinate
+        get_piece(@board[coordinate])
+    end
+
     def get_piece square
         @piece = square.piece
+    end
+
+    def select_square
+        puts "Where are you going to move the piece?"
+        coordinate = get_coordinate
+        until @board.legal_move?(piece.square, @board[coordinate])
+            puts "That is an illegal move, please choose again"
+            coordinate = get_coordinate
+        end
+
+        get_square(@board[coordinate])
+
+    end
+
+    def get_square square
+        @square = square
+    end
+
+    def get_board board
+        @board = board
     end
 
     def get_coordinate
@@ -30,14 +56,6 @@ class Move
             input = gets.chomp
         end
         input
-    end
-
-    def get_square square
-        @square = square
-    end
-
-    def get_board board
-        @board = board
     end
 
     def valid_coordinate? input
