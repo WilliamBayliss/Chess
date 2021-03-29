@@ -899,14 +899,19 @@ describe Board do
 
         end
 
+        it "returns true if the start and end square have pieces but the path is clear" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            expect(board.clear_path?(board["C2"], board["C7"])).to eql(true)
+        end
+
         it "returns false if the path between two squares is blocked by a piece" do
             board = Board.new
             board.create_board(board.board_array)
             board.add_edges
             board.place_pieces
-            board.move_piece(board["B2"].piece, board["B3"])
-
-
             expect(board.clear_path?(board["A1"], board["A5"])).to eql(false)
         end
     end
