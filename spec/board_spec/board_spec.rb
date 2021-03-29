@@ -888,4 +888,16 @@ describe Board do
         end
     end
 
+    describe "#clear_path?" do
+        it "returns true if the path between two squares does not contain a piece" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            expect(board.clear_path?([board["A3"], board["B3"], board["C4"]])).to eql(true)
+
+        end
+    end
+
 end

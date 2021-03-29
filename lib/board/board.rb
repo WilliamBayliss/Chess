@@ -325,4 +325,14 @@ class Board
         end
     end
 
+    def clear_path? path
+        result = true
+        path.each do |square|
+            if square.piece != nil
+                result = false
+            end
+        end
+        result
+    end
+
 end
