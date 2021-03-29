@@ -335,4 +335,35 @@ class Board
         result
     end
 
+    def board_scan source
+        map = {}
+
+        @board.each do |(key, value)|
+            map[key] = {
+                predecessor: nil,
+                distance: nil
+            }
+        end
+
+        map[source.name][:distance] = 0
+
+        queue = []
+        queue.append(source)
+
+        while queue.length > 0
+            temp =  queue[0]
+            queue.shift
+
+            temp.neighbours.each do |neighbour|
+                if map[neighbour.name][:distance].nil?
+                    map[neighbour.name][:distance] = map[temp.name][:distance] + 1
+                    map[neighbour.name][:predecessor] = temp
+
+                    queue.append(neighbour)
+                end
+            end
+        end
+        map
+    end 
+
 end

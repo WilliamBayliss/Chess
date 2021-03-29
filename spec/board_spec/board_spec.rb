@@ -900,4 +900,54 @@ describe Board do
         end
     end
 
+    describe "#board_scan" do
+        it "creates a hash that isn't empty" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.board_scan(board["A1"])
+            expect(map).to_not eql({})
+        end
+
+        it "has values that can be accessed" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.board_scan(board["A1"])
+            expect(map["A1"]).to_not eql(nil)
+        end
+
+        it "gives the source square a predecessor value of nil" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.board_scan(board["A1"])
+            expect(map["A1"][:predecessor]).to eql(nil)
+        end
+
+        it "gives the source square a distance value of 0" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.board_scan(board["A1"])
+            expect(map["A1"][:distance]).to eql(0)
+        end
+
+        it "gives non-source squares a predecessor value of not nil" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.board_scan(board["A1"])
+            expect(map["A2"][:predecessor]).to_not eql(nil)
+        end
+
+        it "gives a square the correct predecessor value" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.board_scan(board["A1"])
+            expect(map["A2"][:predecessor]).to eql(board["A1"])
+        end
+    end
+
 end
