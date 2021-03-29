@@ -26,6 +26,20 @@ describe Square do
             square = Square.new([[0,0], "A1"])
             expect(square.piece).to eql(nil)
         end
+
+        it "initializes neighbours value to empty array" do
+            square = Square.new([[0,0], "A1"])
+            expect(square.neighbours).to eql([])
+        end
+    end
+
+    describe "#add_neighbour" do
+        it "adds another square to the square's neighbours array" do
+            square_one = Square.new([[0,0], "A1"])
+            square_two = Square.new([[0,1], "B1"])
+            square_one.add_neighbour(square_two)
+            expect(square_one.neighbours[0]).to eql(square_two)
+        end
     end
 
     describe "#set_piece" do
