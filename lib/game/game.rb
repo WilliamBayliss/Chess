@@ -44,7 +44,3 @@ class Game
         puts "Welcome to Chess! This is a game of chess that you can play against a friend or the computer on the command line. Take your opponent's pieces and try to put their King into checkmate to win!"
     end
 end
-
-game = Game.new
-player_one = Player.new("will", "wht")
-game.player_move(player_one)
