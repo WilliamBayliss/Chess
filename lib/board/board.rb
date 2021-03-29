@@ -15,6 +15,10 @@ class Board
         @board[square.name] = square
     end
 
+    def add_edge(square, neighbour)
+        @board[square].add_neighbour(@board[neighbour])
+    end
+
     def board_array
         [
             [[1,1], "A1"], [[1,2], "B1"], [[1,3], "C1"], [[1,4], "D1"], [[1,5], "E1"], [[1,6], "F1"], [[1,7], "G1"], [[1,8], "H1"], 
@@ -32,6 +36,16 @@ class Board
         board_array.each do |coordinate|
             square = Square.new(coordinate)
             add_square(square)
+        end
+    end
+
+    def add_edges
+        @board.each_key do |key|
+            @board.each_key do |other_key|
+                if adjacent?(@board[key], @board[other_key])
+                    add_edge(key, other_key)
+                end
+            end
         end
     end
 

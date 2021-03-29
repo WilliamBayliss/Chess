@@ -26,6 +26,15 @@ describe Board do
         end
     end
 
+    describe "#add_edge" do
+        it "adds a square on the board's neighbour to the square's neighbours list" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edge("A1", "B1")
+            expect(board["A1"].neighbours[0]).to eql(board["B1"])
+        end
+    end
+
     describe "#board_array" do
         it "returns the array" do
             board = Board.new
@@ -61,6 +70,44 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             expect(board["C8"].name).to eql("C8")
+        end
+    end
+
+    describe "#add_edges" do
+        it "doesn't leave a square's neighbours array empty" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            expect(board["A1"].neighbours).to_not eql([])
+        end
+
+        it "correctly adds a square's neighbours" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            expect(board["A1"].neighbours).to include(board["B1"])
+        end
+
+
+        it "correctly adds a square's neighbours" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            expect(board["A1"].neighbours).to include(board["A2"])
+        end
+
+        it "correctly adds a square's neighbours" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            expect(board["A1"].neighbours).to include(board["B2"])
+        end
+
+        it "doesn't add a square that isn't a neighbour" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            expect(board["A1"].neighbours).to_not include(board["C2"]) 
         end
     end
 
