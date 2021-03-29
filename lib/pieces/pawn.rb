@@ -5,7 +5,7 @@ class Pawn < Piece
 
         if @color == "wht"
             set_symbol("♙")
-        elsif @color = "blk"
+        elsif @color == "blk"
             set_symbol("♟︎")
         end
     end
