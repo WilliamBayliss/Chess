@@ -325,15 +325,22 @@ class Board
         end
     end
 
-    def clear_path? path
-        result = true
-        path.each do |square|
-            if square.piece != nil
-                result = false
+    def clear_path? start_square, end_square
+        map = board_scan(start_square)
+
+        next_square = map[end_square.name][:predecessor]
+
+        until next_square == start_square
+            if next_square.piece != nil
+                return false
+            else
+                next_square = map[next_square.name][:predecessor]
             end
         end
-        result
+        true
+
     end
+
 
     def board_scan source
         map = {}
@@ -363,6 +370,7 @@ class Board
                 end
             end
         end
+
         map
     end 
 

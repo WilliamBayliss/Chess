@@ -895,8 +895,19 @@ describe Board do
             board.add_edges
             board.place_pieces
 
-            expect(board.clear_path?([board["A3"], board["B3"], board["C4"]])).to eql(true)
+            expect(board.clear_path?(board["A3"], board["C4"])).to eql(true)
 
+        end
+
+        it "returns false if the path between two squares is blocked by a piece" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["B2"].piece, board["B3"])
+
+
+            expect(board.clear_path?(board["A1"], board["A5"])).to eql(false)
         end
     end
 
