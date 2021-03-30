@@ -16,6 +16,11 @@ describe Piece do
             piece = Piece.new("wht")
             expect(piece.symbol).to eql(" ")
         end
+
+        it "initializes @moved to false" do
+            piece = Piece.new("blk")
+            expect(piece.moved).to eql(false)
+        end
     end
 
     describe "#set_symbol" do
@@ -32,6 +37,14 @@ describe Piece do
             new_square = Square.new([[0,5], "F1"])
             piece.set_square(new_square)
             expect(piece.square).to eql(new_square)
+        end
+    end
+    
+    describe "#set_moved" do
+        it "sets the moved attr of a pawn to true" do
+            piece = Piece.new("blk")
+            piece.set_moved
+            expect(piece.moved).to eql(true)
         end
     end
 end
