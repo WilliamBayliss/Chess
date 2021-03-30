@@ -1,6 +1,7 @@
 require_relative 'piece.rb'
 class Pawn < Piece
     attr_accessor :moved
+    
     def initialize color
         super(color)
         @moved = false
