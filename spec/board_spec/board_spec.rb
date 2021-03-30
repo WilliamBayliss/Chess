@@ -714,6 +714,21 @@ describe Board do
             )).to eql(true)
         end
 
+        it "returns false if the forward diagonal square doesn't have a piece on it" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["A2"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["A4"])
+            expect(board.pawn_move?(
+                board["A4"].piece,
+                board["A4"],
+                board["B5"]
+            )).to eql(false)
+        end
+
+
         it "returns true if a square is vertical and adjacent, and a correct move for a white pawn" do
 
             board = Board.new
