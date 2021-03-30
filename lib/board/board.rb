@@ -230,7 +230,6 @@ class Board
         end
     end
 
-
     def knight_move? square, other_square
         if square.nil? || other_square.nil?
             return false
@@ -293,7 +292,9 @@ class Board
     end
 
     def pawn_move? pawn, square, other_square
-        if vertical?(square, other_square) && adjacent?(square, other_square)
+        if (diagonal?(square, other_square) && adjacent?(square, other_square)) && other_square.piece != nil
+            return true
+        elsif vertical?(square, other_square) && adjacent?(square, other_square)
             if pawn.symbol == "♙"
                 if other_square.coordinate[0] > square.coordinate[0]
                     return true
