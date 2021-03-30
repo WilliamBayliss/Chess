@@ -8,7 +8,6 @@ class Game
     def initialize
         @board = create_board
         @moves_history = []
-
     end
 
     def create_player name, color
