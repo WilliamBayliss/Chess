@@ -31,6 +31,11 @@ describe Move do
             move = Move.new("player_one")
             expect(move.board).to eql(nil)
         end
+
+        it "initializes @pawn_jump to false" do
+            move = Move.new("player_one")
+            expect(move.pawn_jump).to eql(false)
+        end
     
     end
     
@@ -52,6 +57,14 @@ describe Move do
             rook = Rook.new("wht")
             board["A1"].set_piece(rook)
             move.get_piece(board["A1"])
+        end
+    end
+
+    describe "#set_pawn_jump" do
+        it "sets the pawn_jump value to true" do
+            move = Move.new("player_one")
+            move.set_pawn_jump
+            expect(move.pawn_jump).to eql(true)
         end
     end
 
