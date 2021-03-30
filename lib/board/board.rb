@@ -318,6 +318,9 @@ class Board
         end
     end
 
+    # These methods are all for assessing the different conditions of moving a pawn
+
+    # Returns true if the other square is in the correct direction for a pawn
     def pawn_direction? square, other_square
         if square.piece.symbol == "♙"
             if other_square.coordinate[0] > square.coordinate[0]
@@ -334,7 +337,7 @@ class Board
         end
     end
 
-
+    # Returns true if the selected move is a legal move for a pawn
     def pawn_move? square, other_square
         if square.piece.moved == false && two_squares_vertical?(square, other_square)
             true
@@ -347,6 +350,7 @@ class Board
         end
     end
 
+    # Assesses the given square and the last move, returns true if the last move sets up an en passant
     def en_passant? square, last_move
         if last_move.pawn_jump == true
             if adjacent?(square, last_move.square) && horizontal?(square, last_move.square)
@@ -359,6 +363,7 @@ class Board
         end
     end
 
+    # Returns true if a move is legal depending on the piece
     def legal_move? piece, square
         case piece.symbol
         when "♟︎", "♙"
@@ -396,6 +401,8 @@ class Board
         end
     end
 
+    # Uses the BFS method board_scan to get a map outward from a point on the board
+    # Finds the end square on that map and returns true if all the squares between the start and end point are empty
     def clear_path? start_square, end_square
         map = board_scan(start_square)
 
@@ -412,7 +419,7 @@ class Board
 
     end
 
-
+    # Uses BFS on the board to create a map of squares outward from a given square
     def board_scan source
         map = {}
 
