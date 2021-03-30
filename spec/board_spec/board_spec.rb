@@ -158,23 +158,19 @@ describe Board do
         it "resets the piece value of the square the piece moved from to nil" do
             board = Board.new
             board.create_board(board.board_array)
-
-            rook = Rook.new("wht")
-            rook.set_square(board["A1"])
-
-            board.move_piece(rook, board["A5"])
-            expect(board["A1"].piece).to eql(nil)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["B1"].piece, board["C3"])
+            expect(board["B1"].piece).to eql(nil)
         end
 
         it "resets the symbol value of the square the piece moved from to empty space" do    
             board = Board.new
             board.create_board(board.board_array)
-
-            rook = Rook.new("wht")
-            rook.set_square(board["A1"])
-
-            board.move_piece(rook, board["A5"])
-            expect(board["A1"].symbol).to eql(" ")
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["B1"].piece, board["C3"])
+            expect(board["B1"].symbol).to eql(" ")
         end
     end
 
@@ -788,11 +784,10 @@ describe Board do
         it "returns false for an illegal bishop move" do
             board = Board.new
             board.create_board(board.board_array)
-
-            piece = Bishop.new("wht")
-            piece.set_square(board["A5"])
+            board.add_edges
+            board.place_pieces
             expect(board.legal_move?(
-                piece,
+                board["C1"].piece,
                 board["D5"]
             )).to eql(false)
         end
@@ -800,61 +795,69 @@ describe Board do
         it "returns true for a legal bishop move" do
             board = Board.new
             board.create_board(board.board_array)
-
-            piece = Bishop.new("wht")
-            piece.set_square(board["D1"])
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["D2"].piece, board["D3"])
             expect(board.legal_move?(
-                piece,
-                board["A4"]
+                board["C1"].piece,
+                board["F4"]
             )).to eql(true)
         end
 
         it "returns false for an illegal rook move" do            
             board = Board.new
             board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["A2"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["A4"])
+            board.move_piece(board["A4"].piece, board["A5"])
 
-            piece = Rook.new("wht")
-            piece.set_square(board["A5"])
+            board.move_piece(board["A1"].piece, board["A3"])
             expect(board.legal_move?(
-                piece,
-                board["D6"]
+                board["A3"].piece,
+                board["B4"]
             )).to eql(false)
-
         end
 
         it "returns true for a legal rook move" do
             board = Board.new
             board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["A2"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["A4"])
+            board.move_piece(board["A4"].piece, board["A5"])
 
-            piece = Rook.new("wht")
-            piece.set_square(board["A5"])
             expect(board.legal_move?(
-                piece,
-                board["A7"]
+                board["A1"].piece,
+                board["A4"]
             )).to eql(true)
         end
 
         it "returns false for an illegal queen move" do
             board = Board.new
             board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["D7"].piece, board["D6"])
 
-            piece = Queen.new("wht")
-            piece.set_square(board["A5"])
             expect(board.legal_move?(
-                piece,
-                board["D7"]
+                board["E8"].piece,
+                board["C4"]
             )).to eql(false)
         end
 
         it "returns true for a legal queen move" do
             board = Board.new
             board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["D7"].piece, board["D6"])
 
-            piece = Queen.new("wht")
-            piece.set_square(board["A5"])
             expect(board.legal_move?(
-                piece,
-                board["C3"]
+                board["E8"].piece,
+                board["B5"]
             )).to eql(true)
         end
 
