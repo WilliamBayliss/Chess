@@ -172,6 +172,22 @@ describe Board do
             board.move_piece(board["B1"].piece, board["C3"])
             expect(board["B1"].symbol).to eql(" ")
         end
+
+        it "will replace a piece that is on the square moved to" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            # Moving a Knight down the board
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["A4"])
+            # Move a pawn one space forward
+            board.move_piece(board["B7"].piece, board["B6"])
+            # Kill the pawn
+            board.move_piece(board["A4"].piece, board["B6"])
+
+            expect(board["B6"].symbol).to eql("♘")
+        end
     end
 
     describe "#diagonal?" do
