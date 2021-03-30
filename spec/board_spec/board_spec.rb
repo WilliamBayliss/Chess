@@ -190,37 +190,26 @@ describe Board do
         end
     end
 
-    describe "#pawn_check" do
-        it "sets an unmoved pawn's moved value to true" do
+    describe "#set_moved" do
+        it "sets an unmoved piece's moved value to true" do
             board = Board.new
             board.create_board(board.board_array)
             board.add_edges
             board.place_pieces
 
-            board.pawn_check(board["A2"].piece)
+            board.set_moved(board["A2"].piece)
             expect(board["A2"].piece.moved).to eql(true)
         end
 
-        it "returns false if a pawn is already moved" do
+        it "returns false if a piece is already moved" do
             board = Board.new
             board.create_board(board.board_array)
             board.add_edges
             board.place_pieces
             board.move_piece(board["A2"].piece, board["A3"])
             
-            expect(board.pawn_check(
+            expect(board.set_moved(
                 board["A3"].piece
-            )).to eql(false)
-        end
-
-        it "returns false if the piece is not a pawn" do
-            board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-
-            expect(board.pawn_check(
-                board["A1"].piece
             )).to eql(false)
         end
     end
@@ -936,7 +925,7 @@ describe Board do
 
             expect(board.en_passant?(board["B5"], last_move)).to eql(true)
         end
-        
+
         it "returns false if en passant is an unavailable to a pawn" do
             player_one = Player.new("Will", "wht")
             player_two = Player.new("Fernando", "blk")
