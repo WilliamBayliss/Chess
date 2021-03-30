@@ -190,6 +190,41 @@ describe Board do
         end
     end
 
+    describe "#pawn_check" do
+        it "sets an unmoved pawn's moved value to true" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            board.pawn_check(board["A2"].piece)
+            expect(board["A2"].piece.moved).to eql(true)
+        end
+
+        it "returns false if a pawn is already moved" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["A2"].piece, board["A3"])
+            
+            expect(board.pawn_check(
+                board["A3"].piece
+            )).to eql(false)
+        end
+
+        it "returns false if the piece is not a pawn" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            expect(board.pawn_check(
+                board["A1"].piece
+            )).to eql(false)
+        end
+    end
+
     describe "#diagonal?" do
         it "returns false if either square is nil" do
             board = Board.new

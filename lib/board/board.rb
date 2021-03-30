@@ -172,9 +172,23 @@ class Board
         if legal_move?(piece, square)
             piece.square.clear_square
             place_piece(piece, square)
+            pawn_check(piece)
             return true
         else
             return false
+        end
+    end
+
+    def pawn_check piece
+        if piece.symbol == "♟︎" || piece.symbol == "♙"
+            if piece.moved == false
+                piece.set_moved
+                true
+            else
+                false
+            end
+        else
+            false
         end
     end
 
