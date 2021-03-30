@@ -21,6 +21,19 @@ describe Pawn do
             pawn = Pawn.new("blk")
             expect(pawn.symbol).to eql("♟︎")
         end
+
+        it "initializes with a moved value of false" do
+            pawn = Pawn.new("blk")
+            expect(pawn.moved).to eql(false)
+        end
+    end
+
+    describe "#set_moved" do
+        it "sets the moved attr of a pawn to true" do
+            pawn = Pawn.new("blk")
+            pawn.set_moved
+            expect(pawn.moved).to eql(true)
+        end
     end
 
 end
