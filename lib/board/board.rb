@@ -313,16 +313,34 @@ class Board
     def legal_move? piece, square
         case piece.symbol
         when "♟︎", "♙"
+            # Return true if square is adjacent and in the correct direction for pawn of that color
             pawn_move?(piece, piece.square, square)
         when "♞", "♘"
+            # Return true if move is an 'L' shape
             knight_move?(piece.square, square)
         when "♝", "♗"
-            bishop_move?(piece.square, square)
+            # Return true if move is diagonal and the path is not blocked by a piece
+            if bishop_move?(piece.square, square) && clear_path?(@board[piece.square.name], square)
+                true
+            else 
+                false
+            end
         when "♜", "♖"
-            rook_move?(piece.square, square)
+            # Return true if move is vertical/horizontal and path not blocked by a piece
+            if rook_move?(piece.square, square) && clear_path?(@board[piece.square.name], square)
+                true
+            else 
+                false
+            end
         when "♛", "♕"
-            queen_move?(piece.square, square)
+            # Return true if move is a straight line and path is not blocked by a piece
+            if queen_move?(piece.square, square) && clear_path?(@board[piece.square.name], square)
+                true
+            else 
+                false
+            end
         when "♚", "♔"
+            # Return true if move is in any direction but only to an adjacent square
             king_move?(piece.square, square)
         else
             false
