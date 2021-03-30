@@ -213,6 +213,16 @@ describe Board do
             )).to eql(false)
         end
 
+
+        it "returns false if the squares are not diagonal" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.diagonal?(
+                board["D8"],
+                board["B5"]
+            )).to eql(false)
+        end
+
         it "returns true if square is above right" do
             board = Board.new
             board.create_board(board.board_array)
@@ -844,7 +854,7 @@ describe Board do
 
             expect(board.legal_move?(
                 board["E8"].piece,
-                board["C4"]
+                board["C5"]
             )).to eql(false)
         end
 
