@@ -345,7 +345,18 @@ class Board
         else
             false
         end
+    end
 
+    def en_passant? square, last_move
+        if last_move.pawn_jump == true
+            if adjacent?(square, last_move.square) && horizontal?(square, last_move.square)
+                true
+            else
+                false
+            end
+        else
+            false
+        end
     end
 
     def legal_move? piece, square

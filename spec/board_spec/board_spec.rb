@@ -915,6 +915,50 @@ describe Board do
         end
     end
 
+    describe "#en_passant?" do
+        it "returns true if en passant is an available to a pawn" do
+            player_one = Player.new("Will", "wht")
+            player_two = Player.new("Fernando", "blk")
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            board.move_piece(board["B2"].piece, board["B4"])
+            board.move_piece(board["B4"].piece, board["B5"])
+            board.move_piece(board["C7"].piece, board["C5"])
+            
+            last_move = Move.new(player_two)
+            last_move.get_square(board["C5"])
+            last_move.get_board(board)
+            last_move.get_piece(board["C5"])
+            last_move.set_pawn_jump
+
+            expect(board.en_passant?(board["B5"], last_move)).to eql(true)
+        end
+        
+        it "returns false if en passant is an unavailable to a pawn" do
+            player_one = Player.new("Will", "wht")
+            player_two = Player.new("Fernando", "blk")
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            board.move_piece(board["B2"].piece, board["B4"])
+            board.move_piece(board["B4"].piece, board["B5"])
+            board.move_piece(board["C7"].piece, board["C6"])
+            board.move_piece(board["C6"].piece, board["C5"])
+            
+            last_move = Move.new(player_two)
+            last_move.get_square(board["C5"])
+            last_move.get_board(board)
+            last_move.get_piece(board["C5"])
+
+            expect(board.en_passant?(board["B5"], last_move)).to eql(false)
+        end
+    end
+
     describe "#legal_move?" do
         it "returns false for an illegal pawn move" do
             board = Board.new
