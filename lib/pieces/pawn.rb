@@ -16,4 +16,8 @@ class Pawn < Piece
     def set_moved
         @moved = true
     end
+
+    def register_en_passant move
+        @en_passant = move
+    end
 end

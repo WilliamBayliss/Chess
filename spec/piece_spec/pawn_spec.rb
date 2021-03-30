@@ -41,4 +41,14 @@ describe Pawn do
         end
     end
 
+    describe "#register_en_passant" do
+        it "sets the en_passant value to a move" do
+            move = Move.new("player_one")
+            pawn = Pawn.new("blk")
+            pawn.register_en_passant(move)
+
+            expect(pawn.en_passant).to eql(move)
+        end
+    end
+
 end
