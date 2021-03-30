@@ -214,6 +214,7 @@ describe Board do
         end
     end
 
+
     describe "#diagonal?" do
         it "returns false if either square is nil" do
             board = Board.new
@@ -745,6 +746,29 @@ describe Board do
                 board["B4"], 
                 board["A3"]
                 )).to eql(true)
+        end
+    end
+
+    describe "#check?" do
+        it "returns false if a square is not attacked by an enemy piece" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            expect(board.check?(board["E1"].piece, board["E1"])).to eql(false)
+        end
+
+        it "returns true if the king's square is in check" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["C5"])
+            board.move_piece(board["C5"].piece, board["F2"])
+            expect(board.check?(board["E1"].piece, board["E1"])).to eql(true)
         end
     end
 

@@ -5,6 +5,7 @@ Dir["./lib/pieces/*.rb"].each {|file| require file }
 class Board
     def initialize
         @board = {}
+
     end
 
     def [](square_name)
@@ -314,6 +315,25 @@ class Board
         end
     end
 
+    def check? king, king_square
+        attacks = []
+        @board.each do |key, square|
+            unless square.piece.nil?
+                unless square.piece.color == king.color
+                    if legal_move?(square.piece, king_square)
+                        attacks.append(true)
+                    end
+                end 
+            end
+        end
+
+        if attacks.include?(true)
+            true
+        else
+            false
+        end
+    end
+
     # These methods are all for assessing the different conditions of moving a pawn
 
     # Returns true if the other square is in the correct direction for a pawn
@@ -362,6 +382,7 @@ class Board
     # Returns true if a move is legal depending on the piece
     def legal_move? piece, square
         case piece.symbol
+
         when "♟︎", "♙"
             # Return true if square is adjacent and in the correct direction for pawn of that color
             pawn_move?(piece.square, square)
