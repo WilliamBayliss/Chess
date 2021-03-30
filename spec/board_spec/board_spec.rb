@@ -468,7 +468,45 @@ describe Board do
         end
     end
 
-    describe 
+    describe "#two_squares vertical" do
+        it "returns false if either square is nil" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.two_squares_vertical?(
+                nil,
+                board["A2"]
+            )).to eql(false)
+        end
+
+        it "returns true if a square is vertical and two squares away from source" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.two_squares_vertical?(
+                board["A2"],
+                board["A4"]
+            )).to eql(true)
+        end
+
+
+        it "returns false if a square is vertical and >2 squares away from source" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.two_squares_vertical?(
+                board["A2"],
+                board["A5"]
+            )).to eql(false)
+        end
+
+
+        it "returns false if a square is vertical and <2 squares away from source" do
+            board = Board.new
+            board.create_board(board.board_array)
+            expect(board.two_squares_vertical?(
+                board["A2"],
+                board["A3"]
+            )).to eql(false)
+        end
+    end
 
     describe "#knight_move?" do
         it "returns false if square is nil" do
@@ -698,6 +736,31 @@ describe Board do
                 )).to eql(false)
         end 
 
+        it "returns true if a pawn has not been moved and the square is two squares forward" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            expect(board.pawn_move?(
+                board["A2"].piece,
+                board["A2"],
+                board["A4"]
+            )).to eql(true)
+        end
+
+        it "returns false if a pawn has been moved and the square is two squares forward" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board["A2"].piece.set_moved
+            expect(board.pawn_move?(
+                board["A2"].piece,
+                board["A2"],
+                board["A4"]
+            )).to eql(false)
+        end
+
         it "returns true if the forward diagonal square has a piece on it" do
             board = Board.new
             board.create_board(board.board_array)
@@ -730,7 +793,6 @@ describe Board do
 
 
         it "returns true if a square is vertical and adjacent, and a correct move for a white pawn" do
-
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("wht")
@@ -742,7 +804,6 @@ describe Board do
         end
 
         it "returns false if a square is vertical and adjacent, but an illegal move for a white pawn" do
-
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("wht")
@@ -755,7 +816,6 @@ describe Board do
 
 
         it "returns true if a square is vertical and adjacent, and a correct move for a black pawn" do
-
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("blk")
@@ -767,7 +827,6 @@ describe Board do
         end
 
         it "returns false if a square is vertical and adjacent, but an illegal move for a black pawn" do
-
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("blk")
