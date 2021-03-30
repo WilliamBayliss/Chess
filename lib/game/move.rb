@@ -1,11 +1,12 @@
 class Move
-    attr_reader :player, :opponent, :piece, :square, :board
+    attr_reader :player, :opponent, :piece, :square, :board, :pawn_jump
     def initialize player
         @player = player
         @opponent = nil
         @piece = nil
         @square = nil
         @board = nil
+        @pawn_jump = false
     end
 
     def log_move_data board, opponent, piece, square
@@ -27,6 +28,10 @@ class Move
 
     def get_piece square
         @piece = square.piece
+    end
+
+    def set_pawn_jump
+        @pawn_jump = true
     end
 
     def select_square
