@@ -318,19 +318,20 @@ class Board
         end
     end
 
-    def pawn_move? pawn, square, other_square
-        if pawn.moved == false && two_squares_vertical?(square, other_square)
+
+    def pawn_move? square, other_square
+        if square.piece.moved == false && two_squares_vertical?(square, other_square)
             true
         elsif (diagonal?(square, other_square) && adjacent?(square, other_square)) && other_square.piece != nil
             true
         elsif vertical?(square, other_square) && adjacent?(square, other_square)
-            if pawn.symbol == "♙"
+            if square.piece.symbol == "♙"
                 if other_square.coordinate[0] > square.coordinate[0]
                     true
                 else
                     false
                 end
-            elsif pawn.symbol == "♟︎"
+            elsif square.piece.symbol == "♟︎"
                 if other_square.coordinate[0] < square.coordinate[0]
                     true
                 else
@@ -347,7 +348,7 @@ class Board
         case piece.symbol
         when "♟︎", "♙"
             # Return true if square is adjacent and in the correct direction for pawn of that color
-            pawn_move?(piece, piece.square, square)
+            pawn_move?(piece.square, square)
         when "♞", "♘"
             # Return true if move is an 'L' shape
             knight_move?(piece.square, square)

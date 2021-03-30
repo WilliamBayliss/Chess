@@ -764,8 +764,8 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("wht")
+            board.place_piece(pawn, board["B4"])
             expect(board.pawn_move?(
-                pawn,
                 board["B4"], 
                 board["A3"]
                 )).to eql(false)
@@ -777,7 +777,6 @@ describe Board do
             board.add_edges
             board.place_pieces
             expect(board.pawn_move?(
-                board["A2"].piece,
                 board["A2"],
                 board["A4"]
             )).to eql(true)
@@ -790,7 +789,6 @@ describe Board do
             board.place_pieces
             board["A2"].piece.set_moved
             expect(board.pawn_move?(
-                board["A2"].piece,
                 board["A2"],
                 board["A4"]
             )).to eql(false)
@@ -806,7 +804,6 @@ describe Board do
             board.move_piece(board["A4"].piece, board["A5"])
             board.move_piece(board["A5"].piece, board["A6"])
             expect(board.pawn_move?(
-                board["A6"].piece,
                 board["A6"],
                 board["B7"]
             )).to eql(true)
@@ -820,7 +817,6 @@ describe Board do
             board.move_piece(board["A2"].piece, board["A3"])
             board.move_piece(board["A3"].piece, board["A4"])
             expect(board.pawn_move?(
-                board["A4"].piece,
                 board["A4"],
                 board["B5"]
             )).to eql(false)
@@ -831,8 +827,8 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("wht")
+            board.place_piece(pawn, board["A5"])
             expect(board.pawn_move?(
-                pawn,
                 board["A5"], 
                 board["A6"]
                 )).to eql(true)
@@ -842,8 +838,8 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("wht")
+            board.place_piece(pawn, board["A5"])
             expect(board.pawn_move?(
-                pawn,
                 board["A5"], 
                 board["A4"]
                 )).to eql(false)
@@ -854,8 +850,8 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("blk")
+            board.place_piece(pawn, board["A3"])
             expect(board.pawn_move?(
-                pawn,
                 board["A3"], 
                 board["A2"]
                 )).to eql(true)
@@ -865,8 +861,8 @@ describe Board do
             board = Board.new
             board.create_board(board.board_array)
             pawn = Pawn.new("blk")
+            board.place_piece(pawn, board["A2"])
             expect(board.pawn_move?(
-                pawn,
                 board["A2"], 
                 board["A3"]
                 )).to eql(false)
@@ -879,7 +875,7 @@ describe Board do
             board.create_board(board.board_array)
 
             pawn = Pawn.new("wht")
-            pawn.set_square(board["A5"])
+            board.place_piece(pawn, board["A5"])
             expect(board.legal_move?(
                 pawn,
                 board["B4"]
@@ -891,7 +887,7 @@ describe Board do
             board.create_board(board.board_array)
 
             pawn = Pawn.new("wht")
-            pawn.set_square(board["A5"])
+            board.place_piece(pawn, board["A5"])
             expect(board.legal_move?(
                 pawn,
                 board["A6"]
@@ -903,6 +899,7 @@ describe Board do
             board.create_board(board.board_array)
 
             pawn = Pawn.new("blk")
+            board.place_piece(pawn, board["A5"])
             pawn.set_square(board["A5"])
             expect(board.legal_move?(
                 pawn,
