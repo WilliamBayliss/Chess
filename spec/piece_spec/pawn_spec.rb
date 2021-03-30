@@ -26,6 +26,11 @@ describe Pawn do
             pawn = Pawn.new("blk")
             expect(pawn.moved).to eql(false)
         end
+
+        it "initializes with an en passant value of nil" do
+            pawn = Pawn.new("blk")
+            expect(pawn.en_passant).to eql(nil)
+        end
     end
 
     describe "#set_moved" do
