@@ -759,6 +759,52 @@ describe Board do
         end
     end
 
+    describe "#pawn_direction?" do
+        it "returns false if a white pawn is trying to move backwards" do
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("wht")
+            board.place_piece(pawn, board["A5"])
+            expect(board.pawn_direction?(
+                board["A5"], 
+                board["A4"]
+                )).to eql(false)
+        end
+
+        it "returns true if a white pawn is moving forwards" do
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("wht")
+            board.place_piece(pawn, board["A5"])
+            expect(board.pawn_direction?(
+                board["A5"], 
+                board["A6"]
+                )).to eql(true)
+        end
+
+        it "returns false if a black pawn is trying to move backwards" do
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("blk")
+            board.place_piece(pawn, board["A5"])
+            expect(board.pawn_move?(
+                board["A5"], 
+                board["A6"]
+                )).to eql(false)
+        end
+
+        it "returns true if a black pawn is moving forwards" do
+            board = Board.new
+            board.create_board(board.board_array)
+            pawn = Pawn.new("blk")
+            board.place_piece(pawn, board["A5"])
+            expect(board.pawn_move?(
+                board["A5"], 
+                board["A4"]
+                )).to eql(true)
+        end
+    end
+
     describe "#pawn_move" do
         it "returns false if a square is neither vertical nor adjacent" do
             board = Board.new

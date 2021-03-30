@@ -318,6 +318,22 @@ class Board
         end
     end
 
+    def pawn_direction? square, other_square
+        if square.piece.symbol == "♙"
+            if other_square.coordinate[0] > square.coordinate[0]
+                true
+            else
+                false
+            end
+        elsif square.piece.symbol == "♟︎"
+            if other_square.coordinate[0] < square.coordinate[0]
+                true
+            else
+                false
+            end
+        end
+    end
+
 
     def pawn_move? square, other_square
         if square.piece.moved == false && two_squares_vertical?(square, other_square)
@@ -325,19 +341,7 @@ class Board
         elsif (diagonal?(square, other_square) && adjacent?(square, other_square)) && other_square.piece != nil
             true
         elsif vertical?(square, other_square) && adjacent?(square, other_square)
-            if square.piece.symbol == "♙"
-                if other_square.coordinate[0] > square.coordinate[0]
-                    true
-                else
-                    false
-                end
-            elsif square.piece.symbol == "♟︎"
-                if other_square.coordinate[0] < square.coordinate[0]
-                    true
-                else
-                    false
-                end
-            end
+           pawn_direction?(square, other_square)
         else
             false
         end
