@@ -3,9 +3,11 @@ require_relative "square.rb"
 Dir["./lib/pieces/*.rb"].each {|file| require file }
 
 class Board
+    attr_accessor :kings
     def initialize
         @board = {}
 
+        @kings = []
     end
 
     def [](square_name)
@@ -60,6 +62,10 @@ class Board
         place_white_pawns
         place_black_pawns
         place_black_pieces
+    end
+
+    def set_kings kings_array
+        @kings = kings_array
     end
 
     def place_white_pieces

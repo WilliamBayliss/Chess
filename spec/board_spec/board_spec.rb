@@ -6,6 +6,11 @@ describe Board do
             board = Board.new
             expect(board).to_not eql(nil)
         end
+
+        it "sets @kings to empty array" do
+            board = Board.new
+            expect(board.kings).to eql([])
+        end
     end
 
     describe '#[]' do
@@ -128,6 +133,47 @@ describe Board do
             expect(square.piece).to eql(piece) 
         end
 
+    end
+
+    describe "#set_kings" do
+        it "sets the kings array to have a length of two" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.set_kings([board["E8"].piece, board["E1"].piece])
+            expect(board.kings.length).to eql(2)
+        end
+
+        it "contains the white king" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.set_kings([board["E8"].piece, board["E1"].piece])
+            expect(board.kings[0]).to eql(board["E8"].piece)
+        end
+
+        it "contains the black king" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.set_kings([board["E8"].piece, board["E1"].piece])
+            expect(board.kings[-1]).to eql(board["E1"].piece)
+        end
+
+        it "works when a king is moved" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.set_kings([board["E8"].piece, board["E1"].piece])
+
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            expect(board.kings[0]).to eql(board["E7"].piece)
+        end
     end
 
     describe "#move_piece" do
