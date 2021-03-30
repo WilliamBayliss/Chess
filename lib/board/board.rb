@@ -49,6 +49,11 @@ class Board
         end
     end
 
+    def place_piece piece, square
+        piece.set_square(square)
+        square.set_piece(piece)
+    end
+
     def place_pieces
         place_white_pieces
         place_white_pawns
@@ -58,78 +63,78 @@ class Board
 
     def place_white_pieces
         rook_one = Rook.new("wht")
-        @board["A1"].set_piece(rook_one)
+        place_piece(rook_one, @board["A1"])
         knight_one = Knight.new("wht")
-        @board["B1"].set_piece(knight_one)
+        place_piece(knight_one, @board["B1"])
         bishop_one = Bishop.new("wht")
-        @board["C1"].set_piece(bishop_one)
+        place_piece(bishop_one, @board["C1"])
         king = King.new("wht")
-        @board["D1"].set_piece(king)
+        place_piece(king, @board["D1"])
         queen = Queen.new("wht")
-        @board["E1"].set_piece(queen)
+        place_piece(queen, @board["E1"])
         bishop_two = Bishop.new("wht")
-        @board["F1"].set_piece(bishop_two)
+        place_piece(bishop_two, @board["F1"])
         knight_two = Knight.new("wht")
-        @board["G1"].set_piece(knight_two)
+        place_piece(knight_two, @board["G1"])
         rook_two = Rook.new("wht")
-        @board["H1"].set_piece(rook_two)
+        place_piece(rook_two, @board["H1"])
     end
 
     def place_white_pawns
         pawn_one = Pawn.new("wht")
-        @board["A2"].set_piece(pawn_one)
+        place_piece(pawn_one, @board["A2"])
         pawn_two = Pawn.new("wht")
-        @board["B2"].set_piece(pawn_two)
+        place_piece(pawn_two, @board["B2"])
         pawn_three = Pawn.new("wht")
-        @board["C2"].set_piece(pawn_three)
+        place_piece(pawn_three, @board["C2"])
         pawn_four = Pawn.new("wht")
-        @board["D2"].set_piece(pawn_four)
+        place_piece(pawn_four, @board["D2"])
         pawn_five = Pawn.new("wht")
-        @board["E2"].set_piece(pawn_five)
+        place_piece(pawn_five, @board["E2"])
         pawn_six = Pawn.new("wht")
-        @board["F2"].set_piece(pawn_six)
+        place_piece(pawn_six, @board["F2"])
         pawn_seven = Pawn.new("wht")
-        @board["G2"].set_piece(pawn_seven)
+        place_piece(pawn_seven, @board["G2"])
         pawn_eight = Pawn.new("wht")
-        @board["H2"].set_piece(pawn_eight)
+        place_piece(pawn_eight, @board["H2"])
     end
 
     def place_black_pieces
         rook_one = Rook.new("blk")
-        @board["A8"].set_piece(rook_one)
+        place_piece(rook_one, @board["A8"])
         knight_one = Knight.new("blk")
-        @board["B8"].set_piece(knight_one)
+        place_piece(knight_one, @board["B8"])
         bishop_one = Bishop.new("blk")
-        @board["C8"].set_piece(bishop_one)
+        place_piece(bishop_one, @board["C8"])
         king = King.new("blk")
-        @board["D8"].set_piece(king)
+        place_piece(king, @board["D8"])
         queen = Queen.new("blk")
-        @board["E8"].set_piece(queen)
+        place_piece(queen, @board["E8"])
         bishop_two = Bishop.new("blk")
-        @board["F8"].set_piece(bishop_two)
+        place_piece(bishop_two, @board["F8"])
         knight_two = Knight.new("blk")
-        @board["G8"].set_piece(knight_two)
+        place_piece(knight_two, @board["G8"])
         rook_two = Rook.new("blk")
-        @board["H8"].set_piece(rook_two)
+        place_piece(rook_two, @board["H8"])
     end
 
     def place_black_pawns
         pawn_one = Pawn.new("blk")
-        @board["A7"].set_piece(pawn_one)
+        place_piece(pawn_one, @board["A7"])
         pawn_two = Pawn.new("blk")
-        @board["B7"].set_piece(pawn_two)
+        place_piece(pawn_two, @board["B7"])
         pawn_three = Pawn.new("blk")
-        @board["C7"].set_piece(pawn_three)
+        place_piece(pawn_three, @board["C7"])
         pawn_four = Pawn.new("blk")
-        @board["D7"].set_piece(pawn_four)
+        place_piece(pawn_four, @board["D7"])
         pawn_five = Pawn.new("blk")
-        @board["E7"].set_piece(pawn_five)
+        place_piece(pawn_five, @board["E7"])
         pawn_six = Pawn.new("blk")
-        @board["F7"].set_piece(pawn_six)
+        place_piece(pawn_six, @board["F7"])
         pawn_seven = Pawn.new("blk")
-        @board["G7"].set_piece(pawn_seven)
+        place_piece(pawn_seven, @board["G7"])
         pawn_eight = Pawn.new("blk")
-        @board["H7"].set_piece(pawn_eight)
+        place_piece(pawn_eight, @board["H7"])
     end
 
     def print_board
@@ -166,8 +171,7 @@ class Board
     def move_piece piece, square
         if legal_move?(piece, square)
             piece.square.clear_square
-            piece.set_square(square)
-            square.set_piece(piece)
+            place_piece(piece, square)
             return true
         else
             return false

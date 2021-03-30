@@ -111,53 +111,48 @@ describe Board do
         end
     end
 
+    describe "#place_piece" do
+        it "sets a piece's square value" do
+            board = Board.new
+            piece = Piece.new("wht")
+            square = Square.new([[0,0], "A1"])
+            board.place_piece(piece, square)
+            expect(piece.square).to eql(square)
+        end
+
+        it "sets a square's piece value" do
+            board = Board.new
+            piece = Piece.new("wht")
+            square = Square.new([[0,0], "A1"])
+            board.place_piece(piece, square)
+            expect(square.piece).to eql(piece) 
+        end
+
+    end
+
     describe "#move_piece" do
         it "returns false if a move is illegal" do
             board = Board.new
             board.create_board(board.board_array)
-
-            rook = Rook.new("wht")
-            rook.set_square(board["A1"])
-
-            
+            board.add_edges
+            board.place_pieces
             expect(board.move_piece(
-                rook, 
-                board["B5"]
+                board["A2"].piece, 
+                board["B3"]
                 )).to eql(false)
         end
+
         it "returns true if a move is legal" do
             board = Board.new
             board.create_board(board.board_array)
-
-            rook = Rook.new("wht")
-            rook.set_square(board["A1"])
+            board.add_edges
+            board.place_pieces
 
             
             expect(board.move_piece(
-                rook, 
-                board["G1"]
+                board["A2"].piece, 
+                board["A3"]
                 )).to eql(true)
-        end
-        it "sets the piece's square value" do
-            board = Board.new
-            board.create_board(board.board_array)
-
-            rook = Rook.new("wht")
-            rook.set_square(board["A1"])
-
-            board.move_piece(rook, board["A5"])
-            expect(rook.square).to eql(board["A5"])
-        end
-
-        it "sets the square's piece value" do
-            board = Board.new
-            board.create_board(board.board_array)
-
-            rook = Rook.new("wht")
-            rook.set_square(board["A1"])
-
-            board.move_piece(rook, board["A5"])
-            expect(board["A5"].piece).to eql(rook)
         end
 
         it "resets the piece value of the square the piece moved from to nil" do
@@ -896,7 +891,6 @@ describe Board do
             board.place_pieces
 
             expect(board.clear_path?(board["A3"], board["C4"])).to eql(true)
-
         end
 
         it "returns true if the start and end square have pieces but the path is clear" do
