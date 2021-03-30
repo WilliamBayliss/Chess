@@ -188,8 +188,7 @@ class Board
         else
             x_difference = square.coordinate[0] - other_square.coordinate[0]
             y_difference = square.coordinate[1] - other_square.coordinate[1]
-            
-            if x_difference / y_difference == 1 || x_difference / y_difference == -1
+            if x_difference.to_f / y_difference.to_f == 1 || x_difference.to_f / y_difference.to_f == -1
                 return true
             else
                 return false
@@ -266,10 +265,14 @@ class Board
     end
 
     def queen_move? square, other_square
-        if vertical?(square, other_square) || horizontal?(square, other_square) || diagonal?(square, other_square)
-            return true
+        if vertical?(square, other_square)
+            true
+        elsif horizontal?(square, other_square)
+            true
+        elsif diagonal?(square, other_square)
+            true
         else
-            return false     
+            false
         end
     end
 
