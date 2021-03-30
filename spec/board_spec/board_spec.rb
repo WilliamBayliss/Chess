@@ -816,6 +816,18 @@ describe Board do
             board.move_piece(board["C5"].piece, board["F2"])
             expect(board.check?(board["E1"].piece, board["E1"])).to eql(true)
         end
+
+        it "returns true if the square the king could move to put the king in check" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["C5"])
+            board.move_piece(board["F2"].piece, board["F4"])
+            expect(board.check?(board["E1"].piece, board["F2"])).to eql(true)
+        end
     end
 
     describe "#pawn_direction?" do
