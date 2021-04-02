@@ -491,11 +491,11 @@ class Board
         map
     end
 
-    def attacks_scan piece
+    def attacks_scan square
         attackers = []
-        @pieces.each do |attacker|
-            if attacker.available_moves.include?(piece.square)
-                attackers.append(attacker)
+        @pieces.each do |piece|
+            if piece.available_moves.include?(square)
+                attackers.append(piece)
             end
         end
         attackers
@@ -503,6 +503,14 @@ class Board
 
     def under_attack? square
         if attacks_scan(square).length > 0
+            true
+        else
+            false
+        end
+    end
+
+    def check? king 
+        if under_attack?(king.square)
             true
         else
             false
