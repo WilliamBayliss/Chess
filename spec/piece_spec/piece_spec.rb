@@ -53,4 +53,13 @@ describe Piece do
             expect(piece.moved).to eql(true)
         end
     end
+
+    describe "#get_move" do
+        it "adds a square to the list of available moves" do
+            square = Square.new([[0,0], "A1"])
+            piece = Piece.new("wht")
+            piece.get_move(square)
+            expect(piece.available_moves).to include(square)
+        end
+    end 
 end
