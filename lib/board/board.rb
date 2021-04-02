@@ -3,11 +3,11 @@ require_relative "square.rb"
 Dir["./lib/pieces/*.rb"].each {|file| require file }
 
 class Board
-    attr_accessor :kings
+    attr_accessor :pieces
     def initialize
         @board = {}
 
-        @kings = []
+        @pieces = []
     end
 
     def [](square_name)
@@ -20,6 +20,12 @@ class Board
 
     def add_edge(square, neighbour)
         @board[square].add_neighbour(@board[neighbour])
+    end
+
+    def save_piece piece_array
+        piece_array.each do |piece|
+            @pieces << piece
+        end
     end
 
     def board_array
@@ -52,6 +58,16 @@ class Board
         end
     end
 
+    def get_piece_moves
+        @pieces.each do |piece|
+            @board.each do |key, square|
+                if legal_move?(piece, square)
+                    piece.get_move(square)
+                end
+            end
+        end
+    end
+
     def place_piece piece, square
         piece.set_square(square)
         square.set_piece(piece)
@@ -64,9 +80,6 @@ class Board
         place_black_pieces
     end
 
-    def set_kings kings_array
-        @kings = kings_array
-    end
 
     def place_white_pieces
         rook_one = Rook.new("wht")
@@ -85,6 +98,8 @@ class Board
         place_piece(knight_two, @board["G1"])
         rook_two = Rook.new("wht")
         place_piece(rook_two, @board["H1"])
+
+        save_piece([rook_one, knight_one, bishop_one, queen, king, bishop_two, knight_two, rook_two])
     end
 
     def place_white_pawns
@@ -104,6 +119,7 @@ class Board
         place_piece(pawn_seven, @board["G2"])
         pawn_eight = Pawn.new("wht")
         place_piece(pawn_eight, @board["H2"])
+        save_piece([pawn_one, pawn_two, pawn_three, pawn_four, pawn_five, pawn_six, pawn_seven, pawn_eight])
     end
 
     def place_black_pieces
@@ -123,6 +139,8 @@ class Board
         place_piece(knight_two, @board["G8"])
         rook_two = Rook.new("blk")
         place_piece(rook_two, @board["H8"])
+        save_piece([rook_one, knight_one, bishop_one, queen, king, bishop_two, knight_two, rook_two])
+
     end
 
     def place_black_pawns
@@ -142,6 +160,7 @@ class Board
         place_piece(pawn_seven, @board["G7"])
         pawn_eight = Pawn.new("blk")
         place_piece(pawn_eight, @board["H7"])
+        save_piece([pawn_one, pawn_two, pawn_three, pawn_four, pawn_five, pawn_six, pawn_seven, pawn_eight])
     end
 
     def print_board
@@ -180,6 +199,7 @@ class Board
             piece.square.clear_square
             place_piece(piece, square)
             set_moved(piece)
+            get_piece_moves()
             return true
         else
             return false
@@ -390,21 +410,21 @@ class Board
                 knight_move?(piece.square, square)
             when "♝", "♗"
                 # Return true if move is diagonal and the path is not blocked by a piece
-                if bishop_move?(piece.square, square) && clear_path?(@board[piece.square.name], square)
+                if bishop_move?(piece.square, square) && clear_path?(piece.square, square)
                     true
                 else 
                     false
                 end
             when "♜", "♖"
                 # Return true if move is vertical/horizontal and path not blocked by a piece
-                if rook_move?(piece.square, square) && clear_path?(@board[piece.square.name], square)
+                if rook_move?(piece.square, square) && clear_path?(piece.square, square)
                     true
                 else 
                     false
                 end
             when "♛", "♕"
                 # Return true if move is a straight line and path is not blocked by a piece
-                if queen_move?(piece.square, square) && clear_path?(@board[piece.square.name], square)
+                if queen_move?(piece.square, square) && clear_path?(piece.square, square)
                     true
                 else 
                     false
