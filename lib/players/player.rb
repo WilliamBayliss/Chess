@@ -4,4 +4,4 @@ class Player
         @name = name
         @color = color
     end
-end
+end 
