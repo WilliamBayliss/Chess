@@ -491,13 +491,11 @@ class Board
         map
     end
 
-    def attacks_scan source
+    def attacks_scan piece
         attackers = []
-        @board.each do |key, square|
-            unless square.piece.nil?
-                if legal_move?(square.piece, source)
-                    attackers.append(square.piece)
-                end
+        @pieces.each do |attacker|
+            if attacker.available_moves.include?(piece.square)
+                attackers.append(attacker)
             end
         end
         attackers
