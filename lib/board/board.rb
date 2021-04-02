@@ -482,4 +482,12 @@ class Board
         end
         attackers
     end
+
+    def under_attack? square
+        if attacks_scan(square).length > 0
+            true
+        else
+            false
+        end
+    end
 end
