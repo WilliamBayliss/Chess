@@ -21,6 +21,12 @@ describe Piece do
             piece = Piece.new("blk")
             expect(piece.moved).to eql(false)
         end
+
+        it "initializes @available_moves to empty array" do
+            piece = Piece.new("wht")
+            expect(piece.available_moves).to eql([])
+
+        end
     end
 
     describe "#set_symbol" do
