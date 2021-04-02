@@ -1098,6 +1098,17 @@ describe Board do
             )).to eql(false)
         end
 
+        it "returns false if moving to a square occupied by one of your own pieces" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            expect(board.legal_move?(
+                board["B8"].piece,
+                board["D7"]
+            )).to eql(false)
+        end
+
         it "returns true for a legal white pawn move" do
             board = Board.new
             board.create_board(board.board_array)
@@ -1326,6 +1337,75 @@ describe Board do
             board.add_edges
             map = board.board_scan(board["A1"])
             expect(map["A2"][:predecessor]).to eql(board["A1"])
+        end
+    end
+
+    describe "#attacks_scan" do
+        it "returns an empty array if square not attacked" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            map = board.attacks_scan(board["A5"])
+            expect(map).to eql([])
+        end
+
+        it "returns an array of pieces attacking the square" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+
+            map = board.attacks_scan( 
+                board["E7"]
+            )
+            expect(map).to include(board["D5"].piece)
+        end
+
+        it "returns the an array with the correct number of pieces" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+
+
+
+
+            map = board.attacks_scan( 
+                board["E7"]
+            )
+            expect(map.length).to eql(3)
+        end
+
+        it "works correctly on an empty square" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["B2"].piece, board["B3"])
+            board.move_piece(board["B3"].piece, board["B4"])
+            board.move_piece(board["B4"].piece, board["B5"])
+
+
+
+            board.print_board
+            map = board.attacks_scan(
+                board["B4"]
+            )
+            expect(map.length).to eql(2)
         end
     end
 
