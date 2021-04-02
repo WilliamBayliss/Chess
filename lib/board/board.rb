@@ -264,20 +264,31 @@ class Board
         if square.nil? || other_square.nil?
             return false
           else
-            if    square.coordinate[0] == (other_square.coordinate[0] + 2) && square.coordinate[1] == (other_square.coordinate[1] + 1)  
+            #  if X+2 && Y+1 move
+            if    square.coordinate[0] +2  == other_square.coordinate[0] && square.coordinate[1] + 1 == other_square.coordinate[1]  
               return true
-            elsif square.coordinate[0] == (other_square.coordinate[0] + 1) && square.coordinate[1] == (other_square.coordinate[1] + 2)
+            #  if X+1 && Y+2
+            elsif square.coordinate[0] + 1 == other_square.coordinate[0] && square.coordinate[1] + 2== other_square.coordinate[1]
               return true
-            elsif square.coordinate[0] == (other_square.coordinate[0] - 1) && square.coordinate[1] == (other_square.coordinate[1] + 2)
+            #   If X-1 && Y+2
+            elsif square.coordinate[0] - 1 == other_square.coordinate[0] && square.coordinate[1] + 2 == other_square.coordinate[1]
               return true
-            elsif square.coordinate[0] == (other_square.coordinate[0] - 2) && square.coordinate[1] == (other_square.coordinate[1] - 1)
+            #   If X-2 && Y-1
+            elsif square.coordinate[0] - 2 == other_square.coordinate[0] && square.coordinate[1] - 1 == other_square.coordinate[1]
               return true
-            elsif square.coordinate[0] == (other_square.coordinate[0] - 1) && square.coordinate[1] == (other_square.coordinate[1] - 2)
+            #   If X-1 && Y-2
+            elsif square.coordinate[0] - 1 == other_square.coordinate[0] && square.coordinate[1] - 2 == other_square.coordinate[1]
               return true
-            elsif square.coordinate[0] == (other_square.coordinate[0] + 1) && square.coordinate[1] == (other_square.coordinate[1] - 2)
+            #   if X+1 && Y-2
+            elsif square.coordinate[0] + 1 == other_square.coordinate[0] && square.coordinate[1] - 2 == other_square.coordinate[1]
               return true
-            elsif square.coordinate[0] == (other_square.coordinate[0] + 2) && square.coordinate[1] == (other_square.coordinate[1] -1)
+            #   if X+2 && Y-1
+            elsif square.coordinate[0] + 2 == other_square.coordinate[0] && square.coordinate[1] - 1 == other_square.coordinate[1]
               return true
+            #   if X-2 && Y + 1
+            elsif square.coordinate[0] - 2 == other_square.coordinate[0] && square.coordinate[1] + 1 == other_square.coordinate[1]
+                return true
+
             else
               return false
             end
@@ -319,22 +330,6 @@ class Board
         else
             return false
         end
-    end
-
-    # These methods are for assessing check conditions
-
-    def attacks piece
-        attacks = []
-        @board.each do |key, square|
-            unless square.piece.nil?
-                if square.piece.color != piece.color
-                    if legal_move?(square.piece, piece.square)
-                        attacks.append(square.piece)
-                    end
-                end
-            end
-        end
-        attacks
     end
 
     # These methods are all for assessing the different conditions of moving a pawn
