@@ -321,26 +321,17 @@ class Board
         end
     end
 
-    def under_attack? square
-        attacks = list_attacks(square)
+    # These methods are for assessing check conditions
 
-        if attacks.length > 0
-            true
-        else
-            false
-        end
-
-    end
-
-    def list_attacks square
+    def attacks piece
         attacks = []
-        @board.each do |k, sq|
-            unless sq.piece.nil?
-                unless sq.piece.color == square.piece.color
-                    if legal_move?(sq.piece, square)
-                        attacks.append(sq)
+        @board.each do |key, square|
+            unless square.piece.nil?
+                if square.piece.color != piece.color
+                    if legal_move?(square.piece, piece.square)
+                        attacks.append(square.piece)
                     end
-                end 
+                end
             end
         end
         attacks
@@ -367,7 +358,7 @@ class Board
 
     # Returns true if the selected move is a legal move for a pawn
     def pawn_move? square, other_square
-        if square.piece.moved == false && two_squares_vertical?(square, other_square)
+        if square.piece.moved == false && two_squares_vertical?(square, other_square) && other_square.piece == nil
             true
         elsif (diagonal?(square, other_square) && adjacent?(square, other_square)) && other_square.piece != nil
             true
