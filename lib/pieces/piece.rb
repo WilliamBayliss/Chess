@@ -21,4 +21,8 @@ class Piece
     def set_moved
         @moved = true
     end
+
+    def get_move square
+        @available_moves << square
+    end
 end
