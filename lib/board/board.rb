@@ -75,10 +75,10 @@ class Board
         place_piece(knight_one, @board["B1"])
         bishop_one = Bishop.new("wht")
         place_piece(bishop_one, @board["C1"])
-        king = King.new("wht")
-        place_piece(king, @board["D1"])
         queen = Queen.new("wht")
-        place_piece(queen, @board["E1"])
+        place_piece(queen, @board["D1"])
+        king = King.new("wht")
+        place_piece(king, @board["E1"])
         bishop_two = Bishop.new("wht")
         place_piece(bishop_two, @board["F1"])
         knight_two = Knight.new("wht")
@@ -113,10 +113,10 @@ class Board
         place_piece(knight_one, @board["B8"])
         bishop_one = Bishop.new("blk")
         place_piece(bishop_one, @board["C8"])
-        king = King.new("blk")
-        place_piece(king, @board["D8"])
         queen = Queen.new("blk")
-        place_piece(queen, @board["E8"])
+        place_piece(queen, @board["D8"])
+        king = King.new("blk")
+        place_piece(king, @board["E8"])
         bishop_two = Bishop.new("blk")
         place_piece(bishop_two, @board["F8"])
         knight_two = Knight.new("blk")
@@ -321,23 +321,29 @@ class Board
         end
     end
 
-    def check? king, king_square
-        attacks = []
-        @board.each do |key, square|
-            unless square.piece.nil?
-                unless square.piece.color == king.color
-                    if legal_move?(square.piece, king_square)
-                        attacks.append(true)
-                    end
-                end 
-            end
-        end
+    def under_attack? square
+        attacks = list_attacks(square)
 
-        if attacks.include?(true)
+        if attacks.length > 0
             true
         else
             false
         end
+
+    end
+
+    def list_attacks square
+        attacks = []
+        @board.each do |k, sq|
+            unless sq.piece.nil?
+                unless sq.piece.color == square.piece.color
+                    if legal_move?(sq.piece, square)
+                        attacks.append(sq)
+                    end
+                end 
+            end
+        end
+        attacks
     end
 
     # These methods are all for assessing the different conditions of moving a pawn
