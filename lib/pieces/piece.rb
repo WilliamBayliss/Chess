@@ -1,12 +1,13 @@
 require './lib/board/square.rb'
 
 class Piece
-    attr_accessor :square, :color, :symbol, :moved
+    attr_accessor :square, :available_moves, :color, :symbol, :moved
     def initialize color
         @square = nil
         @color = color
         @symbol = " "
         @moved = false
+        @available_moves = []
     end
 
     def set_symbol symbol
