@@ -1300,6 +1300,43 @@ describe Board do
             expect(board.clear_path?(board["C2"], board["C7"])).to eql(true)
         end
 
+        it "works on a vertical path" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            expect(board.clear_path?(
+                board["A3"],
+                board["A5"]
+            )).to eql(true)
+        end
+
+        it "works on a diagonal path" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            expect(board.clear_path?(
+                board["A3"],
+                board["D6"]
+                )).to eql(true)
+        end
+
+        it "works on a horizontal path" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+
+            expect(board.clear_path?(
+                board["A3"],
+                board["G3"]
+            )).to eql(true)
+
+        end
+
         it "returns false if the path between two squares is blocked by a piece" do
             board = Board.new
             board.create_board(board.board_array)
