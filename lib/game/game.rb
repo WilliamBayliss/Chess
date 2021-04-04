@@ -21,6 +21,7 @@ class Game
     def create_board
         board = Board.new
         board.setup
+        board
     end
 
     def player_move player
