@@ -1365,7 +1365,7 @@ describe Board do
             expect(board.clear_path?(board["C2"], board["C7"])).to eql(true)
         end
 
-        it "works on a vertical path" do
+        it "returns true on an unblocked vertical path" do
             board = Board.new
             board.create_board(board.board_array)
             board.add_edges
@@ -1377,7 +1377,16 @@ describe Board do
             )).to eql(true)
         end
 
-        it "works on a diagonal path" do
+        it "returns false on a blocked vertical path" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path?(
+                board["A1"],
+                board["A5"]
+            )).to eql(false)
+        end
+
+        it "returns true on an unblocked diagonal path" do
             board = Board.new
             board.create_board(board.board_array)
             board.add_edges
@@ -1389,7 +1398,16 @@ describe Board do
                 )).to eql(true)
         end
 
-        it "works on a horizontal path" do
+        it "returns false on a blocked diagonal path" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path?(
+                board["A1"],
+                board["D3"]
+            )).to eql(false)
+        end
+
+        it "returns true on a horizontal path not blocked" do
             board = Board.new
             board.create_board(board.board_array)
             board.add_edges
@@ -1402,12 +1420,31 @@ describe Board do
 
         end
 
-        it "returns false if the path between two squares is blocked by a piece" do
+        it "returns false on a horizontal path blocked by pieces" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            expect(board.clear_path?(board["A1"], board["A5"])).to eql(false)
+            board.setup
+            expect(board.clear_path?(
+                board["A2"],
+                board["G2"]
+            )).to eql(false)
+        end
+
+        it "does not count the start square's piece" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path?(
+                board["A2"],
+                board["A5"]
+            )).to eql(true)
+        end
+
+        it "does not count the start square's piece" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path?(
+                board["A5"],
+                board["A2"]
+            )).to eql(true)
         end
     end
 
