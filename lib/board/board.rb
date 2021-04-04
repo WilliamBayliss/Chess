@@ -468,6 +468,17 @@ class Board
 
     end
 
+    def clear_path_horizontal? start_square, end_square
+        row = get_row(start_square)
+        path = get_path_from_row(row, start_square, end_square)
+        path.each do |square|
+            if square.piece != nil
+                return false
+            end
+        end
+        true
+    end
+
     def get_row source
         row = {}
         row[source.name] = [source]
