@@ -443,13 +443,42 @@ describe Board do
             board.move_piece(board["D4"].piece, board["B5"])
             board.move_piece(board["B5"].piece, board["C3"])
 
-
-
             expect(board.move_piece(
                 board["C3"].piece,
                 board["B1"]
             )).to eql(true)
         end
+
+        it "correctly moves a rook vertically" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["A2"].piece, board["A4"])
+            expect(board.move_piece(
+                board["A1"].piece,
+                board["A3"]
+            )).to eql(true)
+        end
+        it "correctly moves a rook horizontally" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["A2"].piece, board["A4"])
+            board.move_piece(board["A1"].piece, board["A3"])
+
+            expect(board.move_piece(
+                board["A3"].piece,
+                board["G3"]
+            )).to eql(true)
+        end
+        it "won't move a rook over another piece" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["A2"].piece, board["A4"])
+            expect(board.move_piece(
+                board["A1"].piece,
+                board["A5"]
+            )).to eql(false)
+        end
+
     end
 
     describe "#set_moved" do
