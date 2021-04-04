@@ -348,14 +348,14 @@ describe Board do
             expect(board["B5"].symbol).to eql("♟︎")
         end
 
-        # it "correctly moves a knight" do
-        #     board = Board.new
-        #     board.setup
-        #     expect(board.move_piece(
-        #         board["B1"].piece,
-        #         board["A3"]
-        #     )).to eql(true)
-        # end
+        it "correctly moves a knight" do
+            board = Board.new
+            board.setup
+            expect(board.move_piece(
+                board["B1"].piece,
+                board["A3"]
+            )).to eql(true)
+        end
     end
 
     describe "#set_moved" do
