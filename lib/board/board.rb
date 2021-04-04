@@ -479,8 +479,22 @@ class Board
         row
     end
 
-    def get_path_from_row row
-        
+    def get_path_from_row row, start_square, end_square
+        path = []
+        row.each do |name, square|
+            if start_square.coordinate[1] < end_square.coordinate[1]
+                if square.coordinate[1].between?(start_square.coordinate[1], end_square.coordinate[1])
+                    path.append(square)
+                end
+            elsif end_square.coordinate[1] < start_square.coordinate[1]
+                if square.coordinate[1].between?(end_square.coordinate[1], start_square.coordinate[1])
+                    path.append(square)
+                end
+            end
+        end
+        path.shift
+        path.pop 
+        path
     end
 
 
