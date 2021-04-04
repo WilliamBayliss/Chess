@@ -1688,30 +1688,30 @@ describe Board do
         end
     end
 
-    # describe "#check?" do
-    #     it "returns true if the king is in check" do
-    #         board = Board.new
-    #         board.create_board(board.board_array)
-    #         board.add_edges
-    #         board.place_pieces
-    #         board.get_piece_moves
-    #         board.move_piece(board["B8"].piece, board["C6"])
-    #         board.move_piece(board["C6"].piece, board["D4"])
-    #         board.move_piece(board["D4"].piece, board["F3"])
-    #         expect(board.check?(board["E1"].piece)).to eql(true)
-    #     end
+    describe "#check?" do
+        it "returns true if the king is in check" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.get_piece_moves
+            board.move_piece(board["B8"].piece, board["C6"])
+            board.move_piece(board["C6"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["F3"])
+            expect(board.check?(board["E1"].piece)).to eql(true)
+        end
 
-    #     it "returns false if the king is not in check" do
-    #         board = Board.new
-    #         board.create_board(board.board_array)
-    #         board.add_edges
-    #         board.place_pieces
-    #         board.get_piece_moves
-    #         expect(board.check?(board["E8"].piece)).to eql(false)
-    #     end
+        it "returns false if the king is not in check" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.get_piece_moves
+            expect(board.check?(board["E8"].piece)).to eql(false)
+        end
 
 
 
-    # end
+    end
 
 end
