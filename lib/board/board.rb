@@ -468,6 +468,21 @@ class Board
 
     end
 
+    def get_row source
+        row = {}
+        row[source.name] = [source]
+        @board.each do |name, square|
+            if horizontal?(source, square)
+                row[square.name] = square
+            end
+        end
+        row
+    end
+
+    def get_path_from_row row
+        
+    end
+
 
     # Uses BFS on the board to create a map of squares outward from a given square
     def board_scan source
