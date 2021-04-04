@@ -1249,15 +1249,15 @@ describe Board do
             )).to eql(true)
         end
 
-        # it "returns true for a knight move ¬ " do
-        #     board = Board.new
-        #     board.setup
-        #     board.move_piece(board["B1"].piece, board["C3"])
-        #     expect(board.legal_move?(
-        #         board["C3"].piece,
-        #         board["E4"]
-        #     )).to eql(true)
-        # end
+        it "returns true for a knight move ¬ " do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            expect(board.legal_move?(
+                board["C3"].piece,
+                board["E4"]
+            )).to eql(true)
+        end
 
         it "returns true for a legal bishop move" do
             board = Board.new
@@ -1297,7 +1297,11 @@ describe Board do
             board.move_piece(board["A2"].piece, board["A3"])
             board.move_piece(board["A3"].piece, board["A4"])
             board.move_piece(board["A4"].piece, board["A5"])
-            # board.move_piece(board["A1"].piece, board["A4"])
+            board.move_piece(board["A1"].piece, board["A4"])
+            expect(board.move_piece(
+                board["A4"].piece,
+                board["G4"]
+            )).to eql(true)
         end
 
         it "returns false for an illegal queen move" do
