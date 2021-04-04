@@ -1659,34 +1659,34 @@ describe Board do
         end
     end
 
-    # describe "#under_attack?" do
-    #     it "returns true if a square is under attack" do
-    #         board = Board.new
-    #         board.create_board(board.board_array)
-    #         board.add_edges
-    #         board.place_pieces
-    #         board.get_piece_moves
-    #         board.move_piece(board["B1"].piece, board["C3"])
-    #         board.move_piece(board["C3"].piece, board["D5"])
-    #         board.move_piece(board["G1"].piece, board["F3"])
-    #         board.move_piece(board["F3"].piece, board["E5"])
-    #         board.move_piece(board["E5"].piece, board["C6"])
-    #         board.move_piece(board["D2"].piece, board["D3"])
-    #         board.move_piece(board["C1"].piece, board["G5"])
+    describe "#under_attack?" do
+        it "returns true if a square is under attack" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.get_piece_moves
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
 
-    #         expect(board.under_attack?(board["B4"])).to eql(true)
+            expect(board.under_attack?(board["B4"])).to eql(true)
 
-    #     end
+        end
         
-    #     it "returns false if a square is mot under attack" do
-    #         board = Board.new
-    #         board.create_board(board.board_array)
-    #         board.add_edges
-    #         board.place_pieces
-    #         board.get_piece_moves
-    #         expect(board.under_attack?(board["A1"])).to eql(false)
-    #     end
-    # end
+        it "returns false if a square is mot under attack" do
+            board = Board.new
+            board.create_board(board.board_array)
+            board.add_edges
+            board.place_pieces
+            board.get_piece_moves
+            expect(board.under_attack?(board["A1"])).to eql(false)
+        end
+    end
 
     # describe "#check?" do
     #     it "returns true if the king is in check" do
