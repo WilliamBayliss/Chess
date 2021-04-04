@@ -455,16 +455,20 @@ class Board
     # Uses the BFS method board_scan to get a map outward from a point on the board
     # Finds the end square on that map and returns true if all the squares between the start and end point are empty
     def clear_path? start_square, end_square
-        map = board_scan(start_square)
-        next_square = map[end_square.name][:predecessor]
-        until next_square == start_square
-            if next_square.piece != nil
-                return false
-            else
-                next_square = map[next_square.name][:predecessor]
+        if horizontal?(start_square, end_square)
+            clear_path_horizontal?(start_square, end_square)
+        else
+            map = board_scan(start_square)
+            next_square = map[end_square.name][:predecessor]
+            until next_square == start_square
+                if next_square.piece != nil
+                    return false
+                else
+                    next_square = map[next_square.name][:predecessor]
+                end
             end
+            true
         end
-        true
 
     end
 
