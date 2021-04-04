@@ -341,19 +341,113 @@ describe Board do
             expect(board["B6"].symbol).to eql("♟︎")
         end
 
-        it "correclty moves a black pawn 2 squares forward if unmoved" do
+        it "correctly moves a black pawn 2 squares forward if unmoved" do
             board = Board.new
             board.setup
             board.move_piece(board["B7"].piece, board["B5"])
             expect(board["B5"].symbol).to eql("♟︎")
         end
 
-        it "correctly moves a knight" do
+        it "correctly moves a knight in an L shape" do
             board = Board.new
             board.setup
             expect(board.move_piece(
                 board["B1"].piece,
                 board["A3"]
+            )).to eql(true)
+        end
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            expect(board.move_piece(
+                board["A3"].piece,
+                board["B5"]
+            )).to eql(true)
+        end
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["B5"])
+
+            expect(board.move_piece(
+                board["B5"].piece,
+                board["D4"]
+            )).to eql(true)
+        end
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["B5"])
+            board.move_piece(board["B5"].piece, board["D4"])
+
+
+            expect(board.move_piece(
+                board["D4"].piece,
+                board["F5"]
+            )).to eql(true)
+        end
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["B5"])
+            board.move_piece(board["B5"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["F5"])
+
+            expect(board.move_piece(
+                board["F5"].piece,
+                board["D4"]
+            )).to eql(true)
+        end
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["B5"])
+            board.move_piece(board["B5"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["F5"])
+            board.move_piece(board["F5"].piece, board["D4"])
+
+            expect(board.move_piece(
+                board["D4"].piece,
+                board["B5"]
+            )).to eql(true)
+        end
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["B5"])
+            board.move_piece(board["B5"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["F5"])
+            board.move_piece(board["F5"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["B5"])
+
+
+            expect(board.move_piece(
+                board["B5"].piece,
+                board["C3"]
+            )).to eql(true)
+        end        
+        it "correctly moves a knight in an L shape" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["A3"])
+            board.move_piece(board["A3"].piece, board["B5"])
+            board.move_piece(board["B5"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["F5"])
+            board.move_piece(board["F5"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["B5"])
+            board.move_piece(board["B5"].piece, board["C3"])
+
+
+
+            expect(board.move_piece(
+                board["C3"].piece,
+                board["B1"]
             )).to eql(true)
         end
     end
