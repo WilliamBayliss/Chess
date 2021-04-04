@@ -1411,6 +1411,28 @@ describe Board do
         end
     end
 
+    describe "#clear_path_horizontal?" do
+        it "returns false if there is a piece" do
+            board = Board.new
+            board.setup
+            board.print_board
+            expect(board.clear_path_horizontal?(
+                board["A2"], 
+                board["F2"]
+                )).to eql(false)
+        end
+
+        it "returns true if the path is not blocked by a piece" do
+            board = Board.new
+            board.setup
+            board.print_board
+            expect(board.clear_path_horizontal?(
+                board["A3"], 
+                board["F3"]
+                )).to eql(true)
+        end
+    end
+
     describe "#get_row" do
         it "returns an array containing the source square" do
             board = Board.new
@@ -1443,6 +1465,13 @@ describe Board do
     end
 
     describe "#get_path_from_row" do
+        it "returns an empty array if same square or squares adjacent" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            path = board.get_path_from_row(row, board["A4"], board["B4"])
+            expect(path).to eql([])    
+        end
         it "returns an array of squares in between the start and end point" do
             board = Board.new
             board.setup
