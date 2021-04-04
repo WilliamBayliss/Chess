@@ -479,6 +479,47 @@ describe Board do
             )).to eql(false)
         end
 
+        it "moves a bishop correctly" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            expect(board.move_piece(
+                board["C1"].piece,
+                board["G5"]
+            )).to eql(true)
+        end
+
+        it "moves a queen correctly vertically" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D4"].piece, board["D5"])
+
+            expect(board.move_piece(
+                board["D1"].piece,
+                board["D4"]
+            )).to eql(true)
+        end
+
+        it "moves a queen correctly diagonally" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["C2"].piece, board["C4"])
+            expect(board.move_piece(
+                board["D1"].piece,
+                board["A4"]
+            )).to eql(true)
+        end
+        it "moves a queen correctly horizontally" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["C2"].piece, board["C3"])
+            board.move_piece(board["D1"].piece, board["A4"])
+            expect(board.move_piece(
+                board["A4"].piece,
+                board["G4"]
+            )).to eql(true)
+        end
     end
 
     describe "#set_moved" do
@@ -1525,6 +1566,22 @@ describe Board do
                 )).to eql(true)
         end
 
+        it "returns true on an unblocked diagonal path surrounded by pieces" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["E2"].piece, board["E4"])
+            board.move_piece(board["F2"].piece, board["F3"])
+            board.move_piece(board["D1"].piece, board["E2"])
+
+
+            board.print_board
+            expect(board.clear_path?(
+                board["C1"],
+                board["H6"]
+            )).to eql(true)
+        end
+
         it "returns false on a blocked diagonal path" do
             board = Board.new
             board.setup
@@ -1547,6 +1604,17 @@ describe Board do
 
         end
 
+        it "returns true if path unblocked but surrounded by pieces" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+
+            expect(board.clear_path?(
+                board["D1"],
+                board["D3"]
+            )).to eql(true)
+        end
+
         it "returns false on a horizontal path blocked by pieces" do
             board = Board.new
             board.setup
@@ -1565,7 +1633,7 @@ describe Board do
             )).to eql(true)
         end
 
-        it "does not count the start square's piece" do
+        it "does not count the end square's piece" do
             board = Board.new
             board.setup
             expect(board.clear_path?(
@@ -1664,6 +1732,130 @@ describe Board do
             row = board.get_row(board["A4"])
             path = board.get_path_from_row(row, board["A4"], board["E4"])
             expect(path).to_not include(board["E4"]) 
+        end
+    end
+
+    describe "#clear_path_vertical?" do
+        it "returns false if there is a piece" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path_vertical?(
+                board["A1"], 
+                board["A5"]
+                )).to eql(false)
+        end
+
+        it "returns true if the path is not blocked by a piece" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path_vertical?(
+                board["C2"], 
+                board["C5"]
+                )).to eql(true)
+        end
+
+        it "returns true if only the start square has a piece" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path_vertical?(
+                board["B2"], 
+                board["B4"]
+                )).to eql(true)
+        end
+        it "returns true if only the end square has a piece" do
+            board = Board.new
+            board.setup
+            expect(board.clear_path_vertical?(
+                board["B4"], 
+                board["B2"]
+                )).to eql(true)
+        end
+    end
+
+    describe "#get_column" do
+        it "returns an array containing the source square" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            expect(column[board["A4"].name]).to eql(board["A4"])
+        end
+
+        it "returns an array with squares with the same y coordinate as the source square" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            expect(column[board["A6"].name]).to eql(board["A6"])
+        end
+
+        it "does not contain squares that are not in that column" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            expect(column[board["G5"].name]).to eql(nil)
+        end
+
+        it "contains all the squares in that column" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            expect(column.size).to eql(8)
+        end
+    end
+
+    describe "#get_path_from_column" do
+        it "returns an empty array if same square or squares adjacent" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A1"], board["A2"])
+            expect(path).to eql([])    
+        end
+        it "returns an array of squares in between the start and end point" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A4"], board["A6"])
+            expect(path).to include(board["A5"]) 
+        end
+
+        it "contains all the squares in between the start and end point" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A1"], board["A5"])
+            expect(path.size).to eql(3)
+        end
+
+        it "does not contain squares from that column but not between the start and end point" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A2"], board["A6"])
+            expect(path).to_not include(board["A7"]) 
+        end
+        
+        it "does not contain the start square" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A4"], board["A7"])
+            expect(path).to_not include(board["A4"]) 
+        end
+
+        it "does not contain the end square" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A4"], board["A7"])
+            expect(path).to_not include(board["A7"]) 
+        end
+
+        it "works correctly going backwards" do
+            board = Board.new
+            board.setup
+            column = board.get_column(board["A4"])
+            path = board.get_path_from_column(column, board["A7"], board["A2"])
+            expect(path).to_not include(board["A2"]) 
         end
     end
 
