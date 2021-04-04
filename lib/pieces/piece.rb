@@ -25,4 +25,8 @@ class Piece
     def get_move square
         @available_moves << square
     end
+
+    def reset_moves
+        @available_moves = []
+    end
 end
