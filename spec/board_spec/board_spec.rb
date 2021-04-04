@@ -1411,7 +1411,36 @@ describe Board do
         end
     end
 
+    describe "#get_row" do
+        it "returns an array containing the source square" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            expect(row[board["A4"].name]).to eql(board["A4"])
+        end
 
+        it "returns an array with squares with the same x coordinate as the source square" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            expect(row[board["G4"].name]).to eql(board["G4"])
+        end
+
+        it "does not contain squares that are not on that row" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            expect(row[board["G5"].name]).to eql(nil)
+        end
+
+        it "contains all the squares on that row" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            expect(row.size).to eql(8)
+        end
+
+    end
 
     describe "#board_scan" do
         it "creates a hash that isn't empty" do
