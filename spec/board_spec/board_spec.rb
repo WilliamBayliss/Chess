@@ -1298,7 +1298,6 @@ describe Board do
             board.move_piece(board["A3"].piece, board["A4"])
             board.move_piece(board["A4"].piece, board["A5"])
             # board.move_piece(board["A1"].piece, board["A4"])
-            board.print_board
         end
 
         it "returns false for an illegal queen move" do
@@ -1412,99 +1411,7 @@ describe Board do
         end
     end
 
-    describe "#get_horizontal_path" do
-        it "returns an empty array if same square" do
-            board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            expect(board.get_horizontal_path(
-                board["A1"],
-                board["A1"]
-            )).to eql([])
-        end
 
-        it "returns an empty array if squares are adjacent" do
-            board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-
-            expect(board.get_horizontal_path(
-                board["A4"],
-                board["B4"]
-            )).to eql([])
-        end
-
-        it "returns an array of squares on the same row" do
-            board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-
-            expect(board.get_horizontal_path(
-                board["A4"],
-                board["H4"]
-            )).to_not include(board["G1"])
-        end
-
-        it "returns a path of the right length" do
-            board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            path = board.get_horizontal_path(board["A4"], board["D4"])
-            path.each do |step|
-                puts step.name
-            end
-            
-            expect(board.get_horizontal_path(
-                board["A4"],
-                board["D4"]
-            ).length).to eql(2)
-        end
-
-        it "returns a path of the right length" do
-            board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            path = board.get_horizontal_path(board["A4"], board["D4"])
-            path.each do |step|
-                puts step.name
-            end
-            
-            expect(board.get_horizontal_path(
-                board["A1"],
-                board["H1"]
-            ).length).to eql(6)
-        end
-
-    end
-
-    describe "#empty_square_scan" do
-        it "creates a non empty hash" do
-            board = Board.new
-            board.setup
-            map = board.empty_square_scan(board["A1"])
-            expect(map).to_not eql({})
-        end
-
-        it "does not contain data for squares with pieces on them" do
-            board = Board.new
-            board.setup
-            map = board.empty_square_scan(board["A4"])
-            expect(map["A1"][:predecessor]).to eql(nil)
-        end
-
-        it "contains data for squares without pieces on them" do
-            board = Board.new
-            board.setup
-            map = board.empty_square_scan(board["A4"])
-            expect(map["A5"][:predecessor]).to_not eql(nil)
-        end
-        
-    end
 
     describe "#board_scan" do
         it "creates a hash that isn't empty" do

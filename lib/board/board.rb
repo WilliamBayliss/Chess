@@ -455,92 +455,17 @@ class Board
     # Uses the BFS method board_scan to get a map outward from a point on the board
     # Finds the end square on that map and returns true if all the squares between the start and end point are empty
     def clear_path? start_square, end_square
-     
-
-        if horizontal?(start_square, end_square)
-            path = get_horizontal_path(start_square, end_square)
-            path.each do |step|
-                if step.piece != nil
-                    false
-                end
-            end
-            true
-        else
-            map = board_scan(start_square)
-            next_square = map[end_square.name][:predecessor]
-
-            until next_square == start_square
-                if next_square.piece != nil
-                    return false
-                else
-                    next_square = map[next_square.name][:predecessor]
-                end
-            end
-            true
-        end
-
-    end
-
-    def get_horizontal_path square, other_square
-        path = []
-        current = square
-        until current.neighbours.include?(other_square)
-            current.neighbours.each do |neighbour|
-                # If square is horizontal relational to start square, and in between start and end point
-                # And unless neighbour is already in path
-                if horizontal?(square, neighbour)
-                    if other_square.coordinate[1] > square.coordinate[1]
-                        if neighbour.coordinate[1].between?(square.coordinate[1], other_square.coordinate[1])
-                            unless path.include?(neighbour)
-                                path.append(neighbour)
-                                current = neighbour
-                            end
-                        end
-                    elsif other_square.coordinate[1] < square.coordinate[1]
-                        if neighbour.coordinate[1].between?(other_square.coordinate[1], square.coordinate[1])
-                            unless path.include?(neighbour)
-                                path.append(neighbour)
-                                current = neighbour
-                            end
-                        end
-                    end
-                end
+        map = board_scan(start_square)
+        next_square = map[end_square.name][:predecessor]
+        until next_square == start_square
+            if next_square.piece != nil
+                return false
+            else
+                next_square = map[next_square.name][:predecessor]
             end
         end
-        path.shift
-        path
-    end
+        true
 
-    def empty_square_scan source
-        map = {}
-
-        @board.each do |(key, value)|
-            map[key] = {
-                predecessor: nil,
-                distance: nil
-            }
-        end
-
-        map[source.name][:distance] = 0
-
-        queue = []
-        queue.append(source)
-
-        while queue.length > 0
-            temp =  queue[0]
-            queue.shift
-
-            temp.neighbours.each do |neighbour|
-                if map[neighbour.name][:distance].nil? && neighbour.piece.nil?
-                    map[neighbour.name][:distance] = map[temp.name][:distance] + 1
-                    map[neighbour.name][:predecessor] = temp
-
-                    queue.append(neighbour)
-                end
-            end
-        end
-
-        map
     end
 
 
