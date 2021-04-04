@@ -28,6 +28,13 @@ class Board
         end
     end
 
+    def setup 
+        create_board(board_array)
+        add_edges
+        place_pieces
+        get_piece_moves
+    end
+
     def board_array
         [
             [[1,1], "A1"], [[1,2], "B1"], [[1,3], "C1"], [[1,4], "D1"], [[1,5], "E1"], [[1,6], "F1"], [[1,7], "G1"], [[1,8], "H1"], 
@@ -58,6 +65,11 @@ class Board
         end
     end
 
+    def update_piece_moves
+        clear_piece_moves
+        get_piece_moves
+    end
+
     def get_piece_moves
         @pieces.each do |piece|
             @board.each do |key, square|
@@ -65,6 +77,12 @@ class Board
                     piece.get_move(square)
                 end
             end
+        end
+    end
+
+    def clear_piece_moves
+        @pieces.each do |piece|
+            piece.reset_moves
         end
     end
 
@@ -195,11 +213,11 @@ class Board
     end
 
     def move_piece piece, square
-        if legal_move?(piece, square)
+        if piece.available_moves.include?(square)
             piece.square.clear_square
             place_piece(piece, square)
             set_moved(piece)
-            get_piece_moves()
+            update_piece_moves()
             return true
         else
             return false
@@ -283,32 +301,25 @@ class Board
     def knight_move? square, other_square
         if square.nil? || other_square.nil?
             return false
-          else
-            #  if X+2 && Y+1 move
-            if    square.coordinate[0] +2  == other_square.coordinate[0] && square.coordinate[1] + 1 == other_square.coordinate[1]  
-              return true
-            #  if X+1 && Y+2
-            elsif square.coordinate[0] + 1 == other_square.coordinate[0] && square.coordinate[1] + 2== other_square.coordinate[1]
-              return true
-            #   If X-1 && Y+2
-            elsif square.coordinate[0] - 1 == other_square.coordinate[0] && square.coordinate[1] + 2 == other_square.coordinate[1]
-              return true
-            #   If X-2 && Y-1
-            elsif square.coordinate[0] - 2 == other_square.coordinate[0] && square.coordinate[1] - 1 == other_square.coordinate[1]
-              return true
-            #   If X-1 && Y-2
-            elsif square.coordinate[0] - 1 == other_square.coordinate[0] && square.coordinate[1] - 2 == other_square.coordinate[1]
-              return true
-            #   if X+1 && Y-2
-            elsif square.coordinate[0] + 1 == other_square.coordinate[0] && square.coordinate[1] - 2 == other_square.coordinate[1]
-              return true
-            #   if X+2 && Y-1
-            elsif square.coordinate[0] + 2 == other_square.coordinate[0] && square.coordinate[1] - 1 == other_square.coordinate[1]
-              return true
-            #   if X-2 && Y + 1
-            elsif square.coordinate[0] - 2 == other_square.coordinate[0] && square.coordinate[1] + 1 == other_square.coordinate[1]
-                return true
-
+        else
+            x_difference = square.coordinate[0] - other_square.coordinate[0]
+            y_difference = square.coordinate[1] - other_square.coordinate[1]
+            if x_difference == 2 && y_difference == -1
+                true
+            elsif x_difference == 2 && y_difference == 1
+                true
+            elsif x_difference == -2 && y_difference == -1
+                true
+            elsif x_difference == -2 && y_difference == 1
+                true
+            elsif x_difference == -1 && y_difference == 2
+                true
+            elsif x_difference == -1 && y_difference == -2
+                true
+            elsif x_difference == 1 && y_difference == -2
+                true
+            elsif x_difference == 1 && y_difference == 2
+                true
             else
               return false
             end
@@ -373,7 +384,7 @@ class Board
 
     # Returns true if the selected move is a legal move for a pawn
     def pawn_move? square, other_square
-        if square.piece.moved == false && two_squares_vertical?(square, other_square) && other_square.piece == nil
+        if square.piece.moved == false && two_squares_vertical?(square, other_square) && other_square.piece.nil?
             true
         elsif (diagonal?(square, other_square) && adjacent?(square, other_square)) && other_square.piece != nil
             true
@@ -439,6 +450,7 @@ class Board
             false
         end
     end
+
 
     # Uses the BFS method board_scan to get a map outward from a point on the board
     # Finds the end square on that map and returns true if all the squares between the start and end point are empty
