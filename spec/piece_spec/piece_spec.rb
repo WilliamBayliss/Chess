@@ -62,4 +62,15 @@ describe Piece do
             expect(piece.available_moves).to include(square)
         end
     end 
+
+    describe "#reset_moves" do
+        it "deletes moves from the move list" do
+            square = Square.new([[0,0], "A1"])
+            piece = Piece.new("wht")
+            piece.get_move(square)
+            piece.reset_moves
+            expect(piece.available_moves).to eql([])
+        end
+
+    end
 end
