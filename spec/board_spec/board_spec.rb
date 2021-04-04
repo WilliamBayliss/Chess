@@ -347,6 +347,15 @@ describe Board do
             board.move_piece(board["B7"].piece, board["B5"])
             expect(board["B5"].symbol).to eql("♟︎")
         end
+
+        # it "correctly moves a knight" do
+        #     board = Board.new
+        #     board.setup
+        #     expect(board.move_piece(
+        #         board["B1"].piece,
+        #         board["A3"]
+        #     )).to eql(true)
+        # end
     end
 
     describe "#set_moved" do
@@ -1473,6 +1482,29 @@ describe Board do
 
     end
 
+    describe "#empty_square_scan" do
+        it "creates a non empty hash" do
+            board = Board.new
+            board.setup
+            map = board.empty_square_scan(board["A1"])
+            expect(map).to_not eql({})
+        end
+
+        it "does not contain data for squares with pieces on them" do
+            board = Board.new
+            board.setup
+            map = board.empty_square_scan(board["A4"])
+            expect(map["A1"][:predecessor]).to eql(nil)
+        end
+
+        it "contains data for squares without pieces on them" do
+            board = Board.new
+            board.setup
+            map = board.empty_square_scan(board["A4"])
+            expect(map["A5"][:predecessor]).to_not eql(nil)
+        end
+        
+    end
 
     describe "#board_scan" do
         it "creates a hash that isn't empty" do
