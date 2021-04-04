@@ -38,7 +38,7 @@ describe Square do
             square_one = Square.new([[0,0], "A1"])
             square_two = Square.new([[0,1], "B1"])
             square_one.add_neighbour(square_two)
-            expect(square_one.neighbours[0]).to eql(square_two)
+            expect(square_one.neighbours).to include(square_two)
         end
     end
 
