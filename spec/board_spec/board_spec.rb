@@ -1442,6 +1442,40 @@ describe Board do
 
     end
 
+    describe "#get_path_from_row" do
+        it "returns an array of squares in between the start and end point" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            path = board.get_path_from_row(row, board["A4"], board["E4"])
+            expect(path).to include(board["D4"]) 
+        end
+
+        it "contains all the squares in between the start and end point" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            path = board.get_path_from_row(row, board["A4"], board["E4"])
+            expect(path.size).to eql(3)
+        end
+        
+        it "does not contain the start square" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            path = board.get_path_from_row(row, board["A4"], board["E4"])
+            expect(path).to_not include(board["A4"]) 
+        end
+
+        it "does not contain the end square" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["A4"])
+            path = board.get_path_from_row(row, board["A4"], board["E4"])
+            expect(path).to_not include(board["E4"]) 
+        end
+    end
+
     describe "#board_scan" do
         it "creates a hash that isn't empty" do
             board = Board.new
