@@ -1415,7 +1415,6 @@ describe Board do
         it "returns false if there is a piece" do
             board = Board.new
             board.setup
-            board.print_board
             expect(board.clear_path_horizontal?(
                 board["A2"], 
                 board["F2"]
@@ -1425,7 +1424,6 @@ describe Board do
         it "returns true if the path is not blocked by a piece" do
             board = Board.new
             board.setup
-            board.print_board
             expect(board.clear_path_horizontal?(
                 board["A3"], 
                 board["F3"]
