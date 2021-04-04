@@ -457,6 +457,8 @@ class Board
     def clear_path? start_square, end_square
         if horizontal?(start_square, end_square)
             clear_path_horizontal?(start_square, end_square)
+        elsif vertical?(start_square, end_square)
+            clear_path_vertical?(start_square, end_square)
         else
             map = board_scan(start_square)
             next_square = map[end_square.name][:predecessor]
@@ -485,7 +487,6 @@ class Board
 
     def get_row source
         row = {}
-        row[source.name] = [source]
         @board.each do |name, square|
             if horizontal?(source, square)
                 row[square.name] = square
@@ -509,6 +510,45 @@ class Board
         end
         path.shift
         path.pop 
+        path
+    end
+
+    def clear_path_vertical? start_square, end_square
+        column = get_column(start_square)
+        path = get_path_from_column(column, start_square, end_square)
+        path.each do |square|
+            if square.piece != nil
+                return false
+            end
+        end
+        true
+    end
+
+    def get_column source
+        column = {}
+        @board.each do |name, square|
+            if vertical?(source, square)
+                column[square.name] = square
+            end
+        end
+        column
+    end
+
+    def get_path_from_column column, start_square, end_square
+        path = []
+        column.each do |name, square|
+            if start_square.coordinate[0] < end_square.coordinate[0]
+                if square.coordinate[0].between?(start_square.coordinate[0], end_square.coordinate[0])
+                    path.append(square)
+                end
+            elsif end_square.coordinate[0] < start_square.coordinate[0]
+                if square.coordinate[0].between?(end_square.coordinate[0], start_square.coordinate[0])
+                    path.append(square)
+                end
+            end
+        end
+        path.shift
+        path.pop
         path
     end
 
