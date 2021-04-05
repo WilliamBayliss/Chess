@@ -441,7 +441,7 @@ class Board
                     false
                 end
             when "♚", "♔"
-                # Return true if move is in any direction but only to an adjacent square
+                # Return true if move is in any direction but only to an adjacent square, and the square is not under attack from a piece
                 king_move?(piece.square, square)
             else
                 false
@@ -552,7 +552,6 @@ class Board
         path
     end
 
-
     # Uses BFS on the board to create a map of squares outward from a given square
     def board_scan source
         map = {}
@@ -586,18 +585,18 @@ class Board
         map
     end
 
-    def attacks_scan square
+    def attacks_scan piece, square
         attackers = []
-        @pieces.each do |piece|
-            if piece.available_moves.include?(square)
-                attackers.append(piece)
+        @pieces.each do |enemy|
+            if enemy.available_moves.include?(square) && enemy.color != piece.color
+                attackers.append(enemy)
             end
         end
         attackers
     end
 
-    def under_attack? square
-        if attacks_scan(square).length > 0
+    def under_attack? piece, square
+        if attacks_scan(piece, square).length > 0
             true
         else
             false
@@ -605,7 +604,7 @@ class Board
     end
 
     def check? king 
-        if under_attack?(king.square)
+        if under_attack?(king, king.square)
             true
         else
             false
