@@ -223,20 +223,18 @@ describe Board do
             board.move_piece(board["F8"].piece, board["C5"])
             board.move_piece(board["E1"].piece, board["E2"])
             board.move_piece(board["D8"].piece, board["G5"])
-            board.print_board
-            # board["E2"].piece.available_moves.each do |name, move|
-            #     puts name
-            # end
-            # expect(board["E2"].piece.available_moves).to_not include(board["E3"].name)
+            expect(board["E2"].piece.available_moves).to_not include(board["E3"].name)
         end
     end
 
-    describe "#clear_piece_moves" do
-        it "clears the available moves from all the pieces on the board" do
+    describe "#delete_illegal_moves" do
+        it "removes a move that is no longer legal from a piece's available_moves list" do
             board = Board.new
-            board.setup 
-            board.clear_piece_moves
-            expect(board["B1"].piece.available_moves).to eql({})
+            board.setup
+            bishop = Bishop.new("wht")
+            board.place_piece(bishop, board["A3"])
+            board.delete_illegal_moves
+            expect(board["A2"].piece.available_moves).to_not include(board["A3"].name)
         end
     end
 
@@ -334,16 +332,27 @@ describe Board do
 
         it "will replace a piece that is on the square moved to" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
 
             board.move_piece(board["B2"].piece, board["B4"])
             # Kill the pawn
             board.move_piece(board["A7"].piece, board["A5"])
             board.move_piece(board["B4"].piece, board["A5"])
             expect(board["A5"].symbol).to eql("♙")
+        end
+        
+        it "updates a piece's available moves correclty" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["A2"].piece, board["A4"])
+            expect(board["A4"].piece.available_moves).to include(board["A5"].name)
+        end
+
+        it "updates the moves for other pieces when a piece is moved" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["A2"].piece, board["A4"])
+            expect(board["A1"].piece.available_moves).to include(board["A3"].name)
         end
 
         it "correctly moves a white pawn 1 square forward" do
