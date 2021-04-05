@@ -213,7 +213,7 @@ class Board
     end
 
     def move_piece piece, square
-        if piece.available_moves.include?(square)
+        if piece.available_moves[square.name] != nil
             piece.square.clear_square
             place_piece(piece, square)
             set_moved(piece)
@@ -356,7 +356,7 @@ class Board
     end
 
     def king_move? square, other_square
-        if adjacent?(square, other_square)
+        if adjacent?(square, other_square) && !(under_attack?(square.piece, other_square))
             return true
         else
             return false
@@ -451,9 +451,10 @@ class Board
         end
     end
 
-
-    # Uses the BFS method board_scan to get a map outward from a point on the board
-    # Finds the end square on that map and returns true if all the squares between the start and end point are empty
+    # For vertical and horizontal moves, gets the row or column and evaluates each square between the start
+    # and end point to make sure they have nil piece values
+    # For diagonal moves, uses BFS to get a map outwards from the source and follows the path backwards from
+    # The end point to make sure each piece between the end and start point has a nil piece value
     def clear_path? start_square, end_square
         if horizontal?(start_square, end_square)
             clear_path_horizontal?(start_square, end_square)
@@ -588,7 +589,7 @@ class Board
     def attacks_scan piece, square
         attackers = []
         @pieces.each do |enemy|
-            if enemy.available_moves.include?(square) && enemy.color != piece.color
+            if enemy.available_moves[square.name] != nil && enemy.color != piece.color
                 attackers.append(enemy)
             end
         end
