@@ -66,8 +66,8 @@ class Board
     end
 
     def update_piece_moves
-        clear_piece_moves
         get_piece_moves
+        delete_illegal_moves
     end
 
     def get_piece_moves
@@ -80,9 +80,13 @@ class Board
         end
     end
 
-    def clear_piece_moves
+    def delete_illegal_moves
         @pieces.each do |piece|
-            piece.reset_moves
+            piece.available_moves.each do |name, square|
+                unless legal_move?(piece, square)
+                    piece.available_moves.delete(square.name)
+                end
+            end
         end
     end
 
