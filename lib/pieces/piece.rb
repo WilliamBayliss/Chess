@@ -7,7 +7,7 @@ class Piece
         @color = color
         @symbol = " "
         @moved = false
-        @available_moves = []
+        @available_moves = {}
     end
 
     def set_symbol symbol
@@ -23,10 +23,10 @@ class Piece
     end
 
     def get_move square
-        @available_moves << square
+        @available_moves[square.name] = square
     end
 
     def reset_moves
-        @available_moves = []
+        @available_moves = {}
     end
 end
