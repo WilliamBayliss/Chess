@@ -22,9 +22,9 @@ describe Piece do
             expect(piece.moved).to eql(false)
         end
 
-        it "initializes @available_moves to empty array" do
+        it "initializes @available_moves to empty hash" do
             piece = Piece.new("wht")
-            expect(piece.available_moves).to eql([])
+            expect(piece.available_moves).to eql({})
 
         end
     end
@@ -59,7 +59,7 @@ describe Piece do
             square = Square.new([[0,0], "A1"])
             piece = Piece.new("wht")
             piece.get_move(square)
-            expect(piece.available_moves).to include(square)
+            expect(piece.available_moves[square.name]).to eql(square)
         end
     end 
 
@@ -69,7 +69,7 @@ describe Piece do
             piece = Piece.new("wht")
             piece.get_move(square)
             piece.reset_moves
-            expect(piece.available_moves).to eql([])
+            expect(piece.available_moves).to eql({})
         end
 
     end
