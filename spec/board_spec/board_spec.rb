@@ -126,15 +126,15 @@ describe Board do
         end
     end
 
-    describe "update_piece_moves" do
-        it "replaces the available moves of a piece with the legal moves of its curent position" do
+    describe "#update_piece_moves" do
+        it "adds the legal moves of its curent position" do
             board = Board.new
             board.setup
             board.move_piece(
                 board["A2"].piece,
                 board["A4"]
             )
-            expect(board["A4"].piece.available_moves).to include(board["A5"])
+            expect(board["A4"].piece.available_moves[board["A5"].name]).to_not eql(nil)
         end
         
         it "removes moves that are no longer legal" do
@@ -144,7 +144,7 @@ describe Board do
                 board["A2"].piece,
                 board["A4"]
             )
-            expect(board["A4"].piece.available_moves).to_not include(board["A3"])
+            expect(board["A4"].piece.available_moves[board["A3"]]).to eql(nil)
         end
 
         it "updates the moves of a piece when another is moved" do
@@ -154,7 +154,7 @@ describe Board do
                 board["A2"].piece,
                 board["A4"]
             )
-            expect(board["A4"].piece.available_moves).to_not include(board["A3"])
+            expect(board["A4"].piece.available_moves[board["A3"].name]).to eql(nil)
         end
     end
 
@@ -165,7 +165,7 @@ describe Board do
             board.add_edges
             board.place_pieces
             board.get_piece_moves
-            expect(board["A2"].piece.available_moves.length).to eql(2)
+            expect(board["A2"].piece.available_moves.size).to eql(2)
         end
 
         it "adds squares on the board to the piece's available moves array" do
@@ -174,7 +174,7 @@ describe Board do
             board.add_edges
             board.place_pieces
             board.get_piece_moves
-            expect(board["A2"].piece.available_moves).to include(board["A3"])
+            expect(board["A2"].piece.available_moves[board["A3"].name]).to_not eql(nil)
         end
 
         it "doesn't add illegal moves" do
@@ -183,32 +183,44 @@ describe Board do
             board.add_edges
             board.place_pieces
             board.get_piece_moves
-            expect(board["A2"].piece.available_moves).to_not include(board["B4"])
+            expect(board["A2"].piece.available_moves[board["B4"].name]).to eql(nil)
 
         end
 
         it "adds a knight's legal moves correctly - Up 2 left 1" do
             board = Board.new
             board.setup
-            expect(board["B8"].piece.available_moves).to include(board["A6"])
+            expect(board["B8"].piece.available_moves[board["A6"].name]).to_not eql(nil)
         end
 
         it "adds a knight's legal moves correctly - Up 2 right 1" do
             board = Board.new
             board.setup
-            expect(board["B8"].piece.available_moves).to include(board["C6"])
+            expect(board["B8"].piece.available_moves[board["C6"].name]).to_not eql(nil)
         end
 
         it "adds a knight's down 2 right 1 move" do
             board = Board.new
             board.setup
-            expect(board["B1"].piece.available_moves).to include(board["C3"])
+            expect(board["B1"].piece.available_moves[board["C3"].name]).to_not eql(nil)
         end
 
         it "adds a knight's down 2 left 1 move" do
             board = Board.new
             board.setup
-            expect(board["B1"].piece.available_moves).to include(board["A3"])
+            expect(board["B1"].piece.available_moves[board["A3"].name]).to_not eql(nil)
+        end
+
+        it "does not add attacked squares to a king's moves list" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["C5"])
+            board.move_piece(board["E1"].piece, board["E2"])
+            board.move_piece(board["D8"].piece, board["G5"])
+
+            expect(board["E2"].piece.available_moves[board["E3"].name]).to_not eql(nil)
         end
     end
 
@@ -217,7 +229,7 @@ describe Board do
             board = Board.new
             board.setup 
             board.clear_piece_moves
-            expect(board["B1"].piece.available_moves).to eql([])
+            expect(board["B1"].piece.available_moves).to eql({})
         end
     end
 
@@ -548,6 +560,7 @@ describe Board do
             board.move_piece(board["E7"].piece, board["E5"])
             board.move_piece(board["F8"].piece, board["C5"])
             board.move_piece(board["E1"].piece, board["E2"])
+            board.move_piece(board["D8"].piece, board["G5"])
             expect(board.move_piece(
                 board["E2"].piece, 
                 board["E3"]
@@ -1177,6 +1190,17 @@ describe Board do
                 board["A3"]
                 )).to eql(true)
         end
+
+        it "returns false if the square is attacked" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["C5"])
+            board.move_piece(board["E1"].piece, board["E2"])
+            board.move_piece(board["D8"].piece, board["G5"])
+            expect(board.king_move?(board["E2"], board["E3"])).to eql(false)
+        end
     end
 
     describe "#pawn_direction?" do
@@ -1545,6 +1569,19 @@ describe Board do
                 piece,
                 board["A6"]
             )).to eql(true)
+        end
+
+        it "returns false if the move would put the king in check" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["C5"])
+            board.move_piece(board["E1"].piece, board["E2"])
+            expect(board.move_piece(
+                board["E2"].piece, 
+                board["E3"]
+                )).to eql(false)
         end
     end
 
@@ -1963,10 +2000,7 @@ describe Board do
 
         it "returns the an array with the correct number of pieces" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             board.move_piece(board["B1"].piece, board["C3"])
             board.move_piece(board["C3"].piece, board["D5"])
             board.move_piece(board["G1"].piece, board["F3"])
@@ -1986,10 +2020,7 @@ describe Board do
 
         it "works correctly on an empty square" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             board.move_piece(board["B1"].piece, board["C3"])
             board.move_piece(board["C3"].piece, board["D5"])
             board.move_piece(board["G1"].piece, board["F3"])
@@ -2062,10 +2093,7 @@ describe Board do
     describe "#check?" do
         it "returns true if the king is in check" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             board.move_piece(board["B8"].piece, board["C6"])
             board.move_piece(board["C6"].piece, board["D4"])
             board.move_piece(board["D4"].piece, board["F3"])
@@ -2074,10 +2102,7 @@ describe Board do
 
         it "returns false if the king is not in check" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             expect(board.check?(board["E8"].piece)).to eql(false)
         end
 
