@@ -280,10 +280,7 @@ describe Board do
     describe "#move_piece" do
         it "returns false if a move is illegal" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             expect(board.move_piece(
                 board["A2"].piece, 
                 board["B3"]
@@ -292,10 +289,7 @@ describe Board do
 
         it "returns true if a move is legal" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
 
             expect(board.move_piece(
                 board["A2"].piece, 
@@ -305,10 +299,7 @@ describe Board do
 
         it "resets the piece value of the square the piece moved from to nil" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             board.move_piece(board["B2"].piece, board["B3"])
             expect(board["B2"].piece).to eql(nil)
         end
