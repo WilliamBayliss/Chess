@@ -133,4 +133,26 @@ describe Game do
         end
     end
 
+
+    describe "#valid_coordinate?" do
+        it "returns false if more than two characters are entered" do
+            input = "A55"
+            game = Game.new()
+            expect(game.valid_coordinate?(input)).to eql(false)
+        end
+
+        it "returns false if input not a valid coordinate but right length" do
+            input = "J9"
+            game = Game.new()
+            expect(game.valid_coordinate?(input)).to eql(false)
+        end
+
+        it "returns true for a valid coordinate" do
+            input = "D5"
+            game = Game.new()
+            expect(game.valid_coordinate?(input)).to eql(true)
+        end
+
+    end
+
 end
