@@ -1,6 +1,8 @@
 require_relative 'piece.rb'
 class Queen < Piece
+    attr_accessor :name
     def initialize color
+        @name = "Queen"
         super(color)
         
         if @color == "wht"

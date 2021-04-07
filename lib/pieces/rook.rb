@@ -1,6 +1,8 @@
 require_relative 'piece.rb'
 class Rook < Piece
+    attr_accessor :name
     def initialize color
+        @name = "Rook"
         super(color)
         
         if @color == "wht"
