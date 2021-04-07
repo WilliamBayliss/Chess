@@ -33,12 +33,23 @@ class Game
         move.piece.move(move.square)
     end
 
+    def valid_coordinate? input
+        input = input.split("")
+        if input.length > 2
+            return false
+        elsif input[0] =~ /[A-H]/ && input[1] =~ /[1-8]/
+            return true
+        else
+            return false
+        end
+    end
+
 
     def record_move move
         @moves_history.append(move)
     end
 
-    def preamble
+    def start_game_puts
         puts "Welcome to Chess! This is a game of chess that you can play against a friend or the computer on the command line. Take your opponent's pieces and try to put their King into checkmate to win!"
     end
 end
