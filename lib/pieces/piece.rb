@@ -25,8 +25,4 @@ class Piece
     def get_move square
         @available_moves[square.name] = square
     end
-
-    def reset_moves
-        @available_moves = {}
-    end
 end
