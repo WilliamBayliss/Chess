@@ -27,6 +27,7 @@ describe Piece do
             expect(piece.available_moves).to eql({})
 
         end
+
     end
 
     describe "#set_symbol" do

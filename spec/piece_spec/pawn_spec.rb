@@ -7,6 +7,11 @@ describe Pawn do
             expect(pawn).to_not eql(nil)
         end
 
+        it "initializes with a name of 'Pawn' " do
+            pawn = Pawn.new("wht")
+            expect(pawn.name).to eql("Pawn")
+        end
+
         it "initializes with a square value of nil" do
             pawn = Pawn.new("wht")
             expect(pawn.square).to eql(nil)

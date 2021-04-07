@@ -7,6 +7,11 @@ describe Rook do
             expect(rook).to_not eql(nil)
         end
 
+        it "initializes with 'Rook' name value" do
+            rook = Rook.new("wht")
+            expect(rook.name).to eql("Rook")
+        end
+
         it "initializes with a square of nil" do
             rook = Rook.new("wht")
             expect(rook.square).to eql(nil)

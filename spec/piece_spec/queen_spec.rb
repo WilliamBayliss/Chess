@@ -7,6 +7,11 @@ describe Queen do
             expect(queen).to_not eql(nil)
         end
 
+        it "initializes with 'Queen' name value" do
+            queen = Queen.new("wht")
+            expect(queen.name).to eql("Queen")
+        end
+
         it "initializes with a square of nil" do
             queen = Queen.new("wht")
             expect(queen.square).to eql(nil)

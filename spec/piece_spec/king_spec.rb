@@ -7,6 +7,11 @@ describe King do
             expect(king).to_not eql(nil)
         end
 
+        it "initializes with 'King' name value" do
+            king = King.new("blk")
+            expect(king.name).to eql("King")
+        end
+
         it "initializes with a square of nil" do
             king = King.new("wht")
             expect(king.square).to eql(nil)

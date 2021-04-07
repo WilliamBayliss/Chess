@@ -7,6 +7,11 @@ describe Bishop do
             expect(bishop).to_not eql(nil)
         end
 
+        it "initializes with a name value of 'Bishop' " do
+            bishop = Bishop.new("wht")
+            expect(bishop.name).to eql("Bishop")
+        end
+
         it "initializes with a square value of nil" do
             bishop = Bishop.new("wht")
             expect(bishop.square).to eql(nil)
