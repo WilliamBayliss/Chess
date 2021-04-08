@@ -1945,6 +1945,64 @@ describe Board do
         end
     end
 
+    describe "#get_attack_path" do
+        it "returns an array of squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["A5"])
+
+            expect(board.get_attack_path(board["A5"].piece, board["A7"])).to include(board["A6"])
+        end
+        it "contains the right number of squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["C3"])
+            path = board.get_attack_path(board["C3"].piece, board["C7"])
+            expect(path.length).to eql(3)
+        end
+        it "contains a path when called on horizontal squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["A5"])
+            board.move_piece(board["D7"].piece, board["D5"])
+            path = board.get_attack_path(board["A5"].piece, board["D5"])
+            expect(path).to include(board["B5"])
+        end
+        it "contains a path when called on diagonal squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["B4"])
+            path = board.get_attack_path(board["B4"].piece, board["E7"])
+            expect(path).to include(board["D6"])
+        end
+        it "contains a path when called on diagonal squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["B4"])
+            path = board.get_attack_path(board["B4"].piece, board["E7"])
+            expect(path).to include(board["D6"])
+        end
+        it "contains a path when called on diagonal squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["B4"])
+            path = board.get_attack_path(board["B4"].piece, board["E1"])
+            expect(path).to include(board["D2"])
+        end
+    end
+
     describe "#board_scan" do
         it "creates a hash that isn't empty" do
             board = Board.new
