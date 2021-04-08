@@ -82,12 +82,17 @@ class Board
 
     def delete_illegal_moves
         @pieces.each do |piece|
+            illegal_moves = []
             piece.available_moves.each do |name, square|
                 unless legal_move?(piece, square)
-                    piece.available_moves.delete(square.name)
+                    piece.available_moves.delete(name)
                 end
             end
         end
+    end
+
+    def delete_moves_from_hash piece, illegal_moves
+        piece.available_moves.except!(*illegal_moves)
     end
 
     def place_piece piece, square
@@ -554,6 +559,25 @@ class Board
         end
         path.shift
         path.pop
+        path
+    end
+
+    def get_attack_path piece, square
+        path = []
+        if vertical?(piece.square, square)
+            column = get_column(square)
+            path = get_path_from_column(column, piece.square, square)
+        elsif horizontal?(piece.square, square)
+            row = get_row(square)
+            path = get_path_from_row(row, piece.square, square)
+        else
+            map = board_scan(square)
+            next_square = map[piece.square.name][:predecessor]
+            until next_square == square
+                path.append(next_square)
+                next_square = map[next_square.name][:predecessor]
+            end
+        end
         path
     end
 
