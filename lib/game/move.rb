@@ -20,9 +20,7 @@ class Move
         @opponent = player
     end
 
-    def select_piece
-        puts "Which piece would you like to move?"
-        coordinate = get_coordinate
+    def select_piece coordinate
         get_piece(@board[coordinate])
     end
 
@@ -34,10 +32,19 @@ class Move
         @pawn_jump = true
     end
 
-    def select_square
-        puts "Where are you going to move the piece?"
+    def select_piece
+        get_piece_puts
         coordinate = get_coordinate
-        until @board.legal_move?(piece.square, @board[coordinate])
+        until @board[coordinate].piece != nil
+            puts "Please select a piece on the board"
+            coordinate = get_coordinate
+        end
+    end
+
+    def select_square
+        get_square_puts
+        coordinate = get_coordinate
+        until @piece.available_moves.include?(coordinate)
             puts "That is an illegal move, please choose again"
             coordinate = get_coordinate
         end
@@ -55,7 +62,6 @@ class Move
     end
 
     def get_coordinate
-        puts "Please enter a coordinate to select a square"
         input = gets.chomp
         until valid_coordinate?(input)
             input = gets.chomp
@@ -76,10 +82,10 @@ class Move
 
     def get_piece_puts
         puts "Please enter the coordinate of the piece you'd like to select."
-        input = gets.chomp
-        until valid_coordinate?(input)
-            input = gets.chomp
-        end
+    end
+
+    def get_square_puts piece
+        puts "Please enter the coordinate to move #{piece.name} to."
     end
 
 end
