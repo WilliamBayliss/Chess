@@ -85,14 +85,11 @@ class Board
             illegal_moves = []
             piece.available_moves.each do |name, square|
                 unless legal_move?(piece, square)
-                    piece.available_moves.delete(name)
+                    illegal_moves.append(square)
                 end
             end
+            piece.update_move_list(illegal_moves)
         end
-    end
-
-    def delete_moves_from_hash piece, illegal_moves
-        piece.available_moves.except!(*illegal_moves)
     end
 
     def place_piece piece, square
