@@ -2373,4 +2373,73 @@ describe Board do
 
     end
 
+    describe "#get_attackers_and_paths" do
+        it "returns an array of arrays with 2 items each" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+
+            attackers = board.get_attackers_and_paths(board["E1"].piece)
+            expect(attackers[0].length).to eql(2)
+        end
+        it "returns an array of arrays with pieces and paths" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+
+            attackers = board.get_attackers_and_paths(board["E1"].piece)
+            expect(attackers[0]).to include(board["B4"].piece)
+        end
+        it "returns an array of arrays with pieces and paths where the paths contain squares" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+
+            attackers = board.get_attackers_and_paths(board["E1"].piece)
+            attack = attackers[0]
+            expect(attack[1]).to include(board["D2"])
+        end
+        it "returns an array with path length of correct size" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+
+            attackers = board.get_attackers_and_paths(board["E1"].piece)
+            attack = attackers[0]
+            expect(attack[1].length).to eql(2)
+        end
+    end
+
 end
