@@ -2373,6 +2373,64 @@ describe Board do
 
     end
 
+    describe "#checkmate" do
+        it "return false if the king can move out of check" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["D1"].piece, board["C1"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+            expect(board.checkmate?(board["E1"].piece)).to eql(false)
+        end
+        it "returns false if the attacking piece can be taken" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["A2"].piece, board["A3"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+            expect(board.checkmate?(board["E1"].piece)).to eql(false)
+        end
+        it "returns false if the attack path can be blocked by a move" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["C3"].piece, board["D5"])
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["F3"].piece, board["E5"])
+            board.move_piece(board["E5"].piece, board["C6"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["G5"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["B4"])
+            expect(board.checkmate?(board["E1"].piece)).to eql(false)
+        end
+        it "returns true if the king is in checkmate" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["F7"].piece, board["F6"])
+            board.move_piece(board["E2"].piece, board["E4"])
+            board.move_piece(board["G7"].piece, board["G5"])
+            board.move_piece(board["D1"].piece, board["H5"])
+            expect(board.checkmate?(board["E8"].piece)).to eql(true)
+
+        end
+    end
+
+
     describe "#get_attackers_and_paths" do
         it "returns an array of arrays with 2 items each" do
             board = Board.new
