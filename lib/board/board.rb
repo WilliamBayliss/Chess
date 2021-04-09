@@ -721,6 +721,11 @@ class Board
     def any_blockable_check? 
     end
 
-    def any_escape?
+    def any_escape? king
+        if king.available_moves.size == 0
+            false
+        else
+            true
+        end
     end
 end
