@@ -63,4 +63,46 @@ describe Piece do
             expect(piece.available_moves[square.name]).to eql(square)
         end
     end 
+
+    describe "#update_move_list" do
+        it "updates the @available_moves hash to exclude a key in arg array" do
+            piece = Piece.new("wht")
+            a1 = Square.new([[0,0], "A1"])
+            c1 = Square.new([[0,1], "C1"])        
+            d1 = Square.new([[0,2], "D1"])
+
+            piece.get_move(a1)
+            piece.get_move(c1)
+            piece.get_move(d1)
+            
+            illegal_moves = []
+            illegal_moves.append(d1)
+            piece.update_move_list(illegal_moves)
+            expect(piece.available_moves).to_not include(d1.name)
+
+        end
+
+        it "deletes all the squares in the given array" do
+            piece = Piece.new("wht")
+            a1 = Square.new([[0,0], "A1"])
+            c1 = Square.new([[0,1], "C1"])        
+            d1 = Square.new([[0,2], "D1"])
+            e1 = Square.new([[0,3], "E1"])
+
+
+            piece.get_move(a1)
+            piece.get_move(c1)
+            piece.get_move(d1)
+            
+            illegal_moves = []
+            illegal_moves.append(c1)
+            illegal_moves.append(d1)
+            illegal_moves.append(e1)
+
+
+            piece.update_move_list(illegal_moves)
+            expect(piece.available_moves.size).to eql(1)
+        end
+    
+    end
 end
