@@ -1945,6 +1945,49 @@ describe Board do
         end
     end
 
+    describe "#blockable_check?" do
+        it "returns true if the attack can be intercepted" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["A5"])
+            board.move_piece(board["A5"].piece, board["B6"])
+            board.move_piece(board["C7"].piece, board["C6"])
+
+            attack_path = board.get_attack_path(board["B6"].piece, board["B7"])
+
+            expect(board.blockable_check?(board["B6"].piece, attack_path)).to eql(true)
+        end
+
+        it "returns true if the attack path can be blocked" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["A5"])
+            board.move_piece(board["C7"].piece, board["C6"])
+
+            attack_path = board.get_attack_path(board["A5"].piece, board["B7"])
+
+        end
+
+        it "returns false if the attack cannot be blocked or intercepted" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["D2"].piece, board["D4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["D3"].piece, board["A3"])
+
+
+
+            attack_path = board.get_attack_path(board["A3"].piece, board["E7"])
+
+            expect(board.blockable_check?(board["A3"].piece, attack_path)).to eql(false)
+        end
+    end
+
     describe "#get_attack_path" do
         it "returns an array of squares" do
             board = Board.new
