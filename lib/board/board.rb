@@ -97,6 +97,18 @@ class Board
         square.set_piece(piece)
     end
 
+    def castle king, rook
+        if king.color == rook.color
+            king_square = king.square
+            rook_square = rook.square
+            place_piece(king, rook_square)
+            place_piece(rook, king_square)
+            true
+        else
+            false
+        end
+    end
+
     def place_pieces
         place_white_pieces
         place_white_pawns
