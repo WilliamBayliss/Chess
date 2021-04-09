@@ -97,6 +97,22 @@ class Board
         square.set_piece(piece)
     end
 
+    def castle? king, rook
+        if king.color == rook.color
+            if king.moved == false && rook.moved == false
+                if clear_path_horizontal?(king.square, rook.square)
+                    true
+                else
+                    false
+                end
+            else
+                false
+            end
+        else
+            false
+        end
+    end
+
     def castle king, rook
         if king.color == rook.color
             king_square = king.square
