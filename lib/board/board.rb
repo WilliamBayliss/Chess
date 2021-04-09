@@ -125,6 +125,23 @@ class Board
         end
     end
 
+    def safe_to_castle? king, rook
+        if under_attack?(rook, rook.square)
+            return false
+        else
+            row = get_row(king.square)
+            path = get_path_from_row(row, king.square, rook.square)
+            path.each do |square|
+                puts square.name
+                if under_attack?(king, square)
+                    return false
+                end
+            end
+            
+        end
+        true
+    end
+
     def place_pieces
         place_white_pieces
         place_white_pawns
@@ -508,6 +525,8 @@ class Board
         end
 
     end
+
+
 
     def clear_path_horizontal? start_square, end_square
         row = get_row(start_square)
