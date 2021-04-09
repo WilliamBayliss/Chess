@@ -562,6 +562,21 @@ class Board
         path
     end
 
+    def blockable_check? piece, attack_path
+        if under_attack?(piece, piece.square)
+            return true
+        else
+            attack_path.each do |square|
+                @pieces.each do |player_piece|
+                    if player_piece.available_moves.include?(square)
+                        return true
+                    end
+                end
+            end 
+        end
+        false
+    end
+
     def get_attack_path piece, square
         path = []
         if vertical?(piece.square, square)
