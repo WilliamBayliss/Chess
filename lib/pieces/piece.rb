@@ -25,4 +25,10 @@ class Piece
     def get_move square
         @available_moves[square.name] = square
     end
+
+    def update_move_list illegal_moves
+        illegal_moves.each do |square|
+            @available_moves.delete(square.name)
+        end
+    end
 end
