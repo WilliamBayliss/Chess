@@ -257,6 +257,45 @@ describe Board do
 
     end
 
+    describe "#castle" do
+        it "switches the king and the right side rook" do
+            board = Board.new
+            board.setup
+            board.castle(board["E1"].piece, board["H1"].piece)
+            expect(board["H1"].piece.name).to eql("King")
+        end
+        it "switches the right side rook and the king" do
+            board = Board.new
+            board.setup
+            board.castle(board["E1"].piece, board["H1"].piece)
+            expect(board["E1"].piece.name).to eql("Rook")
+        end
+        it "switches the left side rook and the king" do
+            board = Board.new
+            board.setup
+            board.castle(board["E1"].piece, board["A1"].piece)
+            expect(board["E1"].piece.name).to eql("Rook")
+        end
+        it "switches the king and the right side rook" do
+            board = Board.new
+            board.setup
+            board.castle(board["E1"].piece, board["A1"].piece)
+            expect(board["A1"].piece.name).to eql("King")
+        end
+        it "returns true if it executes" do
+            board = Board.new
+            board.setup
+            expect(board.castle(board["E1"].piece, board["H1"].piece)).to eql(true)
+            
+        end
+        it "returns false if the king and rook are not the same color" do
+            board = Board.new
+            board.setup
+            expect(board.castle(board["E1"].piece, board["H8"].piece)).to eql(false)
+            
+        end
+    end
+
     describe "#place_pieces" do
         it "adds all pieces to @pieces array" do
             board = Board.new
