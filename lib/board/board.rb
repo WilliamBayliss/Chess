@@ -101,7 +101,11 @@ class Board
         if king.color == rook.color
             if king.moved == false && rook.moved == false
                 if clear_path_horizontal?(king.square, rook.square)
-                    true
+                    if safe_to_castle?(king, rook)
+                        true
+                    else
+                        false
+                    end
                 else
                     false
                 end
@@ -132,7 +136,6 @@ class Board
             row = get_row(king.square)
             path = get_path_from_row(row, king.square, rook.square)
             path.each do |square|
-                puts square.name
                 if under_attack?(king, square)
                     return false
                 end
