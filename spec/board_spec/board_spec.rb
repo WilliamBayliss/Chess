@@ -300,34 +300,52 @@ describe Board do
         it "switches the king and the right side rook" do
             board = Board.new
             board.setup
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["E2"].piece, board["E3"])
+            board.move_piece(board["F1"].piece, board["E2"])
             board.castle(board["E1"].piece, board["H1"].piece)
             expect(board["H1"].piece.name).to eql("King")
         end
         it "switches the right side rook and the king" do
             board = Board.new
-            board.setup
+            board.setup           
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["E2"].piece, board["E3"])
+            board.move_piece(board["F1"].piece, board["E2"])
             board.castle(board["E1"].piece, board["H1"].piece)
             expect(board["E1"].piece.name).to eql("Rook")
         end
         it "switches the left side rook and the king" do
             board = Board.new
             board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["F4"])
+            board.move_piece(board["D1"].piece, board["D2"])
+
             board.castle(board["E1"].piece, board["A1"].piece)
             expect(board["E1"].piece.name).to eql("Rook")
         end
-        it "switches the king and the right side rook" do
+        it "switches the king and the left side rook" do
             board = Board.new
             board.setup
+            board.move_piece(board["B1"].piece, board["C3"])
+            board.move_piece(board["D2"].piece, board["D3"])
+            board.move_piece(board["C1"].piece, board["F4"])
+            board.move_piece(board["D1"].piece, board["D2"])
             board.castle(board["E1"].piece, board["A1"].piece)
             expect(board["A1"].piece.name).to eql("King")
         end
         it "returns true if it executes" do
             board = Board.new
             board.setup
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["E2"].piece, board["E3"])
+            board.move_piece(board["F1"].piece, board["E2"])
             expect(board.castle(board["E1"].piece, board["H1"].piece)).to eql(true)
             
         end
-        it "returns false if the king and rook are not the same color" do
+        it "returns false if castle? not legal" do
             board = Board.new
             board.setup
             expect(board.castle(board["E1"].piece, board["H8"].piece)).to eql(false)
