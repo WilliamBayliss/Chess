@@ -349,8 +349,41 @@ describe Board do
             board = Board.new
             board.setup
             expect(board.castle(board["E1"].piece, board["H8"].piece)).to eql(false)
-            
         end
+    end
+
+    describe "#safe_to_castle?" do
+        it "returns true if no square on the path is under attack" do
+            board = Board.new
+            board.setup
+            row = board.get_row(board["E1"])
+            path = board.get_path_from_row(row, board["E1"], board["H1"])
+            expect(board.safe_to_castle?(board["E1"].piece, board["H1"].piece)).to eql(true)
+        end
+        it "returns false if any square on the path is under attack" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B8"].piece, board["C6"])
+            board.move_piece(board["C6"].piece, board["A5"])
+            board.move_piece(board["A5"].piece, board["B3"])
+
+            expect(board.safe_to_castle?(board["E1"].piece, board["A1"].piece)).to eql(false)
+        end
+
+        it "returns false if the rook is under attack" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B2"].piece, board["B4"])
+            board.move_piece(board["E7"].piece, board["E6"])
+            board.move_piece(board["F8"].piece, board["E7"])
+            board.move_piece(board["E7"].piece, board["F6"])
+
+
+
+            board.print_board
+            expect(board.safe_to_castle?(board["E1"].piece, board["A1"].piece)).to eql(false)
+        end
+
     end
 
     describe "#place_pieces" do
@@ -1824,6 +1857,7 @@ describe Board do
             )).to eql(true)
         end
     end
+
 
     describe "#clear_path_horizontal?" do
         it "returns false if there is a piece" do
