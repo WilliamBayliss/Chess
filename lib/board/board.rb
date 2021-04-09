@@ -114,7 +114,7 @@ class Board
     end
 
     def castle king, rook
-        if king.color == rook.color
+        if castle?(king, rook)
             king_square = king.square
             rook_square = rook.square
             place_piece(king, rook_square)
