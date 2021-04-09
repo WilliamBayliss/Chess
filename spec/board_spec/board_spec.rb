@@ -257,6 +257,45 @@ describe Board do
 
     end
 
+    describe "#castle?" do
+        it "returns false if the path between king and rook is not clear" do
+            board = Board.new
+            board.setup
+            expect(board.castle?(board["E1"].piece, board["H1"].piece)).to eql(false)
+        end
+
+        it "returns false if the king has been moved" do
+            board = Board.new
+            board.setup
+            board["E1"].piece.set_moved
+            expect(board.castle?(board["E1"].piece, board["H1"].piece)).to eql(false)
+        end
+        it "returns false if the rook has been moved" do
+            board = Board.new
+            board.setup
+            board["H1"].piece.set_moved
+            expect(board.castle?(board["E1"].piece, board["H1"].piece)).to eql(false)
+        end
+        it "returns false if the pieces are different colors" do
+            board = Board.new
+            board.setup
+            board["H1"].clear_square
+            rook = Rook.new("blk")
+            board.place_piece(rook, board["H1"])
+            expect(board.castle?(board["E1"].piece, board["H1"].piece)).to eql(false)
+        end
+
+        it "returns true if all conditions for castling are met" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["G1"].piece, board["F3"])
+            board.move_piece(board["E2"].piece, board["E3"])
+            board.move_piece(board["F1"].piece, board["E2"])
+            expect(board.castle?(board["E1"].piece, board["H1"].piece)).to eql(true)
+        end
+
+    end
+
     describe "#castle" do
         it "switches the king and the right side rook" do
             board = Board.new
