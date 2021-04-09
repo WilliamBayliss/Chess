@@ -350,6 +350,24 @@ describe Board do
             board.setup
             expect(board.castle(board["E1"].piece, board["H8"].piece)).to eql(false)
         end
+        it "returns false if the rook is under attack" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B2"].piece, board["B4"])
+            board.move_piece(board["E7"].piece, board["E6"])
+            board.move_piece(board["F8"].piece, board["E7"])
+            board.move_piece(board["E7"].piece, board["F6"])
+            expect(board.castle?(board["E1"].piece, board["A1"].piece)).to eql(false)
+        end
+        it "returns false if a square between the king and rook is under attack" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["B8"].piece, board["C6"])
+            board.move_piece(board["C6"].piece, board["A5"])
+            board.move_piece(board["A5"].piece, board["B3"])
+
+            expect(board.castle?(board["E1"].piece, board["A1"].piece)).to eql(false)
+        end
     end
 
     describe "#safe_to_castle?" do
@@ -377,10 +395,6 @@ describe Board do
             board.move_piece(board["E7"].piece, board["E6"])
             board.move_piece(board["F8"].piece, board["E7"])
             board.move_piece(board["E7"].piece, board["F6"])
-
-
-
-            board.print_board
             expect(board.safe_to_castle?(board["E1"].piece, board["A1"].piece)).to eql(false)
         end
 
