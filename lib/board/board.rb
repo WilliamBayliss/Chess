@@ -701,4 +701,26 @@ class Board
             false
         end
     end
+
+    def checkmate?
+
+    end
+
+    def get_attackers_and_paths piece
+        attackers_array = []
+
+        attackers = attacks_scan(piece, piece.square)
+
+        attackers.each do |attack|
+            path = get_attack_path(attack, piece.square)
+            attackers_array.append([attack, path])
+        end
+        attackers_array
+    end
+
+    def any_blockable_check? 
+    end
+
+    def any_escape?
+    end
 end
