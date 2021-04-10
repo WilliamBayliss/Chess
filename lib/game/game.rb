@@ -25,6 +25,16 @@ class Game
         @board.setup
     end
 
+    def set_player_kings player_one, player_two
+        if player_one.color == 0
+            player_one.set_king(@board["E1"].piece)
+            player_two.set_king(@board["E8"].piece)
+        elsif player_one.color == 1
+            player_one.set_king(@board["E8"].piece)
+            player_two.set_king(@board["E1"].piece)
+        end
+    end
+
     def player_move player
         move = Move.new(player)
         move.get_board(@board)
