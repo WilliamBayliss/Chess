@@ -36,6 +36,44 @@ describe Game do
 
     end
 
+    describe "#set_player_kings" do
+        it "saves the correct king when player_one.color is white" do
+           player_one = Player.new("Will", 0)
+           player_two = Player.new("JP", 1)
+           game = Game.new
+           game.create_board
+           game.set_player_kings(player_one, player_two)
+           expect(player_one.king).to eql(game.board["E1"].piece) 
+        end
+
+        it "saves the correct king for when player_two.color is black" do
+            player_one = Player.new("Will", 0)
+            player_two = Player.new("JP", 1)
+            game = Game.new
+            game.create_board
+            game.set_player_kings(player_one, player_two)
+            expect(player_two.king).to eql(game.board["E8"].piece) 
+        end
+
+        it "saves the correct king when player_one.color is black" do
+            player_one = Player.new("Will", 1)
+            player_two = Player.new("JP", 0)
+            game = Game.new
+            game.create_board
+            game.set_player_kings(player_one, player_two)
+            expect(player_one.king).to eql(game.board["E8"].piece) 
+        end
+
+        it "saves the correct king for when player_two.color is white" do
+            player_one = Player.new("Will", 1)
+            player_two = Player.new("JP", 0)
+            game = Game.new
+            game.create_board
+            game.set_player_kings(player_one, player_two)
+            expect(player_two.king).to eql(game.board["E1"].piece) 
+        end
+    end
+
 
     describe "#record_move" do
         it "adds a move to the @move_history" do
