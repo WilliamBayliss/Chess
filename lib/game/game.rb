@@ -4,9 +4,11 @@ Dir["./lib/board/*.rb"].each {|file| require file }
 require './lib/game/move.rb'
 
 class Game
-    attr_accessor :board, :moves_history
+    attr_accessor :board,:player_one, :player_two, :moves_history
     def initialize
         @board = nil
+        @player_one = nil
+        @player_two = nil
         @moves_history = []
     end
 
