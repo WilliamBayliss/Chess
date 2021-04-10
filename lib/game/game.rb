@@ -12,12 +12,28 @@ class Game
         @moves_history = []
     end
 
+    def create_both_players
+        create_player_one
+        create_player_two(@player_one)
+    end
+
     def create_player_one
         get_player_one_name_puts
         name = gets_player_name
         get_player_color_puts
         color = gets_player_color
         @player_one = create_player(name, color)
+    end
+
+    def create_player_two player_one
+        get_player_two_name_puts
+        name = gets_player_name
+        if player_one.color == 0
+            color = 1
+        elsif player_one.color == 1
+            color = 0
+        end
+        @player_two = create_player(name, color)
     end
 
     def create_player name, color
@@ -36,7 +52,7 @@ class Game
             puts "Invalid input, please enter 1 or 2 for white or black"
             input = gets.chomp.to_i
         end
-        input - 1
+        return input - 1
     end
 
     def create_computer_player color
@@ -154,4 +170,4 @@ class Game
 end
 
 game = Game.new
-game.create_player_one
+game.create_both_players
