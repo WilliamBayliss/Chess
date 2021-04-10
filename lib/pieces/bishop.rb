@@ -4,9 +4,9 @@ class Bishop < Piece
     def initialize color
         @name = "Bishop"
         super(color)
-        if @color == "wht"
+        if @color == 0
             set_symbol("♗")
-        elsif @color == "blk"
+        elsif @color == 1
             set_symbol("♝")
         end
     end
