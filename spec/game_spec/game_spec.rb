@@ -5,6 +5,14 @@ describe Game do
             game = Game.new
             expect(game).to_not eql(nil)
         end
+        it "initializes player_one to nil" do
+            game = Game.new
+            expect(game.player_one).to eql(nil)
+        end
+        it "initializes player_two to nil" do
+            game = Game.new
+            expect(game.player_two).to eql(nil)
+        end
 
         it "initializes moves_history to empty array" do
             game = Game.new
