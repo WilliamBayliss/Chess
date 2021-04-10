@@ -231,7 +231,7 @@ describe Board do
         it "removes a move that is no longer legal from a piece's available_moves list" do
             board = Board.new
             board.setup
-            bishop = Bishop.new("wht")
+            bishop = Bishop.new(0)
             board.place_piece(bishop, board["A3"])
             board.delete_illegal_moves
             expect(board["A2"].piece.available_moves).to_not include(board["A3"].name)
@@ -722,6 +722,18 @@ describe Board do
                 board["E2"].piece, 
                 board["E3"]
                 )).to eql(false)
+        end
+
+        it "won't let a king take a piece and then still be in check" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["F8"].piece, board["C5"])
+            board.move_piece(board["E1"].piece, board["E2"])
+            board.move_piece(board["D8"].piece, board["G5"])
+            board.move_piece(board["G5"].piece, board["E3"])
+            expect(board.move_piece(board["E2"].piece, board["E3"])).to eql(false)
         end
     end
 
@@ -1366,31 +1378,27 @@ describe Board do
     describe "#pawn_direction?" do
         it "returns false if a white pawn is trying to move backwards" do
             board = Board.new
-            board.create_board(board.board_array)
-            pawn = Pawn.new("wht")
-            board.place_piece(pawn, board["A5"])
+            board.setup
+            board.move_piece(board["A2"].piece, board["A4"])
             expect(board.pawn_direction?(
-                board["A5"], 
-                board["A4"]
+                board["A4"], 
+                board["A3"]
                 )).to eql(false)
         end
 
         it "returns true if a white pawn is moving forwards" do
             board = Board.new
-            board.create_board(board.board_array)
-            pawn = Pawn.new("wht")
-            board.place_piece(pawn, board["A5"])
+            board.setup
             expect(board.pawn_direction?(
-                board["A5"], 
-                board["A6"]
+                board["A2"], 
+                board["A3"]
                 )).to eql(true)
         end
 
         it "returns false if a black pawn is trying to move backwards" do
             board = Board.new
-            board.create_board(board.board_array)
-            pawn = Pawn.new("blk")
-            board.place_piece(pawn, board["A5"])
+            board.setup
+            board.move_piece(board["A7"].piece, board["A5"])
             expect(board.pawn_move?(
                 board["A5"], 
                 board["A6"]
@@ -1399,12 +1407,10 @@ describe Board do
 
         it "returns true if a black pawn is moving forwards" do
             board = Board.new
-            board.create_board(board.board_array)
-            pawn = Pawn.new("blk")
-            board.place_piece(pawn, board["A5"])
+            board.setup
             expect(board.pawn_move?(
-                board["A5"], 
-                board["A4"]
+                board["A7"], 
+                board["A6"]
                 )).to eql(true)
         end
     end
@@ -1412,10 +1418,7 @@ describe Board do
     describe "#pawn_move" do
         it "returns false if a square is neither vertical nor adjacent" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             expect(board.pawn_move?(
                 board["B2"], 
                 board["A3"]
@@ -1505,23 +1508,20 @@ describe Board do
 
         it "returns true if a square is vertical and adjacent, and a correct move for a black pawn" do
             board = Board.new
-            board.create_board(board.board_array)
-            pawn = Pawn.new("blk")
-            board.place_piece(pawn, board["A3"])
+            board.setup
             expect(board.pawn_move?(
-                board["A3"], 
-                board["A2"]
+                board["A7"], 
+                board["A5"]
                 )).to eql(true)
         end
 
         it "returns false if a square is vertical and adjacent, but an illegal move for a black pawn" do
             board = Board.new
-            board.create_board(board.board_array)
-            pawn = Pawn.new("blk")
-            board.place_piece(pawn, board["A2"])
+            board.setup
+            board.move_piece(board["A7"].piece, board["A6"])
             expect(board.pawn_move?(
-                board["A2"], 
-                board["A3"]
+                board["A6"], 
+                board["A7"]
                 )).to eql(false)
         end
     end
@@ -1709,25 +1709,22 @@ describe Board do
 
         it "returns false for an illegal king move" do
             board = Board.new
-            board.create_board(board.board_array)
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
 
-            piece = King.new("wht")
-            piece.set_square(board["A5"])
             expect(board.legal_move?(
-                piece,
-                board["A7"]
+                board["E1"].piece,
+                board["E3"]
             )).to eql(false)
         end
 
-        it "returne true for a legal king move" do
+        it "returns true for a legal king move" do
             board = Board.new
-            board.create_board(board.board_array)
-
-            piece = King.new("wht")
-            piece.set_square(board["A5"])
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
             expect(board.legal_move?(
-                piece,
-                board["A6"]
+                board["E1"].piece,
+                board["E2"]
             )).to eql(true)
         end
 
@@ -2535,5 +2532,4 @@ describe Board do
             expect(board.any_escape?(board["E1"].piece)).to eql(true)
         end
     end
-
 end

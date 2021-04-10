@@ -45,14 +45,14 @@ describe Square do
     describe "#set_piece" do
         it "updates the square's piece value" do
             square = Square.new([[0,0], "A1"])
-            pawn = Pawn.new("blk")
+            pawn = Pawn.new(0)
             square.set_piece(pawn)
             expect(square.piece).to eql(pawn)
         end
 
         it "updates the square's symbol value" do
             square = Square.new([[0,0], "A1"])
-            pawn = Pawn.new("blk")
+            pawn = Pawn.new(1)
             square.set_piece(pawn)
             expect(square.symbol).to eql("♟︎")
         end
