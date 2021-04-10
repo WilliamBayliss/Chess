@@ -168,6 +168,3 @@ class Game
     end
     
 end
-
-game = Game.new
-game.create_both_players
