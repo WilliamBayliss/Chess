@@ -154,83 +154,83 @@ class Board
 
 
     def place_white_pieces
-        rook_one = Rook.new("wht")
+        rook_one = Rook.new(0)
         place_piece(rook_one, @board["A1"])
-        knight_one = Knight.new("wht")
+        knight_one = Knight.new(0)
         place_piece(knight_one, @board["B1"])
-        bishop_one = Bishop.new("wht")
+        bishop_one = Bishop.new(0)
         place_piece(bishop_one, @board["C1"])
-        queen = Queen.new("wht")
+        queen = Queen.new(0)
         place_piece(queen, @board["D1"])
-        king = King.new("wht")
+        king = King.new(0)
         place_piece(king, @board["E1"])
-        bishop_two = Bishop.new("wht")
+        bishop_two = Bishop.new(0)
         place_piece(bishop_two, @board["F1"])
-        knight_two = Knight.new("wht")
+        knight_two = Knight.new(0)
         place_piece(knight_two, @board["G1"])
-        rook_two = Rook.new("wht")
+        rook_two = Rook.new(0)
         place_piece(rook_two, @board["H1"])
 
         save_piece([rook_one, knight_one, bishop_one, queen, king, bishop_two, knight_two, rook_two])
     end
 
     def place_white_pawns
-        pawn_one = Pawn.new("wht")
+        pawn_one = Pawn.new(0)
         place_piece(pawn_one, @board["A2"])
-        pawn_two = Pawn.new("wht")
+        pawn_two = Pawn.new(0)
         place_piece(pawn_two, @board["B2"])
-        pawn_three = Pawn.new("wht")
+        pawn_three = Pawn.new(0)
         place_piece(pawn_three, @board["C2"])
-        pawn_four = Pawn.new("wht")
+        pawn_four = Pawn.new(0)
         place_piece(pawn_four, @board["D2"])
-        pawn_five = Pawn.new("wht")
+        pawn_five = Pawn.new(0)
         place_piece(pawn_five, @board["E2"])
-        pawn_six = Pawn.new("wht")
+        pawn_six = Pawn.new(0)
         place_piece(pawn_six, @board["F2"])
-        pawn_seven = Pawn.new("wht")
+        pawn_seven = Pawn.new(0)
         place_piece(pawn_seven, @board["G2"])
-        pawn_eight = Pawn.new("wht")
+        pawn_eight = Pawn.new(0)
         place_piece(pawn_eight, @board["H2"])
         save_piece([pawn_one, pawn_two, pawn_three, pawn_four, pawn_five, pawn_six, pawn_seven, pawn_eight])
     end
 
     def place_black_pieces
-        rook_one = Rook.new("blk")
+        rook_one = Rook.new(1)
         place_piece(rook_one, @board["A8"])
-        knight_one = Knight.new("blk")
+        knight_one = Knight.new(1)
         place_piece(knight_one, @board["B8"])
-        bishop_one = Bishop.new("blk")
+        bishop_one = Bishop.new(1)
         place_piece(bishop_one, @board["C8"])
-        queen = Queen.new("blk")
+        queen = Queen.new(1)
         place_piece(queen, @board["D8"])
-        king = King.new("blk")
+        king = King.new(1)
         place_piece(king, @board["E8"])
-        bishop_two = Bishop.new("blk")
+        bishop_two = Bishop.new(1)
         place_piece(bishop_two, @board["F8"])
-        knight_two = Knight.new("blk")
+        knight_two = Knight.new(1)
         place_piece(knight_two, @board["G8"])
-        rook_two = Rook.new("blk")
+        rook_two = Rook.new(1)
         place_piece(rook_two, @board["H8"])
         save_piece([rook_one, knight_one, bishop_one, queen, king, bishop_two, knight_two, rook_two])
 
     end
 
     def place_black_pawns
-        pawn_one = Pawn.new("blk")
+        pawn_one = Pawn.new(1)
         place_piece(pawn_one, @board["A7"])
-        pawn_two = Pawn.new("blk")
+        pawn_two = Pawn.new(1)
         place_piece(pawn_two, @board["B7"])
-        pawn_three = Pawn.new("blk")
+        pawn_three = Pawn.new(1)
         place_piece(pawn_three, @board["C7"])
-        pawn_four = Pawn.new("blk")
+        pawn_four = Pawn.new(1)
         place_piece(pawn_four, @board["D7"])
-        pawn_five = Pawn.new("blk")
+        pawn_five = Pawn.new(1)
         place_piece(pawn_five, @board["E7"])
-        pawn_six = Pawn.new("blk")
+        pawn_six = Pawn.new(1)
         place_piece(pawn_six, @board["F7"])
-        pawn_seven = Pawn.new("blk")
+        pawn_seven = Pawn.new(1)
         place_piece(pawn_seven, @board["G7"])
-        pawn_eight = Pawn.new("blk")
+        pawn_eight = Pawn.new(1)
         place_piece(pawn_eight, @board["H7"])
         save_piece([pawn_one, pawn_two, pawn_three, pawn_four, pawn_five, pawn_six, pawn_seven, pawn_eight])
     end
@@ -727,9 +727,6 @@ class Board
             attackers_array.append([attack, path])
         end
         attackers_array
-    end
-
-    def any_blockable_check? 
     end
 
     def any_escape? king
