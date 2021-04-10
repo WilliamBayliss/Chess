@@ -12,6 +12,12 @@ class Game
         @moves_history = []
     end
 
+    def initial_setup
+        create_board
+        create_both_players
+        set_player_kings(@player_one, @player_two)
+    end
+
     def create_both_players
         create_player_one
         create_player_two(@player_one)
