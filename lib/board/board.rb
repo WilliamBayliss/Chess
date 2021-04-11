@@ -710,15 +710,19 @@ class Board
     end
 
     def checkmate? king
-        if any_escape?(king)
-            false
-        else
-            attacks_array = get_attackers_and_paths(king)
-            attacks_array.each do |attack_data|
-                unless blockable_check?(attack_data[0], attack_data[1])
-                    return true
+        if check?(king)
+            if any_escape?(king)
+                false
+            else
+                attacks_array = get_attackers_and_paths(king)
+                attacks_array.each do |attack_data|
+                    unless blockable_check?(attack_data[0], attack_data[1])
+                        return true
+                    end
                 end
+                false
             end
+        else
             false
         end
 
