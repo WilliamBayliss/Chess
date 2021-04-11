@@ -21,8 +21,11 @@ class Game
 
     def run_game
         until @board.checkmate?(@player_one.king) || @board.checkmate?(@player_two.king)
-            player_move(@player_one)
-            player_move(@player_two)
+            if @moves_history[-1].player == @player_two
+                player_move(@player_one)
+            elsif @moves_history[-1].player == @player_one
+                player_move(@player_two)
+            end
         end
         @board.print_board
         if @board.checkmate?(@player_one.king)
