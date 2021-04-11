@@ -1,0 +1,1310 @@
+--- !ruby/object:Game
+board: &98 !ruby/object:Board
+  board:
+    A1: &1 !ruby/object:Square
+      coordinate:
+      - 1
+      - 1
+      name: A1
+      neighbours:
+      - *1
+      - &2 !ruby/object:Square
+        coordinate:
+        - 1
+        - 2
+        name: B1
+        neighbours:
+        - *1
+        - *2
+        - &3 !ruby/object:Square
+          coordinate:
+          - 1
+          - 3
+          name: C1
+          neighbours:
+          - *2
+          - *3
+          - &4 !ruby/object:Square
+            coordinate:
+            - 1
+            - 4
+            name: D1
+            neighbours:
+            - *3
+            - *4
+            - &5 !ruby/object:Square
+              coordinate:
+              - 1
+              - 5
+              name: E1
+              neighbours:
+              - *4
+              - *5
+              - &6 !ruby/object:Square
+                coordinate:
+                - 1
+                - 6
+                name: F1
+                neighbours:
+                - *5
+                - *6
+                - &7 !ruby/object:Square
+                  coordinate:
+                  - 1
+                  - 7
+                  name: G1
+                  neighbours:
+                  - *6
+                  - *7
+                  - &8 !ruby/object:Square
+                    coordinate:
+                    - 1
+                    - 8
+                    name: H1
+                    neighbours:
+                    - *7
+                    - *8
+                    - &20 !ruby/object:Square
+                      coordinate:
+                      - 2
+                      - 7
+                      name: G2
+                      neighbours:
+                      - *6
+                      - *7
+                      - *8
+                      - &18 !ruby/object:Square
+                        coordinate:
+                        - 2
+                        - 6
+                        name: F2
+                        neighbours:
+                        - *5
+                        - *6
+                        - *7
+                        - &16 !ruby/object:Square
+                          coordinate:
+                          - 2
+                          - 5
+                          name: E2
+                          neighbours:
+                          - *4
+                          - *5
+                          - *6
+                          - &14 !ruby/object:Square
+                            coordinate:
+                            - 2
+                            - 4
+                            name: D2
+                            neighbours:
+                            - *3
+                            - *4
+                            - *5
+                            - &12 !ruby/object:Square
+                              coordinate:
+                              - 2
+                              - 3
+                              name: C2
+                              neighbours:
+                              - *2
+                              - *3
+                              - *4
+                              - &10 !ruby/object:Square
+                                coordinate:
+                                - 2
+                                - 2
+                                name: B2
+                                neighbours:
+                                - *1
+                                - *2
+                                - *3
+                                - &9 !ruby/object:Square
+                                  coordinate:
+                                  - 2
+                                  - 1
+                                  name: A2
+                                  neighbours:
+                                  - *1
+                                  - *2
+                                  - *9
+                                  - *10
+                                  - &11 !ruby/object:Square
+                                    coordinate:
+                                    - 3
+                                    - 1
+                                    name: A3
+                                    neighbours:
+                                    - *9
+                                    - *10
+                                    - *11
+                                    - &13 !ruby/object:Square
+                                      coordinate:
+                                      - 3
+                                      - 2
+                                      name: B3
+                                      neighbours:
+                                      - *9
+                                      - *10
+                                      - *12
+                                      - *11
+                                      - *13
+                                      - &15 !ruby/object:Square
+                                        coordinate:
+                                        - 3
+                                        - 3
+                                        name: C3
+                                        neighbours:
+                                        - *10
+                                        - *12
+                                        - *14
+                                        - *13
+                                        - *15
+                                        - &17 !ruby/object:Square
+                                          coordinate:
+                                          - 3
+                                          - 4
+                                          name: D3
+                                          neighbours:
+                                          - *12
+                                          - *14
+                                          - *16
+                                          - *15
+                                          - *17
+                                          - &19 !ruby/object:Square
+                                            coordinate:
+                                            - 3
+                                            - 5
+                                            name: E3
+                                            neighbours:
+                                            - *14
+                                            - *16
+                                            - *18
+                                            - *17
+                                            - *19
+                                            - &21 !ruby/object:Square
+                                              coordinate:
+                                              - 3
+                                              - 6
+                                              name: F3
+                                              neighbours:
+                                              - *16
+                                              - *18
+                                              - *20
+                                              - *19
+                                              - *21
+                                              - &23 !ruby/object:Square
+                                                coordinate:
+                                                - 3
+                                                - 7
+                                                name: G3
+                                                neighbours:
+                                                - *18
+                                                - *20
+                                                - &22 !ruby/object:Square
+                                                  coordinate:
+                                                  - 2
+                                                  - 8
+                                                  name: H2
+                                                  neighbours:
+                                                  - *7
+                                                  - *8
+                                                  - *20
+                                                  - *22
+                                                  - *23
+                                                  - &24 !ruby/object:Square
+                                                    coordinate:
+                                                    - 3
+                                                    - 8
+                                                    name: H3
+                                                    neighbours:
+                                                    - *20
+                                                    - *22
+                                                    - *23
+                                                    - *24
+                                                    - &36 !ruby/object:Square
+                                                      coordinate:
+                                                      - 4
+                                                      - 7
+                                                      name: G4
+                                                      neighbours:
+                                                      - *21
+                                                      - *23
+                                                      - *24
+                                                      - &34 !ruby/object:Square
+                                                        coordinate:
+                                                        - 4
+                                                        - 6
+                                                        name: F4
+                                                        neighbours:
+                                                        - *19
+                                                        - *21
+                                                        - *23
+                                                        - &32 !ruby/object:Square
+                                                          coordinate:
+                                                          - 4
+                                                          - 5
+                                                          name: E4
+                                                          neighbours:
+                                                          - *17
+                                                          - *19
+                                                          - *21
+                                                          - &30 !ruby/object:Square
+                                                            coordinate:
+                                                            - 4
+                                                            - 4
+                                                            name: D4
+                                                            neighbours:
+                                                            - *15
+                                                            - *17
+                                                            - *19
+                                                            - &28 !ruby/object:Square
+                                                              coordinate:
+                                                              - 4
+                                                              - 3
+                                                              name: C4
+                                                              neighbours:
+                                                              - *13
+                                                              - *15
+                                                              - *17
+                                                              - &26 !ruby/object:Square
+                                                                coordinate:
+                                                                - 4
+                                                                - 2
+                                                                name: B4
+                                                                neighbours:
+                                                                - *11
+                                                                - *13
+                                                                - *15
+                                                                - &25 !ruby/object:Square
+                                                                  coordinate:
+                                                                  - 4
+                                                                  - 1
+                                                                  name: A4
+                                                                  neighbours:
+                                                                  - *11
+                                                                  - *13
+                                                                  - *25
+                                                                  - *26
+                                                                  - &27 !ruby/object:Square
+                                                                    coordinate:
+                                                                    - 5
+                                                                    - 1
+                                                                    name: A5
+                                                                    neighbours:
+                                                                    - *25
+                                                                    - *26
+                                                                    - *27
+                                                                    - &29 !ruby/object:Square
+                                                                      coordinate:
+                                                                      - 5
+                                                                      - 2
+                                                                      name: B5
+                                                                      neighbours:
+                                                                      - *25
+                                                                      - *26
+                                                                      - *28
+                                                                      - *27
+                                                                      - *29
+                                                                      - &31 !ruby/object:Square
+                                                                        coordinate:
+                                                                        - 5
+                                                                        - 3
+                                                                        name: C5
+                                                                        neighbours:
+                                                                        - *26
+                                                                        - *28
+                                                                        - *30
+                                                                        - *29
+                                                                        - *31
+                                                                        - &33 !ruby/object:Square
+                                                                          coordinate:
+                                                                          - 5
+                                                                          - 4
+                                                                          name: D5
+                                                                          neighbours:
+                                                                          - *28
+                                                                          - *30
+                                                                          - *32
+                                                                          - *31
+                                                                          - *33
+                                                                          - &35 !ruby/object:Square
+                                                                            coordinate:
+                                                                            - 5
+                                                                            - 5
+                                                                            name: E5
+                                                                            neighbours:
+                                                                            - *30
+                                                                            - *32
+                                                                            - *34
+                                                                            - *33
+                                                                            - *35
+                                                                            - &37 !ruby/object:Square
+                                                                              coordinate:
+                                                                              - 5
+                                                                              - 6
+                                                                              name: F5
+                                                                              neighbours:
+                                                                              - *32
+                                                                              - *34
+                                                                              - *36
+                                                                              - *35
+                                                                              - *37
+                                                                              - &39 !ruby/object:Square
+                                                                                coordinate:
+                                                                                - 5
+                                                                                - 7
+                                                                                name: G5
+                                                                                neighbours:
+                                                                                - *34
+                                                                                - *36
+                                                                                - &38 !ruby/object:Square
+                                                                                  coordinate:
+                                                                                  - 4
+                                                                                  - 8
+                                                                                  name: H4
+                                                                                  neighbours:
+                                                                                  - *23
+                                                                                  - *24
+                                                                                  - *36
+                                                                                  - *38
+                                                                                  - *39
+                                                                                  - &40 !ruby/object:Square
+                                                                                    coordinate:
+                                                                                    - 5
+                                                                                    - 8
+                                                                                    name: H5
+                                                                                    neighbours:
+                                                                                    - *36
+                                                                                    - *38
+                                                                                    - *39
+                                                                                    - *40
+                                                                                    - &52 !ruby/object:Square
+                                                                                      coordinate:
+                                                                                      - 6
+                                                                                      - 7
+                                                                                      name: G6
+                                                                                      neighbours:
+                                                                                      - *37
+                                                                                      - *39
+                                                                                      - *40
+                                                                                      - &50 !ruby/object:Square
+                                                                                        coordinate:
+                                                                                        - 6
+                                                                                        - 6
+                                                                                        name: F6
+                                                                                        neighbours:
+                                                                                        - *35
+                                                                                        - *37
+                                                                                        - *39
+                                                                                        - &48 !ruby/object:Square
+                                                                                          coordinate:
+                                                                                          - 6
+                                                                                          - 5
+                                                                                          name: E6
+                                                                                          neighbours:
+                                                                                          - *33
+                                                                                          - *35
+                                                                                          - *37
+                                                                                          - &46 !ruby/object:Square
+                                                                                            coordinate:
+                                                                                            - 6
+                                                                                            - 4
+                                                                                            name: D6
+                                                                                            neighbours:
+                                                                                            - *31
+                                                                                            - *33
+                                                                                            - *35
+                                                                                            - &44 !ruby/object:Square
+                                                                                              coordinate:
+                                                                                              - 6
+                                                                                              - 3
+                                                                                              name: C6
+                                                                                              neighbours:
+                                                                                              - *29
+                                                                                              - *31
+                                                                                              - *33
+                                                                                              - &42 !ruby/object:Square
+                                                                                                coordinate:
+                                                                                                - 6
+                                                                                                - 2
+                                                                                                name: B6
+                                                                                                neighbours:
+                                                                                                - *27
+                                                                                                - *29
+                                                                                                - *31
+                                                                                                - &41 !ruby/object:Square
+                                                                                                  coordinate:
+                                                                                                  - 6
+                                                                                                  - 1
+                                                                                                  name: A6
+                                                                                                  neighbours:
+                                                                                                  - *27
+                                                                                                  - *29
+                                                                                                  - *41
+                                                                                                  - *42
+                                                                                                  - &43 !ruby/object:Square
+                                                                                                    coordinate:
+                                                                                                    - 7
+                                                                                                    - 1
+                                                                                                    name: A7
+                                                                                                    neighbours:
+                                                                                                    - *41
+                                                                                                    - *42
+                                                                                                    - *43
+                                                                                                    - &45 !ruby/object:Square
+                                                                                                      coordinate:
+                                                                                                      - 7
+                                                                                                      - 2
+                                                                                                      name: B7
+                                                                                                      neighbours:
+                                                                                                      - *41
+                                                                                                      - *42
+                                                                                                      - *44
+                                                                                                      - *43
+                                                                                                      - *45
+                                                                                                      - &47 !ruby/object:Square
+                                                                                                        coordinate:
+                                                                                                        - 7
+                                                                                                        - 3
+                                                                                                        name: C7
+                                                                                                        neighbours:
+                                                                                                        - *42
+                                                                                                        - *44
+                                                                                                        - *46
+                                                                                                        - *45
+                                                                                                        - *47
+                                                                                                        - &49 !ruby/object:Square
+                                                                                                          coordinate:
+                                                                                                          - 7
+                                                                                                          - 4
+                                                                                                          name: D7
+                                                                                                          neighbours:
+                                                                                                          - *44
+                                                                                                          - *46
+                                                                                                          - *48
+                                                                                                          - *47
+                                                                                                          - *49
+                                                                                                          - &51 !ruby/object:Square
+                                                                                                            coordinate:
+                                                                                                            - 7
+                                                                                                            - 5
+                                                                                                            name: E7
+                                                                                                            neighbours:
+                                                                                                            - *46
+                                                                                                            - *48
+                                                                                                            - *50
+                                                                                                            - *49
+                                                                                                            - *51
+                                                                                                            - &53 !ruby/object:Square
+                                                                                                              coordinate:
+                                                                                                              - 7
+                                                                                                              - 6
+                                                                                                              name: F7
+                                                                                                              neighbours:
+                                                                                                              - *48
+                                                                                                              - *50
+                                                                                                              - *52
+                                                                                                              - *51
+                                                                                                              - *53
+                                                                                                              - &55 !ruby/object:Square
+                                                                                                                coordinate:
+                                                                                                                - 7
+                                                                                                                - 7
+                                                                                                                name: G7
+                                                                                                                neighbours:
+                                                                                                                - *50
+                                                                                                                - *52
+                                                                                                                - &54 !ruby/object:Square
+                                                                                                                  coordinate:
+                                                                                                                  - 6
+                                                                                                                  - 8
+                                                                                                                  name: H6
+                                                                                                                  neighbours:
+                                                                                                                  - *39
+                                                                                                                  - *40
+                                                                                                                  - *52
+                                                                                                                  - *54
+                                                                                                                  - *55
+                                                                                                                  - &56 !ruby/object:Square
+                                                                                                                    coordinate:
+                                                                                                                    - 7
+                                                                                                                    - 8
+                                                                                                                    name: H7
+                                                                                                                    neighbours:
+                                                                                                                    - *52
+                                                                                                                    - *54
+                                                                                                                    - *55
+                                                                                                                    - *56
+                                                                                                                    - &63 !ruby/object:Square
+                                                                                                                      coordinate:
+                                                                                                                      - 8
+                                                                                                                      - 7
+                                                                                                                      name: G8
+                                                                                                                      neighbours:
+                                                                                                                      - *53
+                                                                                                                      - *55
+                                                                                                                      - *56
+                                                                                                                      - &62 !ruby/object:Square
+                                                                                                                        coordinate:
+                                                                                                                        - 8
+                                                                                                                        - 6
+                                                                                                                        name: F8
+                                                                                                                        neighbours:
+                                                                                                                        - *51
+                                                                                                                        - *53
+                                                                                                                        - *55
+                                                                                                                        - &61 !ruby/object:Square
+                                                                                                                          coordinate:
+                                                                                                                          - 8
+                                                                                                                          - 5
+                                                                                                                          name: E8
+                                                                                                                          neighbours:
+                                                                                                                          - *49
+                                                                                                                          - *51
+                                                                                                                          - *53
+                                                                                                                          - &60 !ruby/object:Square
+                                                                                                                            coordinate:
+                                                                                                                            - 8
+                                                                                                                            - 4
+                                                                                                                            name: D8
+                                                                                                                            neighbours:
+                                                                                                                            - *47
+                                                                                                                            - *49
+                                                                                                                            - *51
+                                                                                                                            - &59 !ruby/object:Square
+                                                                                                                              coordinate:
+                                                                                                                              - 8
+                                                                                                                              - 3
+                                                                                                                              name: C8
+                                                                                                                              neighbours:
+                                                                                                                              - *45
+                                                                                                                              - *47
+                                                                                                                              - *49
+                                                                                                                              - &58 !ruby/object:Square
+                                                                                                                                coordinate:
+                                                                                                                                - 8
+                                                                                                                                - 2
+                                                                                                                                name: B8
+                                                                                                                                neighbours:
+                                                                                                                                - *43
+                                                                                                                                - *45
+                                                                                                                                - *47
+                                                                                                                                - &57 !ruby/object:Square
+                                                                                                                                  coordinate:
+                                                                                                                                  - 8
+                                                                                                                                  - 1
+                                                                                                                                  name: A8
+                                                                                                                                  neighbours:
+                                                                                                                                  - *43
+                                                                                                                                  - *45
+                                                                                                                                  - *57
+                                                                                                                                  - *58
+                                                                                                                                  piece: &89 !ruby/object:Rook
+                                                                                                                                    name: Rook
+                                                                                                                                    square: *57
+                                                                                                                                    color: 1
+                                                                                                                                    symbol: "♜"
+                                                                                                                                    moved: false
+                                                                                                                                    available_moves:
+                                                                                                                                      A6: *41
+                                                                                                                                      A7: *43
+                                                                                                                                  symbol: "♜"
+                                                                                                                                - *58
+                                                                                                                                - *59
+                                                                                                                                piece: &90 !ruby/object:Knight
+                                                                                                                                  name: Knight
+                                                                                                                                  square: *58
+                                                                                                                                  color: 1
+                                                                                                                                  symbol: "♞"
+                                                                                                                                  moved: false
+                                                                                                                                  available_moves:
+                                                                                                                                    A6: *41
+                                                                                                                                    C6: *44
+                                                                                                                                    D7: *49
+                                                                                                                                symbol: "♞"
+                                                                                                                              - *59
+                                                                                                                              - *60
+                                                                                                                              piece: &91 !ruby/object:Bishop
+                                                                                                                                name: Bishop
+                                                                                                                                square: *59
+                                                                                                                                color: 1
+                                                                                                                                symbol: "♝"
+                                                                                                                                moved: false
+                                                                                                                                available_moves:
+                                                                                                                                  H3: *24
+                                                                                                                                  G4: *36
+                                                                                                                                  F5: *37
+                                                                                                                                  E6: *48
+                                                                                                                                  D7: *49
+                                                                                                                              symbol: "♝"
+                                                                                                                            - *60
+                                                                                                                            - *61
+                                                                                                                            piece: &92 !ruby/object:Queen
+                                                                                                                              name: Queen
+                                                                                                                              square: *60
+                                                                                                                              color: 1
+                                                                                                                              symbol: "♛"
+                                                                                                                              moved: false
+                                                                                                                              available_moves:
+                                                                                                                                D6: *46
+                                                                                                                                D7: *49
+                                                                                                                            symbol: "♛"
+                                                                                                                          - *61
+                                                                                                                          - *62
+                                                                                                                          piece: &93 !ruby/object:King
+                                                                                                                            name: King
+                                                                                                                            square: *61
+                                                                                                                            color: 1
+                                                                                                                            symbol: "♚"
+                                                                                                                            moved: false
+                                                                                                                            available_moves:
+                                                                                                                              D7: *49
+                                                                                                                          symbol: "♚"
+                                                                                                                        - *62
+                                                                                                                        - *63
+                                                                                                                        piece: &94 !ruby/object:Bishop
+                                                                                                                          name: Bishop
+                                                                                                                          square: *62
+                                                                                                                          color: 1
+                                                                                                                          symbol: "♝"
+                                                                                                                          moved: false
+                                                                                                                          available_moves: {}
+                                                                                                                        symbol: "♝"
+                                                                                                                      - *63
+                                                                                                                      - &64 !ruby/object:Square
+                                                                                                                        coordinate:
+                                                                                                                        - 8
+                                                                                                                        - 8
+                                                                                                                        name: H8
+                                                                                                                        neighbours:
+                                                                                                                        - *55
+                                                                                                                        - *56
+                                                                                                                        - *63
+                                                                                                                        - *64
+                                                                                                                        piece: &96 !ruby/object:Rook
+                                                                                                                          name: Rook
+                                                                                                                          square: *64
+                                                                                                                          color: 1
+                                                                                                                          symbol: "♜"
+                                                                                                                          moved: false
+                                                                                                                          available_moves: {}
+                                                                                                                        symbol: "♜"
+                                                                                                                      piece: &95 !ruby/object:Knight
+                                                                                                                        name: Knight
+                                                                                                                        square: *63
+                                                                                                                        color: 1
+                                                                                                                        symbol: "♞"
+                                                                                                                        moved: false
+                                                                                                                        available_moves:
+                                                                                                                          F6: *50
+                                                                                                                          H6: *54
+                                                                                                                      symbol: "♞"
+                                                                                                                    - *64
+                                                                                                                    piece: &88 !ruby/object:Pawn
+                                                                                                                      name: Pawn
+                                                                                                                      square: *56
+                                                                                                                      color: 1
+                                                                                                                      symbol: "♟︎"
+                                                                                                                      moved: false
+                                                                                                                      available_moves:
+                                                                                                                        H5: *40
+                                                                                                                        H6: *54
+                                                                                                                    symbol: "♟︎"
+                                                                                                                  piece: 
+                                                                                                                  symbol: " "
+                                                                                                                - *53
+                                                                                                                - *55
+                                                                                                                - *56
+                                                                                                                - *62
+                                                                                                                - *63
+                                                                                                                - *64
+                                                                                                                piece: &87 !ruby/object:Pawn
+                                                                                                                  name: Pawn
+                                                                                                                  square: *55
+                                                                                                                  color: 1
+                                                                                                                  symbol: "♟︎"
+                                                                                                                  moved: false
+                                                                                                                  available_moves:
+                                                                                                                    G5: *39
+                                                                                                                    G6: *52
+                                                                                                                symbol: "♟︎"
+                                                                                                              - *61
+                                                                                                              - *62
+                                                                                                              - *63
+                                                                                                              piece: &86 !ruby/object:Pawn
+                                                                                                                name: Pawn
+                                                                                                                square: *53
+                                                                                                                color: 1
+                                                                                                                symbol: "♟︎"
+                                                                                                                moved: false
+                                                                                                                available_moves:
+                                                                                                                  F5: *37
+                                                                                                                  F6: *50
+                                                                                                              symbol: "♟︎"
+                                                                                                            - *60
+                                                                                                            - *61
+                                                                                                            - *62
+                                                                                                            piece: &85 !ruby/object:Pawn
+                                                                                                              name: Pawn
+                                                                                                              square: *51
+                                                                                                              color: 1
+                                                                                                              symbol: "♟︎"
+                                                                                                              moved: false
+                                                                                                              available_moves:
+                                                                                                                E5: *35
+                                                                                                                E6: *48
+                                                                                                            symbol: "♟︎"
+                                                                                                          - *59
+                                                                                                          - *60
+                                                                                                          - *61
+                                                                                                          piece: 
+                                                                                                          symbol: " "
+                                                                                                        - *58
+                                                                                                        - *59
+                                                                                                        - *60
+                                                                                                        piece: &83 !ruby/object:Pawn
+                                                                                                          name: Pawn
+                                                                                                          square: *47
+                                                                                                          color: 1
+                                                                                                          symbol: "♟︎"
+                                                                                                          moved: false
+                                                                                                          available_moves:
+                                                                                                            C5: *31
+                                                                                                            C6: *44
+                                                                                                        symbol: "♟︎"
+                                                                                                      - *57
+                                                                                                      - *58
+                                                                                                      - *59
+                                                                                                      piece: &82 !ruby/object:Pawn
+                                                                                                        name: Pawn
+                                                                                                        square: *45
+                                                                                                        color: 1
+                                                                                                        symbol: "♟︎"
+                                                                                                        moved: false
+                                                                                                        available_moves:
+                                                                                                          B6: *42
+                                                                                                      symbol: "♟︎"
+                                                                                                    - *57
+                                                                                                    - *58
+                                                                                                    piece: 
+                                                                                                    symbol: " "
+                                                                                                  - *45
+                                                                                                  piece: 
+                                                                                                  symbol: " "
+                                                                                                - *42
+                                                                                                - *44
+                                                                                                - *43
+                                                                                                - *45
+                                                                                                - *47
+                                                                                                piece: 
+                                                                                                symbol: " "
+                                                                                              - *44
+                                                                                              - *46
+                                                                                              - *45
+                                                                                              - *47
+                                                                                              - *49
+                                                                                              piece: 
+                                                                                              symbol: " "
+                                                                                            - *46
+                                                                                            - *48
+                                                                                            - *47
+                                                                                            - *49
+                                                                                            - *51
+                                                                                            piece: 
+                                                                                            symbol: " "
+                                                                                          - *48
+                                                                                          - *50
+                                                                                          - *49
+                                                                                          - *51
+                                                                                          - *53
+                                                                                          piece: 
+                                                                                          symbol: " "
+                                                                                        - *50
+                                                                                        - *52
+                                                                                        - *51
+                                                                                        - *53
+                                                                                        - *55
+                                                                                        piece: 
+                                                                                        symbol: " "
+                                                                                      - *52
+                                                                                      - *54
+                                                                                      - *53
+                                                                                      - *55
+                                                                                      - *56
+                                                                                      piece: 
+                                                                                      symbol: " "
+                                                                                    - *54
+                                                                                    piece: 
+                                                                                    symbol: " "
+                                                                                  piece: 
+                                                                                  symbol: " "
+                                                                                - *37
+                                                                                - *39
+                                                                                - *40
+                                                                                - *50
+                                                                                - *52
+                                                                                - *54
+                                                                                piece: 
+                                                                                symbol: " "
+                                                                              - *48
+                                                                              - *50
+                                                                              - *52
+                                                                              piece: 
+                                                                              symbol: " "
+                                                                            - *46
+                                                                            - *48
+                                                                            - *50
+                                                                            piece: 
+                                                                            symbol: " "
+                                                                          - *44
+                                                                          - *46
+                                                                          - *48
+                                                                          piece: &84 !ruby/object:Pawn
+                                                                            name: Pawn
+                                                                            square: *33
+                                                                            color: 1
+                                                                            symbol: "♟︎"
+                                                                            moved: true
+                                                                            available_moves:
+                                                                              D4: *30
+                                                                          symbol: "♟︎"
+                                                                        - *42
+                                                                        - *44
+                                                                        - *46
+                                                                        piece: 
+                                                                        symbol: " "
+                                                                      - *41
+                                                                      - *42
+                                                                      - *44
+                                                                      piece: &66 !ruby/object:Knight
+                                                                        name: Knight
+                                                                        square: *29
+                                                                        color: 0
+                                                                        symbol: "♘"
+                                                                        moved: true
+                                                                        available_moves:
+                                                                          A3: *11
+                                                                          C3: *15
+                                                                          D4: *30
+                                                                          D6: *46
+                                                                          A7: *43
+                                                                          C7: *47
+                                                                      symbol: "♘"
+                                                                    - *41
+                                                                    - *42
+                                                                    piece: &81 !ruby/object:Pawn
+                                                                      name: Pawn
+                                                                      square: *27
+                                                                      color: 1
+                                                                      symbol: "♟︎"
+                                                                      moved: true
+                                                                      available_moves:
+                                                                        A4: *25
+                                                                    symbol: "♟︎"
+                                                                  - *29
+                                                                  piece: 
+                                                                  symbol: " "
+                                                                - *26
+                                                                - *28
+                                                                - *27
+                                                                - *29
+                                                                - *31
+                                                                piece: 
+                                                                symbol: " "
+                                                              - *28
+                                                              - *30
+                                                              - *29
+                                                              - *31
+                                                              - *33
+                                                              piece: 
+                                                              symbol: " "
+                                                            - *30
+                                                            - *32
+                                                            - *31
+                                                            - *33
+                                                            - *35
+                                                            piece: 
+                                                            symbol: " "
+                                                          - *32
+                                                          - *34
+                                                          - *33
+                                                          - *35
+                                                          - *37
+                                                          piece: 
+                                                          symbol: " "
+                                                        - *34
+                                                        - *36
+                                                        - *35
+                                                        - *37
+                                                        - *39
+                                                        piece: 
+                                                        symbol: " "
+                                                      - *36
+                                                      - *38
+                                                      - *37
+                                                      - *39
+                                                      - *40
+                                                      piece: 
+                                                      symbol: " "
+                                                    - *38
+                                                    piece: 
+                                                    symbol: " "
+                                                  piece: &80 !ruby/object:Pawn
+                                                    name: Pawn
+                                                    square: *22
+                                                    color: 0
+                                                    symbol: "♙"
+                                                    moved: false
+                                                    available_moves:
+                                                      H3: *24
+                                                      H4: *38
+                                                  symbol: "♙"
+                                                - *21
+                                                - *23
+                                                - *24
+                                                - *34
+                                                - *36
+                                                - *38
+                                                piece: 
+                                                symbol: " "
+                                              - *32
+                                              - *34
+                                              - *36
+                                              piece: 
+                                              symbol: " "
+                                            - *30
+                                            - *32
+                                            - *34
+                                            piece: 
+                                            symbol: " "
+                                          - *28
+                                          - *30
+                                          - *32
+                                          piece: 
+                                          symbol: " "
+                                        - *26
+                                        - *28
+                                        - *30
+                                        piece: 
+                                        symbol: " "
+                                      - *25
+                                      - *26
+                                      - *28
+                                      piece: 
+                                      symbol: " "
+                                    - *25
+                                    - *26
+                                    piece: 
+                                    symbol: " "
+                                  - *13
+                                  piece: &73 !ruby/object:Pawn
+                                    name: Pawn
+                                    square: *9
+                                    color: 0
+                                    symbol: "♙"
+                                    moved: false
+                                    available_moves:
+                                      A4: *25
+                                      A3: *11
+                                  symbol: "♙"
+                                - *10
+                                - *12
+                                - *11
+                                - *13
+                                - *15
+                                piece: &74 !ruby/object:Pawn
+                                  name: Pawn
+                                  square: *10
+                                  color: 0
+                                  symbol: "♙"
+                                  moved: false
+                                  available_moves:
+                                    B3: *13
+                                    B4: *26
+                                symbol: "♙"
+                              - *12
+                              - *14
+                              - *13
+                              - *15
+                              - *17
+                              piece: &75 !ruby/object:Pawn
+                                name: Pawn
+                                square: *12
+                                color: 0
+                                symbol: "♙"
+                                moved: false
+                                available_moves:
+                                  C3: *15
+                                  C4: *28
+                              symbol: "♙"
+                            - *14
+                            - *16
+                            - *15
+                            - *17
+                            - *19
+                            piece: &76 !ruby/object:Pawn
+                              name: Pawn
+                              square: *14
+                              color: 0
+                              symbol: "♙"
+                              moved: false
+                              available_moves:
+                                D3: *17
+                                D4: *30
+                            symbol: "♙"
+                          - *16
+                          - *18
+                          - *17
+                          - *19
+                          - *21
+                          piece: &77 !ruby/object:Pawn
+                            name: Pawn
+                            square: *16
+                            color: 0
+                            symbol: "♙"
+                            moved: false
+                            available_moves:
+                              E3: *19
+                              E4: *32
+                          symbol: "♙"
+                        - *18
+                        - *20
+                        - *19
+                        - *21
+                        - *23
+                        piece: &78 !ruby/object:Pawn
+                          name: Pawn
+                          square: *18
+                          color: 0
+                          symbol: "♙"
+                          moved: false
+                          available_moves:
+                            F3: *21
+                            F4: *34
+                        symbol: "♙"
+                      - *20
+                      - *22
+                      - *21
+                      - *23
+                      - *24
+                      piece: &79 !ruby/object:Pawn
+                        name: Pawn
+                        square: *20
+                        color: 0
+                        symbol: "♙"
+                        moved: false
+                        available_moves:
+                          G3: *23
+                          G4: *36
+                      symbol: "♙"
+                    - *22
+                    piece: &72 !ruby/object:Rook
+                      name: Rook
+                      square: *8
+                      color: 0
+                      symbol: "♖"
+                      moved: false
+                      available_moves: {}
+                    symbol: "♖"
+                  - *18
+                  - *20
+                  - *22
+                  piece: &71 !ruby/object:Knight
+                    name: Knight
+                    square: *7
+                    color: 0
+                    symbol: "♘"
+                    moved: false
+                    available_moves:
+                      F3: *21
+                      H3: *24
+                  symbol: "♘"
+                - *16
+                - *18
+                - *20
+                piece: &70 !ruby/object:Bishop
+                  name: Bishop
+                  square: *6
+                  color: 0
+                  symbol: "♗"
+                  moved: false
+                  available_moves: {}
+                symbol: "♗"
+              - *14
+              - *16
+              - *18
+              piece: &69 !ruby/object:King
+                name: King
+                square: *5
+                color: 0
+                symbol: "♔"
+                moved: false
+                available_moves: {}
+              symbol: "♔"
+            - *12
+            - *14
+            - *16
+            piece: &68 !ruby/object:Queen
+              name: Queen
+              square: *4
+              color: 0
+              symbol: "♕"
+              moved: false
+              available_moves: {}
+            symbol: "♕"
+          - *10
+          - *12
+          - *14
+          piece: &67 !ruby/object:Bishop
+            name: Bishop
+            square: *3
+            color: 0
+            symbol: "♗"
+            moved: false
+            available_moves: {}
+          symbol: "♗"
+        - *9
+        - *10
+        - *12
+        piece: 
+        symbol: " "
+      - *9
+      - *10
+      piece: &65 !ruby/object:Rook
+        name: Rook
+        square: *1
+        color: 0
+        symbol: "♖"
+        moved: false
+        available_moves:
+          B1: *2
+      symbol: "♖"
+    B1: *2
+    C1: *3
+    D1: *4
+    E1: *5
+    F1: *6
+    G1: *7
+    H1: *8
+    A2: *9
+    B2: *10
+    C2: *12
+    D2: *14
+    E2: *16
+    F2: *18
+    G2: *20
+    H2: *22
+    A3: *11
+    B3: *13
+    C3: *15
+    D3: *17
+    E3: *19
+    F3: *21
+    G3: *23
+    H3: *24
+    A4: *25
+    B4: *26
+    C4: *28
+    D4: *30
+    E4: *32
+    F4: *34
+    G4: *36
+    H4: *38
+    A5: *27
+    B5: *29
+    C5: *31
+    D5: *33
+    E5: *35
+    F5: *37
+    G5: *39
+    H5: *40
+    A6: *41
+    B6: *42
+    C6: *44
+    D6: *46
+    E6: *48
+    F6: *50
+    G6: *52
+    H6: *54
+    A7: *43
+    B7: *45
+    C7: *47
+    D7: *49
+    E7: *51
+    F7: *53
+    G7: *55
+    H7: *56
+    A8: *57
+    B8: *58
+    C8: *59
+    D8: *60
+    E8: *61
+    F8: *62
+    G8: *63
+    H8: *64
+  pieces:
+  - *65
+  - *66
+  - *67
+  - *68
+  - *69
+  - *70
+  - *71
+  - *72
+  - *73
+  - *74
+  - *75
+  - *76
+  - *77
+  - *78
+  - *79
+  - *80
+  - *81
+  - *82
+  - *83
+  - *84
+  - *85
+  - *86
+  - *87
+  - *88
+  - *89
+  - *90
+  - *91
+  - *92
+  - *93
+  - *94
+  - *95
+  - *96
+player_one: &97 !ruby/object:Player
+  name: Fern
+  color: 1
+  king: *93
+player_two: &99 !ruby/object:Player
+  name: JP
+  color: 0
+  king: *69
+moves_history:
+- !ruby/object:Move
+  player: *97
+  piece: *81
+  square: *27
+  board: *98
+  pawn_jump: true
+- !ruby/object:Move
+  player: *99
+  piece: *66
+  square: *11
+  board: *98
+  pawn_jump: false
+- !ruby/object:Move
+  player: *97
+  piece: *84
+  square: *33
+  board: *98
+  pawn_jump: true
+- !ruby/object:Move
+  player: *99
+  piece: *66
+  square: *29
+  board: *98
+  pawn_jump: false
