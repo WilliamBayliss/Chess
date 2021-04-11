@@ -97,6 +97,11 @@ class Board
         square.set_piece(piece)
     end
 
+    def kill_piece piece
+        piece.square.clear_square
+        piece.square = nil
+    end
+
     def castle? king, rook
         if king.color == rook.color
             if king.moved == false && rook.moved == false
