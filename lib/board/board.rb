@@ -65,12 +65,12 @@ class Board
         end
     end
 
-    def update_piece_moves
-        get_piece_moves
-        delete_illegal_moves
+    def update_piece_moves last_move=nil
+        get_piece_moves(last_move)
+        delete_illegal_moves(last_move)
     end
 
-    def get_piece_moves
+    def get_piece_moves last_move=nil
         @pieces.each do |piece|
             @board.each do |key, square|
                 if legal_move?(piece, square)
@@ -80,11 +80,11 @@ class Board
         end
     end
 
-    def delete_illegal_moves
+    def delete_illegal_moves last_move=nil
         @pieces.each do |piece|
             illegal_moves = []
             piece.available_moves.each do |name, square|
-                unless legal_move?(piece, square)
+                unless legal_move?(piece, square, last_move)
                     illegal_moves.append(square)
                 end
             end
@@ -437,13 +437,15 @@ class Board
     end
 
     # Returns true if the selected move is a legal move for a pawn
-    def pawn_move? square, other_square
-        if square.piece.moved == false && two_squares_vertical?(square, other_square) && other_square.piece.nil?
+    def pawn_move? piece, square, last_move=nil
+        if piece.moved == false && two_squares_vertical?(piece.square, square) && square.piece.nil?
             true
-        elsif (diagonal?(square, other_square) && adjacent?(square, other_square)) && other_square.piece != nil
+        elsif en_passant?(piece.square, last_move) && (diagonal?(piece.square, square) && adjacent?(piece.square, square))
             true
-        elsif vertical?(square, other_square) && adjacent?(square, other_square)
-           pawn_direction?(square, other_square)
+        elsif (diagonal?(piece.square, square) && adjacent?(piece.square, square)) && square.piece != nil
+            true
+        elsif vertical?(piece.square, square) && adjacent?(piece.square, square)
+           pawn_direction?(piece.square, square)
         else
             false
         end
@@ -451,9 +453,13 @@ class Board
 
     # Assesses the given square and the last move, returns true if the last move sets up an en passant
     def en_passant? square, last_move
-        if last_move.pawn_jump == true
-            if adjacent?(square, last_move.square) && horizontal?(square, last_move.square)
-                true
+        if last_move != nil
+            if last_move.pawn_jump == true
+                if adjacent?(square, last_move.square) && horizontal?(square, last_move.square)
+                    true
+                else
+                    false
+                end
             else
                 false
             end
@@ -463,13 +469,13 @@ class Board
     end
 
     # Returns true if a move is legal depending on the piece
-    def legal_move? piece, square
+    def legal_move? piece, square, last_move=nil
         if square.piece.nil? || square.piece.color != piece.color
             case piece.symbol
 
             when "♟︎", "♙"
                 # Return true if square is adjacent and in the correct direction for pawn of that color
-                pawn_move?(piece.square, square)
+                pawn_move?(piece, square, last_move)
             when "♞", "♘"
                 # Return true if move is an 'L' shape
                 knight_move?(piece.square, square)
