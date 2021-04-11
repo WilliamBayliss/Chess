@@ -420,20 +420,21 @@ class Board
     # These methods are all for assessing the different conditions of moving a pawn
 
     # Returns true if the other square is in the correct direction for a pawn
-    def pawn_direction? square, other_square
-        if square.piece.symbol == "♙"
-            if other_square.coordinate[0] > square.coordinate[0]
+    def pawn_direction? piece, square
+        if piece.color == 0
+            if square.coordinate[0] > piece.square.coordinate[0]
                 true
             else
                 false
             end
-        elsif square.piece.symbol == "♟︎"
-            if other_square.coordinate[0] < square.coordinate[0]
+        elsif piece.color == 1
+            if square.coordinate[0] < piece.square.coordinate[0]
                 true
             else
                 false
             end
         end
+  
     end
 
     # Returns true if the selected move is a legal move for a pawn
@@ -445,7 +446,7 @@ class Board
         elsif (diagonal?(piece.square, square) && adjacent?(piece.square, square)) && square.piece != nil
             true
         elsif vertical?(piece.square, square) && adjacent?(piece.square, square)
-           pawn_direction?(piece.square, square)
+           pawn_direction?(piece, square)
         else
             false
         end
