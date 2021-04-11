@@ -127,6 +127,7 @@ class Game
         move_piece(piece, square)
         move.log_move_data(piece, square)
         record_move(move)
+        save_game
     end
     
     def legal_move? piece, square
@@ -182,6 +183,22 @@ class Game
         @moves_history.append(move)
     end
 
+    def save_game
+        File.open("saves/save_game.txt", "w") do |save|
+            save.write(YAML::dump(self))
+        end
+    end
+
+    def load_game
+        if File.exist?("saves/save_game.txt")
+            game = YAML::load(File.read("saves/save_game.txt"))
+            puts "Game load successful."
+            game.run_game
+        else
+            puts "No Save File Detected Error"
+        end
+    end
+
     def start_game_puts
         puts "Welcome to Chess! This is a game of chess that you can play against a friend or the computer on the command line. Take your opponent's pieces and try to put their King into checkmate to win! \n The board is arranged by columns A-H and rows 1-8. When prompted to select a square on the board, enter the coordinate in the form column/row, i.e: A1 would select the top-left square on the board. \n Let the game begin!"
     end
@@ -217,5 +234,4 @@ class Game
 end
 
 game = Game.new
-game.initial_setup
-game.run_game
+game.load_game
