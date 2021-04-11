@@ -38,6 +38,9 @@ class Game
     def move_piece piece, square
         if piece.available_moves[square.name] != nil
             piece.square.clear_square
+            if square.piece != nil
+                board.kill_piece(square.piece)
+            end
             board.place_piece(piece, square)
             piece.set_moved
             board.update_piece_moves(@moves_history[-1])
@@ -128,9 +131,14 @@ class Game
         end
 
         move_piece(piece, square)
-        move.log_move_data(piece, square)
-        record_move(move)
-        save_game
+        if @board.check?(player.king)
+            puts "You cannot make a move that would leave your King in check"
+            load_game
+        else
+            move.log_move_data(piece, square)
+            record_move(move)
+            save_game
+        end
     end
     
     def legal_move? piece, square
@@ -229,8 +237,12 @@ class Game
     def check_check
         if @board.check?(@player_one.king)
             puts "#{@player_one.name}, you are in check."
+            return true
         elsif @board.check?(@player_two.king)
-            puts "#{@player_two.king}, you are in check."
+            puts "#{@player_two.name}, you are in check."
+            return true
+        else
+            return false
         end
     end
     
