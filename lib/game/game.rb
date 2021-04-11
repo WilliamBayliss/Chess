@@ -2,6 +2,7 @@ Dir["./lib/pieces/*.rb"].each {|file| require file }
 Dir["./lib/players/*.rb"].each {|file| require file }
 Dir["./lib/board/*.rb"].each {|file| require file }
 require './lib/game/move.rb'
+require 'yaml'
 
 class Game
     attr_accessor :board,:player_one, :player_two, :moves_history
@@ -16,6 +17,34 @@ class Game
         create_board
         create_both_players
         set_player_kings(@player_one, @player_two)
+    end
+
+    def run_game
+        until @board.checkmate?(@player_one.king) || @board.checkmate?(@player_two.king)
+            player_move(@player_one)
+            player_move(@player_two)
+        end
+        @board.print_board
+        if @board.checkmate?(@player_one.king)
+            puts "Checkmate! #{player_two.name} wins."
+        elsif @board.checkmate?(@player_two.king)
+            puts "Checkmate! #{@player_one.name} wins."
+        end
+    end
+
+    def move_piece piece, square
+        if piece.available_moves[square.name] != nil
+            piece.square.clear_square
+            board.place_piece(piece, square)
+            piece.set_moved
+            board.update_piece_moves(@moves_history[-1])
+            check_check
+
+
+            return true
+        else
+            return false
+        end
     end
 
     def create_both_players
@@ -85,17 +114,17 @@ class Game
         move.get_board(@board)
         @board.print_board
         
-        piece = select_piece
+        piece = select_piece(player)
         until piece.color == player.color
-            piece = select_piece
+            piece = select_piece(player)
         end        
-        square = select_square(piece)
+        square = select_square(piece, player)
 
         if piece.name == "Pawn" && @board.two_squares_vertical?(piece.square, square)
             move.set_pawn_jump
         end
 
-        @board.move_piece(piece, square)
+        move_piece(piece, square)
         move.log_move_data(piece, square)
         record_move(move)
     end
@@ -108,14 +137,18 @@ class Game
         end
     end
 
-    def select_piece
-        select_piece_puts
+    def select_piece player
+        select_piece_puts(player)
         coordinate = get_coordinate
+        until @board[coordinate].piece != nil
+            puts "Please select a square with a piece on it"
+            coordinate = get_coordinate
+        end
         return @board[coordinate].piece
     end
 
-    def select_square piece
-        select_square_puts
+    def select_square piece, player
+        select_square_puts(player)
         coordinate = get_coordinate
         until legal_move?(piece, @board[coordinate])
             puts "Please enter a legal move for a #{piece.name}"
@@ -153,12 +186,12 @@ class Game
         puts "Welcome to Chess! This is a game of chess that you can play against a friend or the computer on the command line. Take your opponent's pieces and try to put their King into checkmate to win! \n The board is arranged by columns A-H and rows 1-8. When prompted to select a square on the board, enter the coordinate in the form column/row, i.e: A1 would select the top-left square on the board. \n Let the game begin!"
     end
 
-    def select_piece_puts
-        puts "Please enter the coordinate of the piece you'd like to select."
+    def select_piece_puts player
+        puts "#{player.name}, please enter the coordinate of the piece you'd like to select."
     end
 
-    def select_square_puts
-        puts "Please enter the square to move."
+    def select_square_puts player
+        puts "#{player.name}, please enter the square to move."
     end
 
     def get_player_one_name_puts
@@ -172,5 +205,17 @@ class Game
     def get_player_color_puts
         puts "Player 1, please select your color. Enter 1 for white or 2 for black."
     end
+
+    def check_check
+        if @board.check?(@player_one.king)
+            puts "#{@player_one.name}, you are in check."
+        elsif @board.check?(@player_two.king)
+            puts "#{@player_two.king}, you are in check."
+        end
+    end
     
 end
+
+game = Game.new
+game.initial_setup
+game.run_game
