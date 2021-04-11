@@ -225,6 +225,7 @@ describe Board do
             board.move_piece(board["D8"].piece, board["G5"])
             expect(board["E2"].piece.available_moves).to_not include(board["E3"].name)
         end
+
     end
 
     describe "#delete_illegal_moves" do
@@ -1270,93 +1271,21 @@ describe Board do
     describe "#king_move?" do
         it "returns false if square is not adjacent" do
             board = Board.new
-            board.create_board(board.board_array)
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
             expect(board.king_move?(
-                board["A4"], 
-                board["D3"]
+                board["E1"].piece, 
+                board["E3"]
                 )).to eql(false)
         end
 
-        it "returns false if square is not adjacent" do
+        it "returns true if square is adjacent" do
             board = Board.new
-            board.create_board(board.board_array)
+            board.setup
+            board.move_piece(board["E2"].piece, board["E4"])
             expect(board.king_move?(
-                board["A4"], 
-                board["A6"]
-                )).to eql(false)
-        end
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["B3"]
-                )).to eql(true)
-        end
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["C3"]
-                )).to eql(true)
-        end
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["C4"]
-                )).to eql(true)
-        end
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["C5"]
-                )).to eql(true)
-        end
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["B5"]
-                )).to eql(true)
-        end
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["A5"]
-                )).to eql(true)
-        end
-
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["A4"]
-                )).to eql(true)
-        end
-
-
-        it "returns true if square is adjacent in any direction" do
-            board = Board.new
-            board.create_board(board.board_array)
-            expect(board.king_move?(
-                board["B4"], 
-                board["A3"]
+                board["E1"].piece, 
+                board["E2"]
                 )).to eql(true)
         end
 
@@ -1369,7 +1298,7 @@ describe Board do
             board.move_piece(board["E1"].piece, board["E2"])
             board.move_piece(board["D8"].piece, board["G5"])
             expect(board.king_move?(
-                board["E2"], 
+                board["E2"].piece, 
                 board["E3"]
                 )).to eql(false)
         end
@@ -1518,61 +1447,8 @@ describe Board do
                 board["A7"]
                 )).to eql(false)
         end
-
-        it "returns true for en passant" do
-            board = Board.new
-            board.setup
-            player = Player.new("Will", 1)
-            board.move_piece(board["A2"].piece, board["A4"])
-            board.move_piece(board["A4"].piece, board["A5"])
-            move = Move.new(player)
-            board.move_piece(board["B7"].piece, board["B5"])
-            move.set_pawn_jump
-            move.get_piece(board["B5"].piece)
-            move.get_square(board["B5"])
-            expect(board.pawn_move?(board["A5"].piece, board["B6"], move)).to eql(true)
-        end
     end
 
-    describe "#en_passant?" do
-        it "returns true if en passant is an available to a pawn" do
-            player_one = Player.new("Will", "wht")
-            player_two = Player.new("Fernando", "blk")
-            board = Board.new
-            board.setup
-
-            board.move_piece(board["B2"].piece, board["B4"])
-            board.move_piece(board["B4"].piece, board["B5"])
-            board.move_piece(board["C7"].piece, board["C5"])
-            
-            last_move = Move.new(player_two)
-            last_move.get_square(board["C5"])
-            last_move.get_board(board)
-            last_move.get_piece(board["C5"])
-            last_move.set_pawn_jump
-
-            expect(board.en_passant?(board["B5"], last_move)).to eql(true)
-        end
-
-        it "returns false if en passant is an unavailable to a pawn" do
-            player_one = Player.new("Will", "wht")
-            player_two = Player.new("Fernando", "blk")
-            board = Board.new
-            board.setup
-
-            board.move_piece(board["B2"].piece, board["B4"])
-            board.move_piece(board["B4"].piece, board["B5"])
-            board.move_piece(board["C7"].piece, board["C6"])
-            board.move_piece(board["C6"].piece, board["C5"])
-            
-            last_move = Move.new(player_two)
-            last_move.get_square(board["C5"])
-            last_move.get_board(board)
-            last_move.get_piece(board["C5"])
-
-            expect(board.en_passant?(board["B5"], last_move)).to eql(false)
-        end
-    end
 
     describe "#legal_move?" do
         it "returns false for an illegal pawn move" do
