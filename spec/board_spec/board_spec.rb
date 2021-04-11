@@ -1399,7 +1399,7 @@ describe Board do
             board = Board.new
             board.setup
             board.move_piece(board["A7"].piece, board["A5"])
-            expect(board.pawn_move?(
+            expect(board.pawn_direction?(
                 board["A5"], 
                 board["A6"]
                 )).to eql(false)
@@ -1408,7 +1408,7 @@ describe Board do
         it "returns true if a black pawn is moving forwards" do
             board = Board.new
             board.setup
-            expect(board.pawn_move?(
+            expect(board.pawn_direction?(
                 board["A7"], 
                 board["A6"]
                 )).to eql(true)
@@ -1420,32 +1420,26 @@ describe Board do
             board = Board.new
             board.setup
             expect(board.pawn_move?(
-                board["B2"], 
+                board["B2"].piece, 
                 board["A3"]
                 )).to eql(false)
         end 
 
         it "returns true if a pawn has not been moved and the square is two squares forward" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             expect(board.pawn_move?(
-                board["A2"],
+                board["A2"].piece,
                 board["A4"]
             )).to eql(true)
         end
 
         it "returns false if a pawn has been moved and the square is two squares forward" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             board["A2"].piece.set_moved
             expect(board.pawn_move?(
-                board["A2"],
+                board["A2"].piece,
                 board["A4"]
             )).to eql(false)
         end
@@ -1456,7 +1450,7 @@ describe Board do
             board.move_piece(board["A7"].piece, board["A5"])
             board.move_piece(board["A5"].piece, board["A4"])
             expect(board.pawn_move?(
-                board["A2"],
+                board["A2"].piece,
                 board["A4"]
             )).to eql(false)
         end
@@ -1469,7 +1463,7 @@ describe Board do
             board.move_piece(board["A4"].piece, board["A5"])
             board.move_piece(board["A5"].piece, board["A6"])
             expect(board.pawn_move?(
-                board["A6"],
+                board["A6"].piece,
                 board["B7"]
             )).to eql(true)
         end
@@ -1480,7 +1474,7 @@ describe Board do
             board.move_piece(board["A2"].piece, board["A3"])
             board.move_piece(board["A3"].piece, board["A4"])
             expect(board.pawn_move?(
-                board["A4"],
+                board["A4"].piece,
                 board["B5"]
             )).to eql(false)
         end
@@ -1490,7 +1484,7 @@ describe Board do
             board = Board.new
             board.setup
             expect(board.pawn_move?(
-                board["A2"], 
+                board["A2"].piece, 
                 board["A3"]
                 )).to eql(true)
         end
@@ -1500,7 +1494,7 @@ describe Board do
             board.setup
             board.move_piece(board["B2"].piece, board["B4"])
             expect(board.pawn_move?(
-                board["B4"], 
+                board["B4"].piece, 
                 board["B3"]
                 )).to eql(false)
         end
@@ -1510,7 +1504,7 @@ describe Board do
             board = Board.new
             board.setup
             expect(board.pawn_move?(
-                board["A7"], 
+                board["A7"].piece, 
                 board["A5"]
                 )).to eql(true)
         end
@@ -1520,9 +1514,23 @@ describe Board do
             board.setup
             board.move_piece(board["A7"].piece, board["A6"])
             expect(board.pawn_move?(
-                board["A6"], 
+                board["A6"].piece, 
                 board["A7"]
                 )).to eql(false)
+        end
+
+        it "returns true for en passant" do
+            board = Board.new
+            board.setup
+            player = Player.new("Will", 1)
+            board.move_piece(board["A2"].piece, board["A4"])
+            board.move_piece(board["A4"].piece, board["A5"])
+            move = Move.new(player)
+            board.move_piece(board["B7"].piece, board["B5"])
+            move.set_pawn_jump
+            move.get_piece(board["B5"].piece)
+            move.get_square(board["B5"])
+            expect(board.pawn_move?(board["A5"].piece, board["B6"], move)).to eql(true)
         end
     end
 
