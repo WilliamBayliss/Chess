@@ -21,7 +21,9 @@ class Game
 
     def run_game
         until @board.checkmate?(@player_one.king) || @board.checkmate?(@player_two.king)
-            if @moves_history[-1].player == @player_two
+            if @moves_history.size == 0
+                player_move(@player_one)
+            elsif @moves_history[-1].player == @player_two
                 player_move(@player_one)
             elsif @moves_history[-1].player == @player_one
                 player_move(@player_two)
@@ -124,20 +126,101 @@ class Game
         until piece.color == player.color
             piece = select_piece(player)
         end        
-        square = select_square(piece, player)
 
-        if piece.name == "Pawn" && @board.two_squares_vertical?(piece.square, square)
-            move.set_pawn_jump
-        end
-
-        move_piece(piece, square)
-        if @board.check?(player.king)
-            puts "You cannot make a move that would leave your King in check"
-            load_game
+        if piece.name == "King"
+            if right_castle?(player) || left_castle?(player)
+                puts "Would you like to castle?"
+                input = gets.chomp
+                until input.upcase == "Y" || input.upcase == "N"
+                    puts "Please enter y for yes or n for no."
+                    input = gets.chomp
+                end
+                if input.upcase == "Y"
+                    castle(player, move)
+                    record_move(move)
+                    save_game
+                    return
+                else
+                    square = select_square(piece, player)
+                    move_piece(piece, square)
+                    if @board.check?(player.king)
+                        puts "You cannot make a move that would leave your King in check"
+                        load_game
+                    else
+                        move.log_move_data(piece, square)
+                        record_move(move)
+                        save_game
+                    end
+                        end
+                    end
         else
-            move.log_move_data(piece, square)
-            record_move(move)
-            save_game
+            square = select_square(piece, player)
+            if piece.name == "Pawn" && @board.two_squares_vertical?(piece.square, square)
+                move.set_pawn_jump
+            end
+            move_piece(piece, square)
+            if @board.check?(player.king)
+                puts "You cannot make a move that would leave your King in check"
+                load_game
+            else
+                move.log_move_data(piece, square)
+                record_move(move)
+                save_game
+            end
+        end
+    end
+
+    def castle player, move
+        if player.color == 0 && right_castle?(player)
+            @board.castle(player.king, @board["H1"].piece)
+            square = @board["H1"]
+        elsif player.color == 0 && left_castle?(player)
+            @board.castle(player.king, @board["A1"].piece)
+            square = @board["A1"]
+        elsif player.color == 1 && right_castle?(player)
+            @board.castle(player.king, @board["H8"].piece)
+            square = @board["H8"]
+        elsif player.color == 1 && left_castle?(player)
+            @board.castle(player.king, @board["A8"].piece)
+            square = @board["A8"]
+        end
+        move.get_piece(player.king)
+        move.get_square(square)
+    end
+    
+    def right_castle?(player)
+        if player.color == 0
+            if @board.castle?(player.king, @board["H1"].piece)
+                true
+            else
+                false
+            end
+        elsif player.color == 1
+            if @board.castle?(player.king, @board["H8"].piece)
+                true
+            else
+                false
+            end
+        end
+    end
+
+    def left_castle?(player)
+        if player.color == 0
+            unless @board["A1"].piece.nil?
+                if @board.castle?(player.king, @board["A1"].piece)
+                    true
+                else
+                    false
+                end
+            end
+        elsif player.color == 1
+            unless @board["A8"].piece.nil?    
+                if @board.castle?(player.king, @board["A8"].piece)
+                    true
+                else
+                    false
+                end
+            end
         end
     end
     
