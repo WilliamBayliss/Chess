@@ -13,10 +13,6 @@ class Move
         get_square(square)
     end
 
-    def get_opponent player
-        @opponent = player
-    end
-
     def select_piece coordinate
         get_piece(@board[coordinate])
     end
