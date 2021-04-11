@@ -45,7 +45,7 @@ class Game
             end
             board.place_piece(piece, square)
             piece.set_moved
-            board.update_piece_moves(@moves_history[-1])
+            board.update_piece_moves
             check_check
 
 
@@ -151,8 +151,20 @@ class Game
                         record_move(move)
                         save_game
                     end
-                        end
-                    end
+                end
+            else
+                square = select_square(piece, player)
+                move_piece(piece, square)
+                if @board.check?(player.king)
+                    puts "You cannot make a move that would leave your King in check"
+                    load_game
+                else
+                    move.log_move_data(piece, square)
+                    record_move(move)
+                    save_game
+                end
+            end
+
         else
             square = select_square(piece, player)
             if piece.name == "Pawn" && @board.two_squares_vertical?(piece.square, square)
@@ -190,16 +202,20 @@ class Game
     
     def right_castle?(player)
         if player.color == 0
-            if @board.castle?(player.king, @board["H1"].piece)
-                true
-            else
-                false
+            unless @board["H1"].piece.nil?
+                if @board.castle?(player.king, @board["H1"].piece)
+                    true
+                else
+                    false
+                end
             end
         elsif player.color == 1
-            if @board.castle?(player.king, @board["H8"].piece)
-                true
-            else
-                false
+            unless @board["H8"].piece.nil?
+                if @board.castle?(player.king, @board["H8"].piece)
+                    true
+                else
+                    false
+                end
             end
         end
     end
