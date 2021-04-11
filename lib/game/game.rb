@@ -232,6 +232,3 @@ class Game
     end
     
 end
-
-game = Game.new
-game.load_game
