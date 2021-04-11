@@ -1381,7 +1381,7 @@ describe Board do
             board.setup
             board.move_piece(board["A2"].piece, board["A4"])
             expect(board.pawn_direction?(
-                board["A4"], 
+                board["A4"].piece, 
                 board["A3"]
                 )).to eql(false)
         end
@@ -1390,7 +1390,7 @@ describe Board do
             board = Board.new
             board.setup
             expect(board.pawn_direction?(
-                board["A2"], 
+                board["A2"].piece, 
                 board["A3"]
                 )).to eql(true)
         end
@@ -1400,7 +1400,7 @@ describe Board do
             board.setup
             board.move_piece(board["A7"].piece, board["A5"])
             expect(board.pawn_direction?(
-                board["A5"], 
+                board["A5"].piece, 
                 board["A6"]
                 )).to eql(false)
         end
@@ -1409,7 +1409,7 @@ describe Board do
             board = Board.new
             board.setup
             expect(board.pawn_direction?(
-                board["A7"], 
+                board["A7"].piece, 
                 board["A6"]
                 )).to eql(true)
         end
