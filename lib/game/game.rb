@@ -45,6 +45,7 @@ class Game
             end
             @board.place_piece(piece, square)
             piece.set_moved
+            @board.update_piece_moves
             check_check
 
 
