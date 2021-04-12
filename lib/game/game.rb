@@ -124,9 +124,10 @@ class Game
         @board.print_board
         
         piece = select_piece(player)
-        until piece.color == player.color
+        until piece.color == player.color && piece.available_moves.size != 0
             piece = select_piece(player)
-        end        
+        end
+    
 
         if piece.name == "King"
             if right_castle?(player) || left_castle?(player)
