@@ -415,8 +415,11 @@ class Board
     end
 
     def king_move? king, square
-        if adjacent?(king.square, square) && !(under_attack?(king, square))
-            return true
+        if adjacent?(king.square, square)
+            unless under_attack?(king, square)
+                return true
+            end
+            false
         else
             return false
         end
@@ -671,7 +674,7 @@ class Board
     def attacks_scan piece, square
         attackers = []
         @pieces.each do |enemy|
-            if enemy.available_moves[square.name] != nil && enemy.color != piece.color
+            if enemy.color != piece.color && enemy.available_moves.include?(square.name)
                 attackers.append(enemy)
             end
         end
@@ -679,7 +682,7 @@ class Board
     end
 
     def under_attack? piece, square
-        if attacks_scan(piece, square).length > 0
+        if attacks_scan(piece, square).length != 0
             true
         else
             false
