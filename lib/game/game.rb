@@ -269,6 +269,7 @@ class Game
     end
 
     def get_coordinate input = gets.chomp
+        input.upcase!
         until valid_coordinate?(input)
             puts "Please enter a valid coordinate."
             input = gets.chomp
