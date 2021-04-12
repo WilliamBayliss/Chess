@@ -43,9 +43,8 @@ class Game
             if square.piece != nil
                 board.kill_piece(square.piece)
             end
-            board.place_piece(piece, square)
+            @board.place_piece(piece, square)
             piece.set_moved
-            board.update_piece_moves
             check_check
 
 
@@ -118,6 +117,7 @@ class Game
     end
 
     def player_move player
+        @board.update_piece_moves
         move = Move.new(player)
         move.get_board(@board)
         @board.print_board
