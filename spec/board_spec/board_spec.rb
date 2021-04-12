@@ -161,10 +161,7 @@ describe Board do
     describe "#get_piece_moves" do
         it "adds all a piece's legal moves to that piece's available_moves property" do
             board = Board.new
-            board.create_board(board.board_array)
-            board.add_edges
-            board.place_pieces
-            board.get_piece_moves
+            board.setup
             expect(board["A2"].piece.available_moves.size).to eql(2)
         end
 
@@ -179,6 +176,12 @@ describe Board do
             board.setup
             expect(board["A2"].piece.available_moves).to_not include(board["B4"].name)
 
+        end
+
+        it "doesn't add the square it is already on" do
+            board = Board.new
+            board.setup
+            expect(board["A2"].piece.available_moves).to_not include(board["A2"])
         end
 
         it "doesn't add squares that are occupied by your own pieces" do
@@ -226,6 +229,33 @@ describe Board do
             expect(board["E2"].piece.available_moves).to_not include(board["E3"].name)
         end
 
+        it "adds safe squares to king movelist" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["H2"].piece, board["H4"])
+            board.move_piece(board["H1"].piece, board["H3"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            board.move_piece(board["H3"].piece, board["F3"])  
+            board.move_piece(board["F3"].piece, board["F5"])  
+
+            expect(board["E7"].piece.available_moves).to include(board["E6"].name)
+            
+        end
+
+        it "lets a king take a piece" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["H2"].piece, board["H4"])
+            board.move_piece(board["H1"].piece, board["H3"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            board.move_piece(board["H3"].piece, board["F3"])  
+            board.move_piece(board["F3"].piece, board["F6"])  
+            board.update_piece_moves
+            expect(board["E7"].piece.available_moves).to include(board["F6"].name)
+            
+        end
     end
 
     describe "#delete_illegal_moves" do
@@ -237,6 +267,22 @@ describe Board do
             board.delete_illegal_moves
             expect(board["A2"].piece.available_moves).to_not include(board["A3"].name)
         end
+
+        it "doesn't delete legal moves" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["H2"].piece, board["H4"])
+            board.move_piece(board["H1"].piece, board["H3"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            board.move_piece(board["H3"].piece, board["F3"])  
+            board.move_piece(board["F3"].piece, board["F6"])  
+            board["E7"].piece.get_move(board["F6"])
+            board.delete_illegal_moves
+            expect(board["E7"].piece.available_moves).to include(board["F6"].name)
+
+        end
+            
     end
 
     describe "#place_piece" do
@@ -1302,6 +1348,22 @@ describe Board do
                 board["E3"]
                 )).to eql(false)
         end
+
+        it "lets a king take a piece" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["H2"].piece, board["H4"])
+            board.move_piece(board["H1"].piece, board["H3"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            board.move_piece(board["H3"].piece, board["F3"])  
+            board.move_piece(board["F3"].piece, board["F6"])  
+            expect(board.king_move?(
+                board["E7"].piece,
+                board["F6"]
+            )).to eql(true)
+
+        end
     end
 
     describe "#pawn_direction?" do
@@ -1624,6 +1686,22 @@ describe Board do
                 board["E2"].piece, 
                 board["E3"]
                 )).to eql(false)
+        end
+
+        it "lets a king take a piece" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["H2"].piece, board["H4"])
+            board.move_piece(board["H1"].piece, board["H3"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            board.move_piece(board["H3"].piece, board["F3"])  
+            board.move_piece(board["F3"].piece, board["F6"])  
+
+            expect(board.legal_move?(
+                board["E7"].piece,
+                board["F6"]
+            )).to eql(true)
         end
     end
 
@@ -2231,6 +2309,22 @@ describe Board do
                 board["A1"].piece,
                 board["A1"]
                 )).to eql(false)
+        end
+
+        it "doesn't list a square as under attack from its own piece" do
+            board = Board.new
+            board.setup
+            board.move_piece(board["E7"].piece, board["E5"])
+            board.move_piece(board["H2"].piece, board["H4"])
+            board.move_piece(board["H1"].piece, board["H3"])
+            board.move_piece(board["E8"].piece, board["E7"])
+            board.move_piece(board["H3"].piece, board["F3"])  
+            board.move_piece(board["F3"].piece, board["F6"])  
+
+            expect(board.under_attack?(
+                board["E7"].piece,
+                board["F6"]
+            )).to eql(false)
         end
     end
 
